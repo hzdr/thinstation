@@ -4,7 +4,7 @@
 # Depends on: xorg-libx11
 
 name=freerdp
-version=1.1
+version=1.0
 release=stable
 source=()
 
@@ -12,20 +12,22 @@ build() {
 	git config --global http.sslVerify false
 	git clone https://github.com/FreeRDP/FreeRDP.git -b ${release}-$version
 	cd FreeRDP
+	git checkout
 	cmake .	-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DWITH_SSE2_TARGET=ON \
 		-DWITH_PCSC=ON \
 		-DBUILD_SHARED_LIBS=ON \
-		-DWITH_CHANNELS=ON \
 		-DWITH_SERVER=OFF \
 		-DWITH_CLIENT=ON \
-		-DWITH_PULSE=OFF \
+		-DWITH_PULSEAUDIO=OFF \
 		-DWITH_CUPS=ON \
 		-DWITH_FFMPEG=ON \
-		-DCHANNEL_URBDRC_CLIENT=ON \
-		-DWITH_GSTREAMER=ON \
 		-DWITH_DIRECTFB=OFF \
-		-DWITH_XINERAMA=ON
+		-DWITH_XINERAMA=ON \
+		-DWITH_CUNIT=OFF \
+		-DWITH_MANPAGES=OFF
 
 	make
 	make DESTDIR=$PKG install
