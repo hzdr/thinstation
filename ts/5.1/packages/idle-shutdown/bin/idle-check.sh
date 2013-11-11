@@ -44,13 +44,16 @@ TIMESTAMP=`/bin/date +%s`
 STEP=$((${SHUTDOWN_IDLE_INTERVAL}*60))
 
 # check if an important program is running
-/bin/ps aux | /bin/grep -v grep | /bin/grep -q -E ${SHUTDOWN_PROGRAM}
-PROGRAM=$?
-if [ ${PROGRAM} = 0 ]; then
-  # $Program is running, update timestamp
+#/bin/ps aux | /bin/grep -v grep | /bin/grep -q -E ${SHUTDOWN_PROGRAM}
+#we do it differently. We check the xset -q to see what is statues of the
+#monitor 
+MONITOR_STAT=`/bin/xset -q | grep "Monitor is" | awk '{print $3}'`
+
+if [ ${MONITOR_STAT} != "Off" ]; then
+  # Monitor is not off
   echo ${TIMESTAMP} > /tmp/idle-check.dat
 else
-  # $program is not running, check for previous timestamp
+  # monitor is off, check for previous timestamp
   if [ -e "/tmp/idle-check.dat" ]; then 
     # timestamp exists, read it
     LASTTIMESTAMP=`/bin/cat /tmp/idle-check.dat`
