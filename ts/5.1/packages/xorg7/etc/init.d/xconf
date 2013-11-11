@@ -56,7 +56,7 @@ keyboard_ ()
 							echo -e "Section \"InputClass\""				> $CONF
 							echo -e "\tIdentifier	\"Keyboard Defaults\""			>> $CONF
 							echo -e "\tMatchIsKeyboard	 \"on\""			>> $CONF
-							echo -e "\tOption \"XkbLayout\"  \"$XKEYBOARD\""		>> $CONF
+							#echo -e "\tOption \"XkbLayout\"  \"$XKEYBOARD\""		>> $CONF
 		if [ -n "$XKBMODEL" ]; then		echo -e "\tOption \"XkbModel\"   \"$XKBMODEL\""			>> $CONF; fi
 		if [ -n "$XKBVARIANT" ]; then		echo -e "\tOption \"XkbVariant\" \"$XKBVARIANT\""		>> $CONF; fi
 		if [ -n "$XKBOPTIONS" ]; then		echo -e "\tOption \"XkbOptions\" \"$XKBOPTIONS\""		>> $CONF; fi
