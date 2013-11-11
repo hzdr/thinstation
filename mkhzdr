@@ -19,6 +19,7 @@ else
   echo -n "Please enter a version number: "
   read VERSION
   echo ${VERSION} >VERSION
+  chmod 660 VERSION
 fi
 
 # check for a PASSWD file and if not present request from user
@@ -30,21 +31,24 @@ else
   read -s PASSWD
   echo
   echo ${PASSWD} >PASSWD
-  chmod o-r PASSWD
+  chmod 660 PASSWD
 fi
 
-exit 0
 # let us copy the build.conf.example file to build.conf.private and
 # stuff in the root password into it (build.conf.private will not be
 # put on GitHub&co)
 sed "s/pleasechangeme/${PASSWD}/g" ts/5.1/build.conf.example >ts/5.1/build.conf.private
+chmod 660 ts/5.1/build.conf.private
 
 # run the image build process and use the SMP kernel as well as the private
 # build.conf
 sudo ./setup-chroot -b -o --kernel SMP build.conf.private
 
 # copy the images to the respective TFTP directory
-if [ -e "${TFTP_ROOT}"]; then
+if [ -e "${TFTP_ROOT}" ]; then
+  if [ ! -e "${TFTP_ROOT}/thinstation" ]; then
+    mkdir "${TFTP_ROOT}/thinstation"
+  fi
   cp ts/5.1/boot-images/pxe/initrd ${TFTP_ROOT}/thinstation/initrd-${VERSION}
   cp ts/5.1/boot-images/pxe/lib.squash ${TFTP_ROOT}/thinstation/lib.squash-${VERSION}
   cp ts/5.1/boot-images/pxe/vmlinuz ${TFTP_ROOT}/thinstation/vmlinuz-${VERSION}
