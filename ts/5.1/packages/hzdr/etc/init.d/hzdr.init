@@ -1,0 +1,50 @@
+#!/bin/sh
+
+. $TS_GLOBAL
+
+case "$1" in 
+init)
+
+  # Now we trying to rebind the power button of the sun keyboard to pause signal
+  KEYBOARD=`/lib/udev/findkeyboards | awk '{ print $3 }'`
+  /lib/udev/keymap ${KEYBOARD} 0x70066 pause
+
+  # make sure we have a thinlinc config dir in the user home
+	if [ ! -d $HOME/.thinlinc ] ; then
+	  mkdir -p $HOME/.thinlinc
+	fi
+
+  # copy the known_hosts file to the thinlinc setup
+  # dir so that the user isn't queried for unknown ssh keys
+  if [ -e $ROOT/etc/.ssh/known_hosts ] ; then
+    cp -a $ROOT/etc/.ssh/known_hosts $HOME/.thinlinc/
+  fi
+ 
+  # lets parse for SESSION_0_* env variables which we can forward
+  # to the thinlinc configuration file
+	TLCLIENTCONF=$HOME/.thinlinc/tlclient.conf
+  let x=0
+  while [ -n "`eval echo '$SESSION_'$x'_TYPE'`" ] ; do  
+    TLTYPE=`eval echo '$SESSION_'$x'_TYPE'`     
+    if [ "`make_caps $TLTYPE`" = "HZDR" ] ; then
+
+	    (set | grep "SESSION_"$x"_HZDR_TL_CONFIG_" ) |
+	    while read session; do
+	      tlvalue=`echo $session | cut -f2 -d"="`
+	      tlvalue=`eval echo $tlvalue`
+	      line=`echo $session | cut -f1 -d"="`
+	      tlparam=`echo $line | sed -e s/SESSION_${x}_HZDR_TL_CONFIG_//`
+	      tlparam=`make_caps $tlparam` 
+
+	      echo "${tlparam} = ${tlvalue}" >> $TLCLIENTCONF
+	    done
+    fi
+    let x=x+1
+  done
+
+  # start the keyd daemon so that we are listening for user
+  # key presses
+  nohup /bin/keyd -l /var/log/keyd.log  &
+
+;;
+esac

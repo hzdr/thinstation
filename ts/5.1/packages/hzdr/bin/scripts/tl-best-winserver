@@ -1,0 +1,182 @@
+#/bin/bash
+#
+# This is a shell script which mimics the behaviour of tl-best-winserver
+# which is installed with the Server component of ThinLinc. It can be used
+# to return the name of a server of a supplied server list which is found
+# to be least loaded due to a resources check via check_nrpe
+#
+# ChangeLog:
+# 1.0 (2013-07-17) - initial release
+# 1.1 (2013-07-17) - fixed to run within busybox' bash
+# 1.2 (2013-07-22) - fixed bug where 'bc' on solaris doesn't know 'else'
+# 1.3 (2013-07-22) - removed 'bc' dependency completely and replaced it with 'awk'
+# 1.4 (2013-08-02) - modified rating calculation to actually use num_cpus as well.
+# 1.5 (2013-08-06) - use 'gawk' on SunOS or otherwise floating point calc doesn't work.
+#
+# It has been released under Public Domain in 2013
+# by Jens Langner <j.langner@hzdr.de>
+#
+
+if [ `uname -s` = "SunOS" ]; then
+   AWK=/opt/csw/bin/gawk
+else
+   AWK=/usr/bin/awk
+fi
+ 
+CHECK_NRPE="/usr/local/bin/check_nrpe"
+
+# function that takes a server list (command/space separated) and
+# a username. It then uses the check_nrpe command to query each server for
+#
+# 1. if the user is logged in one of the servers
+# 2. if not, the rating numbers are calculated
+#
+# according to these criteria the least loaded server or the server
+# where the user is logged in is chosen and then the name returned. This
+# function assumes The ThinLinc Windows-Extensions are installed on all
+# the corresponding servers.
+tlbestwinserver()
+{
+  local serverList=`echo $1 | tr -s ',' ' '`
+  local userName="$2"
+  local verbose="$3"
+
+  # 1. check if the user is logged into one of the servers in
+  # the list
+  for server in ${serverList}; do
+
+    # if no check_nrpe command is present we always revert to
+    # the first server in the list
+    if [ ! -x "${CHECK_NRPE}" ]; then
+      echo ${server}
+      return 2
+    fi
+
+    # get user information from server via check_nrpe
+    res=`${CHECK_NRPE} -n -H ${server} -p 5667 -c tl_usercheck -a ${userName}`
+    if [ $? -ne 0 ]; then
+      echo ${server}
+      return 1
+    fi
+
+    # check if user was logged in or not
+    local num_sessions=`echo ${res} | tr -d "[:cntrl:]" | cut -d ':' -f 2`
+    if [ ${num_sessions} -gt 0 ]; then
+      if [ "${verbose}" = "verbose" ]; then 
+        echo >&2 "User ${userName} has ${num_sessions} sessions on (selected) ${server}"
+      fi
+      echo ${server}
+      return 0
+    fi
+
+  done
+
+  # 2. get the server information and calculate a rating value similar
+  # to how ThinLinc is doing this. Return the name of the server being
+  # least busy
+  local last_rating=0
+  local last_server=
+  local RAM_PER_USER=$((50 * 1024))
+  local EST_BOGOMIPS=4000
+  local BOGOMIPS_PER_USER=80
+  local EXISTING_USERS_WEIGHT=4
+ 
+  # loop through all servers
+  for server in ${serverList}; do
+
+    # get user information from server via check_nrpe
+    res=`${CHECK_NRPE} -n -H ${server} -p 5667 -c tl_load`
+    if [ $? -ne 0 ]; then
+      echo ${server} 
+      return 1
+    fi
+
+    # get all the server load data
+    res=`echo ${res} | tr -d "[:cntrl:]"`
+    local mem_total=`echo $res | ${AWK} '{ print $1 }' | cut -d ':' -f 2`
+    local mem_free=`echo $res | ${AWK} '{ print $2 }' | cut -d ':' -f 2`
+    local swap_total=`echo $res | ${AWK} '{ print $3 }' | cut -d ':' -f 2`
+    local swap_used=`echo $res | ${AWK} '{ print $4 }' | cut -d ':' -f 2`
+    local loadavg=`echo $res | ${AWK} '{ print $5 }' | tr -d '-' | cut -d ':' -f 2`
+    local num_cpus=`echo $res | ${AWK} '{ print $6 }' | cut -d ':' -f 2`
+    local num_users=`echo $res | ${AWK} '{ print $7 }' | cut -d ':' -f 2`
+
+    # now calculate the weighting based on fixed values
+    local rating=`${AWK} "BEGIN { num_users_mem = (${mem_free}-${swap_used}/2)/${RAM_PER_USER}; \
+                                  free_bogomips = ${EST_BOGOMIPS}*(${num_cpus}-${loadavg})/${num_cpus}; \
+                                  num_users_load = free_bogomips/${BOGOMIPS_PER_USER}; \
+                                  num_free_users = (num_users_mem < num_users_load ? num_users_mem : num_users_load); \
+                                  printf(\"%.6f\", num_free_users - (${num_users}/${EXISTING_USERS_WEIGHT})); }"`
+
+    if [ "${verbose}" = "verbose" ]; then
+      echo >&2 "Rating for server ${server} is ${rating}"
+    fi
+
+    if [ -z "${last_server}" ] || [[ "`${AWK} \"BEGIN { print (${rating} > ${last_rating} ? 1 : 0) }\"`" == "1" ]]; then
+      last_server=${server}
+      last_rating=${rating}
+    fi
+   
+  done
+
+  echo ${last_server}
+
+  return 0
+} 
+
+displayHelp()
+{
+  echo >&2 "Select terminal server with lighest load."
+  echo >&2 "If the user already has a session on a server, this one will"
+  echo >&2 "be reported instead."
+  echo >&2 "Usage: tl-best-winserver [-h|--help] [-v|--verbose] [-u|--user <username] <server1> [server2]..."
+  echo >&2 "  --verbose will print extended information to stderr"
+  echo >&2 "  --user lets you specify a different username than '${USER}'"
+}
+
+###############################################
+# now we have to process the command-line input 
+if [ $# -lt 1 ]; then
+  displayHelp
+  exit 1
+fi
+
+# parsing command-line options
+username="${USER}"
+verbose=""
+optspec=":hv-:u:"
+while getopts "$optspec" optchar; do
+    case "${optchar}" in
+        -)
+            case "${OPTARG}" in
+                verbose)
+                    verbose="verbose"
+                    ;;
+                user)
+                    username="$${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
+                    ;;
+                *)
+                    displayHelp
+                    exit 1
+                    ;;
+            esac;;
+        v)
+            verbose="verbose"
+            ;;
+        u)
+            username="${OPTARG}"
+            ;;
+        *)
+            displayHelp
+            exit 1
+            ;;
+    esac
+done
+shift `expr $OPTIND - 1`
+
+# construct a comma-separated list of servers
+serverList=`echo $* | tr -s ' ' ','`
+
+# call our internal tl-best-winserver function
+tlbestwinserver ${serverList} ${username} ${verbose}
+exit $?
