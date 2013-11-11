@@ -44,6 +44,8 @@ sed "s/pleasechangeme/${PASSWD}/g" ts/5.1/build.conf.example >ts/5.1/build.conf.
 sudo ./setup-chroot -b -o --kernel SMP build.conf.private
 
 # copy the images to the respective TFTP directory
-cp ts/5.1/boot-images/pxe/initrd ${TFTP_ROOT}/thinstation/initrd-${VERSION}
-cp ts/5.1/boot-images/pxe/lib.squash ${TFTP_ROOT}/thinstation/lib.squash-${VERSION}
-cp ts/5.1/boot-images/pxe/vmlinuz ${TFTP_ROOT}/thinstation/vmlinuz-${VERSION}
+if [ -e "${TFTP_ROOT}"]; then
+  cp ts/5.1/boot-images/pxe/initrd ${TFTP_ROOT}/thinstation/initrd-${VERSION}
+  cp ts/5.1/boot-images/pxe/lib.squash ${TFTP_ROOT}/thinstation/lib.squash-${VERSION}
+  cp ts/5.1/boot-images/pxe/vmlinuz ${TFTP_ROOT}/thinstation/vmlinuz-${VERSION}
+fi

@@ -1,2 +1,3 @@
-module battery
+module processor
+module thermal
 package acpi
