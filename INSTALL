@@ -9,6 +9,11 @@ INSTALL - A short installation documentation on HOWTO build thinstation
    > cd thinstation-hzdr
    > sudo ./setup-chroot
 
-3. run the build and automatically install the pxe images
+3. put proper id_rsa and id_rsa.pub file in ts/5.1 directory
+
+   > cp id_rsa ts/5.1
+   > cp id_rsa.pub ts/5.1
+
+4. run the build and automatically install the pxe images
 
    > ./mkhzdr
