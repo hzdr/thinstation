@@ -2,7 +2,7 @@
 
 This repository hosts a fork of the Linux-based [Thinstation](https://github.com/Thinstation/thinstation) thin client project. It comes with some modifications to:
 
-* get Thinstation running more smoothly and optimized on the [intel NUC](http://www.intel.de/content/www/de/de/motherboards/desktop-motherboards/nuc.html) platform
+* get Thinstation running more smoothly and optimized on the [intel NUC](http://www.intel.com/content/www/us/en/motherboards/desktop-motherboards/nuc.html) platform
 * provide a lightweight kiosk system which after bootup provides a simple connection GUI with options to connect via [ThinLinc](http://www.cendio.se/), RDP (via [freerdp](http://www.freerdp.com)) and VNC to Linux and Windows Terminalservers
 * provide an adapted user interface to the needs of our organization ([Helmholtz-Zentrum Dresden-Rossendorf](http://www.hzdr.de/))
 
