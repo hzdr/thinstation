@@ -12,9 +12,10 @@
 # 1.3 (2013-07-22) - removed 'bc' dependency completely and replaced it with 'awk'
 # 1.4 (2013-08-02) - modified rating calculation to actually use num_cpus as well.
 # 1.5 (2013-08-06) - use 'gawk' on SunOS or otherwise floating point calc doesn't work.
+# 1.6 (2013-11-18) - reverted num_cpu fix for load_avg since ThinLinc 4.1.1 fixes it
 #
 # It has been released under Public Domain in 2013
-# by Jens Langner <j.langner@hzdr.de>
+# by Jens Maus <j.maus@hzdr.de>
 #
 
 if [ `uname -s` = "SunOS" ]; then
@@ -103,7 +104,7 @@ tlbestwinserver()
 
     # now calculate the weighting based on fixed values
     local rating=`${AWK} "BEGIN { num_users_mem = (${mem_free}-${swap_used}/2)/${RAM_PER_USER}; \
-                                  free_bogomips = ${EST_BOGOMIPS}*(${num_cpus}-${loadavg})/${num_cpus}; \
+                                  free_bogomips = ${EST_BOGOMIPS}*(1-${loadavg}); \
                                   num_users_load = free_bogomips/${BOGOMIPS_PER_USER}; \
                                   num_free_users = (num_users_mem < num_users_load ? num_users_mem : num_users_load); \
                                   printf(\"%.6f\", num_free_users - (${num_users}/${EXISTING_USERS_WEIGHT})); }"`
