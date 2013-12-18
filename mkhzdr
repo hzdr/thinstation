@@ -37,8 +37,9 @@ fi
 # let us copy the build.conf.example file to build.conf.private and
 # stuff in the root password into it (build.conf.private will not be
 # put on GitHub&co)
-sed "s/pleasechangeme/${PASSWD}/g" ts/5.1/build.conf.example >ts/5.1/build.conf.private
+sed "s/pleasechangeme/${PASSWD}/g" ts/5.1/build.conf.hzdr >ts/5.1/build.conf.private
 chmod 660 ts/5.1/build.conf.private
+cp ts/5.1/thinstation.conf.hzdr ts/5.1/thinstation.conf.buildtime
 
 # run the image build process and use the SMP kernel as well as the private
 # build.conf

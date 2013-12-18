@@ -1,3 +1,4 @@
+module acpi-cpufreq
 module snd-usb-audio
 module snd-usbmidi-lib
 module snd-rawmidi
@@ -5,6 +6,7 @@ module snd-seq-device
 module auth_rpcgss
 module cpufreq_stats
 module snd-hda-codec-hdmi
+module snd-hda-codec-realtek
 module i915
 module snd-hda-intel
 module snd-hda-codec
