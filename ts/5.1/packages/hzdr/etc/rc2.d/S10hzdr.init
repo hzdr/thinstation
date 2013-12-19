@@ -153,7 +153,8 @@ init)
         SNDCRD2=`echo $APLAYOUT | awk '{print $3}'`
         SNDDEV2=`echo $APLAYOUT | sed -rn 's/.*device //p' | awk '{print $1}'`
       fi
-      createASoundConf ${SNDCRD1} ${SNDDEV1} ${SNDCRD2} ${SNDDEV2}
+      #createASoundConf ${SNDCRD1} ${SNDDEV1} ${SNDCRD2} ${SNDDEV2}
+      createASoundConf ${SNDCRD1} ${SNDDEV1}
     else
       APLAYOUT=`aplay -l | grep card | head -1 | tr -d ':'`
       SNDCRD=`echo $APLAYOUT | awk '{print $3}'`
