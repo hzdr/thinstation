@@ -100,7 +100,7 @@ drwxr-xr-x	root/4135	usr/include/freerdp/utils/
 drwxr-sr-x	root/4135	usr/lib/
 drwxr-sr-x	root/4135	usr/lib/freerdp/
 -rwxr-xr-x	root/4135	usr/lib/freerdp/audin.so
--rwxr-xr-x	root/4135	usr/lib/freerdp/audin_alsa.so
+-rwxr-xr-x	root/4135	usr/lib/freerdp/audin_pulse.so
 -rwxr-xr-x	root/4135	usr/lib/freerdp/cliprdr.so
 -rwxr-xr-x	root/4135	usr/lib/freerdp/disk.so
 -rwxr-xr-x	root/4135	usr/lib/freerdp/drdynvc.so
@@ -110,12 +110,12 @@ drwxr-sr-x	root/4135	usr/lib/freerdp/
 -rwxr-xr-x	root/4135	usr/lib/freerdp/rdpdbg.so
 -rwxr-xr-x	root/4135	usr/lib/freerdp/rdpdr.so
 -rwxr-xr-x	root/4135	usr/lib/freerdp/rdpsnd.so
--rwxr-xr-x	root/4135	usr/lib/freerdp/rdpsnd_alsa.so
+-rwxr-xr-x	root/4135	usr/lib/freerdp/rdpsnd_pulse.so
 -rwxr-xr-x	root/4135	usr/lib/freerdp/scard.so
 -rwxr-xr-x	root/4135	usr/lib/freerdp/serial.so
 -rwxr-xr-x	root/4135	usr/lib/freerdp/tsmf.so
--rwxr-xr-x	root/4135	usr/lib/freerdp/tsmf_alsa.so
 -rwxr-xr-x	root/4135	usr/lib/freerdp/tsmf_ffmpeg.so
+-rwxr-xr-x	root/4135	usr/lib/freerdp/tsmf_pulse.so
 lrwxrwxrwx	root/4135	usr/lib/libfreerdp-cache.so -> libfreerdp-cache.so.1.0
 lrwxrwxrwx	root/4135	usr/lib/libfreerdp-cache.so.1.0 -> libfreerdp-cache.so.1.0.3
 -rwxr-xr-x	root/4135	usr/lib/libfreerdp-cache.so.1.0.3

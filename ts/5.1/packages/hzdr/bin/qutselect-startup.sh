@@ -37,6 +37,9 @@ xprop -root -remove _NET_NUMBER_OF_DESKTOPS \
 # start openbox wm
 openbox --config-file /etc/xdg/openbox/rc-single-app.xml &
 
+# start the pulseaudio daemon to make sure we have sound
+/usr/bin/pulseaudio --start --log-target=syslog --disallow-exit
+
 # wait for openbox to start
 if ! wait_for_wm; then
     echo "$0: Timeout waiting for openbox to start"
@@ -44,7 +47,7 @@ fi
 
 # start qutselect unlimited
 while true; do
-  qutselect -dtlogin -keep
+  qutselect -dtlogin -nouser -keep
   if [ $? -ne 0 ]; then
     break 
   fi
