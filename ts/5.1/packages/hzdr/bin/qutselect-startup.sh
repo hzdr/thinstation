@@ -38,7 +38,10 @@ xprop -root -remove _NET_NUMBER_OF_DESKTOPS \
 openbox --config-file /etc/xdg/openbox/rc-single-app.xml &
 
 # start the pulseaudio daemon to make sure we have sound
-/usr/bin/pulseaudio --start --log-target=syslog --disallow-exit
+/usr/bin/pulseaudio --start --log-target=syslog --disallow-exit --exit-idle-time=-1
+
+# update the default pa sink
+/bin/pa-update-default-sink.sh
 
 # wait for openbox to start
 if ! wait_for_wm; then
