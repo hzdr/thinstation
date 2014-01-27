@@ -34,6 +34,16 @@ else
   chmod 660 PASSWD
 fi
 
+# check that we have ssh keys installed
+if [ ! -e "ts/5.1/id_rsa" ]; then
+  echo "ERROR: ts/5.1/id_rsa SSH keyfile missing"
+  exit 2
+fi
+if [ ! -e "ts/5.1/id_rsa.pub" ]; then
+  echo "ERROR: ts/5.1/id_rsa.pub SSH public keyfile missing"
+  exit 2
+fi
+
 # let us copy the build.conf.example file to build.conf.private and
 # stuff in the root password into it (build.conf.private will not be
 # put on GitHub&co)
