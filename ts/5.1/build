@@ -769,9 +769,9 @@ do
 	;;
     firmware)
 	if [ -n "$args" ]; then
-		firmfiles=`find -L ./kernel/firmware/ -name $name | grep $args`
+		firmfiles=`find -L ./kernel/firmware/ -name $name\* | grep $args`
 	else
-		firmfiles=`find -L ./kernel/firmware/ -name $name`
+		firmfiles=`find -L ./kernel/firmware/ -name $name\*`
 	fi
 	if [ -n "$firmfiles" ]; then
 		for firmfile in $firmfiles; do
@@ -983,7 +983,14 @@ rm ./filelist
 if [ -e $PACDIR/tsuser.param ]; then
     echo "TSUSER=$ts_tsuser" >> ./tmp-tree/etc/thinstation.defaults
     echo "HOME=/home/$ts_tsuser" >> ./tmp-tree/etc/thinstation.env
-    echo "$ts_tsuser::1000:1000:$ts_tsuser:/home/$ts_tsuser:/bin/sh" >> ./tmp-tree/etc/passwd
+	if [  -e $PACDIR/tsuserpasswd.param ]; then
+		if [ "$ts_tsuserpasswd" == "!!" ]; then
+			GETPASSWD="!!"
+		else
+			GETPASSWD=`$TOOLSDIR/cryptmd5 $ts_tsuserpasswd`
+		fi
+	fi
+    echo "$ts_tsuser:$GETPASSWD:1000:1000:$ts_tsuser:/home/$ts_tsuser:/bin/sh" >> ./tmp-tree/etc/passwd
     echo "$ts_tsuser:x:1000:" >> ./tmp-tree/etc/group
     sed -i -e "s/tsuser/$ts_tsuser/g" ./tmp-tree/etc/group
     sed -i -e "s/\-a root/\-a $ts_tsuser/g" ./tmp-tree/etc/inittab
@@ -1091,11 +1098,11 @@ echo -e "Checking for Known Hosts File"
 
 if [ -e $PACDIR/knownhosts.param ]; then
 	if [ -e "$ts_knownhosts" ] ; then
-		if [ ! -e ./tmp-tree/etc/.ssh ] ; then
-			mkdir ./tmp-tree/etc/.ssh
+		if [ ! -e ./tmp-tree/etc/skel/.ssh ] ; then
+			mkdir -p ./tmp-tree/etc/skel/.ssh
 		fi
-		cp $ts_knownhosts ./tmp-tree/etc/.ssh
-		echo "" >> ./tmp-tree/etc/.ssh/`basename $ts_knownhosts`
+		cp $ts_knownhosts ./tmp-tree/etc/skel/.ssh
+		echo "" >> ./tmp-tree/etc/skel/.ssh/`basename $ts_knownhosts`
 	else
 		echo "Known Hosts file not found, build aborted."
 		remove_files
