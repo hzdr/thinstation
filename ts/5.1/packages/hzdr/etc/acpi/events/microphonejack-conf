@@ -1,9 +1,9 @@
-# /etc/acpi/events/headphonejack
-# This is called when the user plugs or unplugs headphones 
+# /etc/acpi/events/microphonejack
+# This is called when the user plugs or unplugs a microphone
 #
 # Optionally you can specify the placeholder %e. It will pass
 # through the whole kernel event message to the program you've
 # specified.
 
-event=jack/headphone
+event=jack/microphone
 action=su - tsuser -c /bin/pa-update-default-sink.sh
