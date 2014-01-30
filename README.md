@@ -52,6 +52,7 @@ The following should provide a short list of major modifications in comparison t
   * modifications to generate an optimized ThinLinc configuration file to perform remote connections with only minor user input.
 * optimized `build.conf` to generate a small PXE image (~ 40 MB only) with only the necessary packages included and `fastboot=lostofmem` enabled.
 * downgraded/tested version of freerdp (1.0.3-dev) to fix issues with multi-monitor and session redirection environments with the 1.1 versions of freerdp.
+* full pulseaudio 4.0 support including udev and acpi scripts to automatically move audio output on demand to a different device (e.g. as soon as headphones are plugged in)
 * own `mkhzdr` install script to perform the necessary steps (even interactively) to generate the PXE images and directly install them in /tftpboot/thinstation
 * minor fixes and adaptions to general Thinstation functionality (see changes in our [upstream](https://github.com/hzdr/thinstation/compare/upstream) branch)
 
