@@ -255,6 +255,9 @@ if [ -z "${cmdArgs}" ] && [ -x ${XFREERDP} ]; then
    # enable sound redirection
    cmdArgs="$cmdArgs --plugin rdpsnd"
 
+   # enable audio input redirection
+   cmdArgs="$cmdArgs --plugin drdynvc --data audin --"
+
    # add clipboard synchronization
    cmdArgs="$cmdArgs --plugin cliprdr"
 
