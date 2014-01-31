@@ -46,7 +46,6 @@ The following should provide a short list of major modifications in comparison t
   * special udev and acpi scripts to automatically move audio output on demand to a different device (e.g. as soon as headphones are plugged in)
   * own pulseaudio configuration file to allow to switch audio output sinks even in a ThinLinc session.
 * optimized `build.conf.hzdr` to generate a small PXE image (~ 40 MB only) with only the necessary packages included and `fastboot=lostofmem` enabled.
-* downgraded/tested version of freerdp (1.0.3-dev) to fix issues with multi-monitor and session redirection environments with the 1.1 versions of freerdp.
 * own `mkhzdr` install script to perform the necessary steps (even interactively) to generate the PXE images and directly install them in /tftpboot/thinstation
 
 ### Modifications already integrated in upstream
