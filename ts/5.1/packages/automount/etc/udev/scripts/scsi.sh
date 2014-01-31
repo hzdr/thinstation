@@ -4,9 +4,9 @@
 #
 
 # wait until hostname has been specified
-#while [ "`hostname`" = "(none)" ]; do
-#  sleep 1
-#done
+while [ "`hostname`" = "(none)" ]; do
+  sleep 0.5
+done
 
 . /etc/thinstation.env
 . $TS_GLOBAL

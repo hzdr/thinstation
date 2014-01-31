@@ -36,12 +36,20 @@ fi
 
 # check that we have ssh keys installed
 if [ ! -e "ts/5.1/id_rsa" ]; then
-  echo "ERROR: ts/5.1/id_rsa SSH keyfile missing"
-  exit 2
+  if [ -e "../id_rsa" ]; then
+    cp -a "../id_rsa" "ts/5.1/"
+  else
+    echo "ERROR: ts/5.1/id_rsa SSH keyfile missing"
+    exit 2
+  fi
 fi
 if [ ! -e "ts/5.1/id_rsa.pub" ]; then
-  echo "ERROR: ts/5.1/id_rsa.pub SSH public keyfile missing"
-  exit 2
+  if [ -e "../id_rsa.pub" ]; then
+    cp -a "../id_rsa.pub" "ts/5.1/"
+  else
+    echo "ERROR: ts/5.1/id_rsa.pub SSH public keyfile missing"
+    exit 2
+  fi
 fi
 
 # let us copy the build.conf.example file to build.conf.private and

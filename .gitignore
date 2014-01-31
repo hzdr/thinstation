@@ -3990,6 +3990,11 @@
 /ts/5.1/packages/gnome-network-properties/lib/gnome-control-center/
 /ts/5.1/packages/gnome-network-properties/lib/icons/
 /ts/5.1/packages/gnome-python/lib/
+/ts/5.1/packages/gnome-search-tool/bin/
+/ts/5.1/packages/gnome-search-tool/etc/
+/ts/5.1/packages/gnome-search-tool/lib/applications/
+/ts/5.1/packages/gnome-search-tool/lib/gnome/
+/ts/5.1/packages/gnome-search-tool/lib/pixmaps/
 /ts/5.1/packages/gparted/bin/
 /ts/5.1/packages/gparted/sbin/
 /ts/5.1/packages/gtk-2.0/etc/gtk-2.0/gtk.immodules

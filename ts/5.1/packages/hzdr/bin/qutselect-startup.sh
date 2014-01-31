@@ -7,8 +7,8 @@ has_ewmh_wm()
     local child_id
 
     # If property does not exist, "id" will contain "no such atom on any window"
-    id=`xprop -root 32x ' $0\n' _NET_SUPPORTING_WM_CHECK | awk '{ print $2 }'`
-    child_id=`xprop -id "${id}" 32x ' $0\n' _NET_SUPPORTING_WM_CHECK 2>/dev/null | awk '{ print $2 }'`
+    id=`/bin/xprop -root 32x ' $0\n' _NET_SUPPORTING_WM_CHECK | awk '{ print $2 }'`
+    child_id=`/bin/xprop -id "${id}" 32x ' $0\n' _NET_SUPPORTING_WM_CHECK 2>/dev/null | awk '{ print $2 }'`
 
     if [ "${id}" != "${child_id}" ]; then
         return 1
@@ -30,15 +30,15 @@ wait_for_wm()
 }
 
 # Clean up after earlier WMs
-xprop -root -remove _NET_NUMBER_OF_DESKTOPS \
-      -remove _NET_DESKTOP_NAMES \
-      -remove _NET_CURRENT_DESKTOP 2> /dev/null
+/bin/xprop -root -remove _NET_NUMBER_OF_DESKTOPS \
+                 -remove _NET_DESKTOP_NAMES \
+                 -remove _NET_CURRENT_DESKTOP 2> /dev/null
 
 # start openbox wm
-openbox --config-file /etc/xdg/openbox/rc-single-app.xml &
+/bin/openbox --config-file /etc/xdg/openbox/rc-single-app.xml &
 
 # start the pulseaudio daemon to make sure we have sound
-/usr/bin/pulseaudio --start --log-target=syslog --disallow-exit --exit-idle-time=-1
+/bin/pulseaudio --start --log-target=syslog --disallow-exit --exit-idle-time=-1 -n --file=/etc/pulse/default-hzdr.pa
 
 # update the default pa sink
 /bin/pa-update-default-sink.sh
@@ -50,11 +50,11 @@ fi
 
 # start qutselect unlimited
 while true; do
-  qutselect -dtlogin -nouser -keep
+  /bin/qutselect -dtlogin -nouser -keep
   if [ $? -ne 0 ]; then
     break 
   fi
 done
 
 # stop openbox again
-openbox --exit
+/bin/openbox --exit
