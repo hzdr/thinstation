@@ -31,7 +31,7 @@
 
 ### Automatically restore the volume of streams and devices
 load-module module-device-restore
-load-module module-stream-restore
+load-module module-stream-restore restore_device=false
 load-module module-card-restore
 
 ### Automatically augment property information from .desktop files
@@ -39,8 +39,8 @@ load-module module-card-restore
 load-module module-augment-properties
 
 ### Should be after module-*-restore but before module-*-detect
-load-module module-switch-on-port-available
-load-module module-switch-on-connect
+#load-module module-switch-on-port-available
+#load-module module-switch-on-connect
 
 ### Load audio drivers statically
 ### (it's probably better to not load these drivers manually, but instead
@@ -48,6 +48,8 @@ load-module module-switch-on-connect
 #load-module module-alsa-sink
 #load-module module-alsa-source device=hw:1,0
 #load-module module-null-sink
+load-module module-null-sink sink_name="stream"
+load-module module-loopback source="stream.monitor" latency_msec=1
 #load-module module-pipe-sink
 
 ### Automatically load driver modules depending on the hardware available
@@ -88,11 +90,11 @@ load-module module-native-protocol-unix
 ### Load additional modules from GConf settings. This can be configured with the paprefs tool.
 ### Please keep in mind that the modules configured by paprefs might conflict with manually
 ### loaded modules.
-.ifexists module-gconf.so
-.nofail
-load-module module-gconf
-.fail
-.endif
+#.ifexists module-gconf.so
+#.nofail
+#load-module module-gconf
+#.fail
+#.endif
 
 ### Automatically restore the default sink/source when changed by the user
 ### during runtime

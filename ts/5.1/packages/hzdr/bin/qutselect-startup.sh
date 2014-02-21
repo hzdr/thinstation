@@ -37,9 +37,6 @@ wait_for_wm()
 # start openbox wm
 /bin/openbox --config-file /etc/xdg/openbox/rc-single-app.xml &
 
-# start the pulseaudio daemon to make sure we have sound
-/bin/pulseaudio --start --log-target=syslog --disallow-exit --exit-idle-time=-1 -n --file=/etc/pulse/default-hzdr.pa
-
 # update the default pa sink
 /bin/pa-update-default-sink.sh
 
