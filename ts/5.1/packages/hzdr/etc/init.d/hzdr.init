@@ -10,9 +10,9 @@ init)
   /lib/udev/keymap ${KEYBOARD} 0x70066 pause
 
   # make sure we have a thinlinc config dir in the user home
-	if [ ! -d $HOME/.thinlinc ] ; then
-	  mkdir -p $HOME/.thinlinc
-	fi
+  if [ ! -d $HOME/.thinlinc ] ; then
+    mkdir -p $HOME/.thinlinc
+  fi
 
   # copy the known_hosts file to the thinlinc setup
   # dir so that the user isn't queried for unknown ssh keys
@@ -44,7 +44,7 @@ init)
 
   # start the keyd daemon so that we are listening for user
   # key presses
-  nohup /bin/keyd -l /var/log/keyd.log  &
+  (setsid /bin/keyd -l /var/log/keyd.log 2>&1 >/dev/null) &
 
 ;;
 esac
