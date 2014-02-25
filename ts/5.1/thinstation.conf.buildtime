@@ -56,3 +56,4 @@ SHUTDOWN_MAX_UPTIME_HOUR=3
 SHUTDOWN_PROGRAM="tlclient|xfreerdp|rdesktop|vncviewer"
 X_NUMLOCK=on
 WAIT_FOR_TOCK=enabled
+PKG_PREFIX=pkg
