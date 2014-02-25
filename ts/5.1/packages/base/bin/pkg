@@ -2,7 +2,7 @@
 
 . $TS_GLOBAL
 INITLIST=/tmp/initlist
-PKGDIR=/tmp/pkg
+PKGDIR=`mktemp -d`
 
 if [ -n "$DEBUG_NETWORK" ] ; then
 	debug="-d"
