@@ -77,11 +77,16 @@ fi
 # check if we have the name of the sink
 if [ -n "${sinkname}" ]; then
 
-  # move the null stream input (0) to the new sink
-  pactl move-sink-input 0 "${sinkname}"
+  # move all sink inputs to the new sink
+  for inum in `pactl list short sink-inputs | cut -f1`; do
+    pactl move-sink-input ${inum} "${sinkname}"
+  done
 
   # make sure that the new sink is unmuted
   pactl set-sink-mute ${sinkname} 0
+
+  # set the new sink as the new default
+  pactl set-default-sink ${sinkname}
 
 else
   echo "WARNING: no available output sink found"

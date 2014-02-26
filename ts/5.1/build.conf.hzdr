@@ -206,7 +206,8 @@ package freerdp		# X RDP Client - fork of rdesktop
 #package ssh 			# Secure Shell client
 #package tn5250          	# 5250 terminal emulator
 #package dillo			# Dillo light web browser
-#package thinlinc		# Cendio ThinLinc client support
+package thinlinc		# Cendio ThinLinc client support
+package thinlinc_nightly		# Cendio ThinLinc client support (nightly builds)
 #package nx              	# No Machine NX client
 #package 2x			# 2X client
 #package java			# Java runtime
