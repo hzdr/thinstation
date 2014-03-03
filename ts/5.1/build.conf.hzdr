@@ -214,7 +214,7 @@ package thinlinc_nightly		# Cendio ThinLinc client support (nightly builds)
 #package firefox_lowmem		# Firefox 3 for low resource machines
 pkg firefox		# Firefox current Web Browser
 #package chrome			# Google Chrome Web Browser
-pkg kiosk			# Rkiosk Plugin for Firefox
+#package kiosk			# Rkiosk Plugin for Firefox
 #package flash_lowmem		# Flash 9 browser plugin for firefox and low resource machines
 pkg flash			# Flash Current
 #package filezilla		# FileZilla FTP Client for X
@@ -258,6 +258,7 @@ package idle-shutdown		# Package that lets you specify automatic shutdown settin
 #package lpr             	# LPR Print Server, for use with samba-server package
 #package lprng           	# LPRng Print Server, supports network based printing
 package sshd 			# Dropbear secure shell server
+pkg cups          # cups printing system
 #package tftpd 			# Built in tftpd server. Useful for making a tftpserver
 				#  for thinstation on a WAN over a slow link.
 #package samba-server		# Samba server FS Support, allows you to share
@@ -277,7 +278,7 @@ package sshd 			# Dropbear secure shell server
 
 
 #!!Miscellaneous
-#package gtk-2.0			# Full gtk-2.0 plus clearlooks theme
+pkg gtk-2.0			# Full gtk-2.0 plus clearlooks theme
 package icons-cursor		# Anti Aliased Mouse Cursor Theme
 #package icons-hicolor           # Hi-Color icons for some applications and themes. Does not really contain any icons.
 #package icons-gnome             # gnome Hi-Color icons theme. Needed by most other icon themes.

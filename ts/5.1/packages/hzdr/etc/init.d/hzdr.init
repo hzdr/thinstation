@@ -5,6 +5,14 @@
 case "$1" in 
 init)
 
+  # check if cups is installed and if yes then check if it is running already or not
+  if [ -e "/sbin/cupsd" ]; then
+    /bin/pgrep /sbin/cupsd
+    if [ $? -gt 0 ]; then
+      /etc/init.d/cups init
+    fi
+  fi
+
   # Now we trying to rebind the power button of the sun keyboard to pause signal
   KEYBOARD=`/lib/udev/findkeyboards | awk '{ print $3 }'`
   /lib/udev/keymap ${KEYBOARD} 0x70066 pause

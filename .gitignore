@@ -105,6 +105,7 @@
 /ts/5.1/packages/cpuspeed/bin/
 /ts/5.1/packages/crystalhd/lib/
 /ts/5.1/packages/cups/build/extra/bin/
+/ts/5.1/packages/cups/var/
 /ts/5.1/packages/curl/bin/
 /ts/5.1/packages/curl/lib/
 /ts/5.1/packages/dbus-python/lib/
@@ -4005,6 +4006,7 @@
 /ts/5.1/packages/gutenprint/lib/
 /ts/5.1/packages/haveged/sbin/
 /ts/5.1/packages/hpijs/lib/
+/ts/5.1/packages/hzdr/build/
 /ts/5.1/packages/ica/build/extra/bin/logger
 /ts/5.1/packages/ica/build/extra/etc/gssapi_mech.conf
 /ts/5.1/packages/ica/build/extra/lib/libgssapi.so
