@@ -43,3 +43,4 @@ module video
 module mperf
 module usb-storage
 module hid-logitech
+module hid-apple
