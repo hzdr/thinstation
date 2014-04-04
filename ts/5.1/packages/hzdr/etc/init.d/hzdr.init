@@ -17,6 +17,10 @@ init)
   KEYBOARD=`/lib/udev/findkeyboards | awk '{ print $3 }'`
   /lib/udev/keymap ${KEYBOARD} 0x70066 pause
 
+  # the following remaps f14 to scroll lock and f15 to pause for a mac-style keyboard
+  /lib/udev/keymap ${KEYBOARD} 0x70069 ScrollLock
+  /lib/udev/keymap ${KEYBOARD} 0x7006A pause
+
   # make sure we have a thinlinc config dir in the user home
   if [ ! -d $HOME/.thinlinc ] ; then
     mkdir -p $HOME/.thinlinc
