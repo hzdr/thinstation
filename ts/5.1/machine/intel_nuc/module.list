@@ -44,3 +44,7 @@ module mperf
 module usb-storage
 module hid-logitech
 module hid-apple
+module hid-cherry
+module hid-magicmouse
+module hid-microsoft
+module hid-chicony
