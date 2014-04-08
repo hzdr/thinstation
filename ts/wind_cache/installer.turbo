@@ -1,6 +1,6 @@
-#0911afb866f8169f1d8fe28f5575860a  .dna
+#dd022806cafdc2c3e76927eb237971e2  .dna
 rm /ts/5.1/packages/installer/install/syslinux
+rm /ts/5.1/packages/installer/install/mbr.bin
 rm /ts/5.1/packages/installer/install/vesamenu.c32
-rm /ts/5.1/packages/installer/bin/wget
 rm /ts/5.1/packages/installer/bin/chroot
 

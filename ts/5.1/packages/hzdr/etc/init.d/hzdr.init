@@ -26,12 +26,6 @@ init)
     mkdir -p $HOME/.thinlinc
   fi
 
-  # copy the known_hosts file to the thinlinc setup
-  # dir so that the user isn't queried for unknown ssh keys
-  if [ -e $ROOT/etc/.ssh/known_hosts ] ; then
-    cp -a $ROOT/etc/.ssh/known_hosts $HOME/.thinlinc/
-  fi
- 
   # lets parse for SESSION_0_* env variables which we can forward
   # to the thinlinc configuration file
 	TLCLIENTCONF=$HOME/.thinlinc/tlclient.conf
@@ -48,12 +42,17 @@ init)
 	      tlparam=`echo $line | sed -e s/SESSION_${x}_HZDR_TL_CONFIG_//`
 	      tlparam=`make_caps $tlparam` 
 
-	      echo "${tlparam} = ${tlvalue}" >> $TLCLIENTCONF
+	      echo "${tlparam}=${tlvalue}" >> $TLCLIENTCONF
 	    done
     fi
     let x=x+1
   done
 
+  # make sure the whole home folder is owned by tsuser
+  if [ "$TSUSER" != "root" ]; then
+    chown -R $TSUSER:$TSUSER $HOME
+  fi
+ 
   # start the keyd daemon so that we are listening for user
   # key presses
   (setsid /bin/keyd -l /var/log/keyd.log 2>&1 >/dev/null) &
