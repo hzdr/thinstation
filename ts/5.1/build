@@ -1368,7 +1368,7 @@ for filename in `ls -1 $PKGDIR/` ; do
 		rm -Rf build
 	fi
 	echo "Building $filename.pkg"
-	tar -cz * > ../$filename.pkg
+	tar -cJf ../$filename.pkg *
 	cd ../../..
 	rm -Rf $PKGDIR/$filename
 	if [ -n "$PKGFILES" ] ; then
