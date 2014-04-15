@@ -207,8 +207,18 @@ if [ -z "${cmdArgs}" ] && [ -x ${XFREERDP} ]; then
        cmdArgs="$cmdArgs /size:${resolution}"
     fi
 
-    # enable multi monitor support
-    cmdArgs="$cmdArgs /multimon"
+    # enable multi monitor support, but only if the two displays
+    # are not mirrored (offset = 0)
+    for r in `xrandr | grep " connected" | cut -d " " -f3`; do
+      x=`echo $r | cut -d "+" -f2`
+      
+      # check the x-offset for being non-zero and if so
+      # enable multimon support
+      if [ $x -ne 0 ]; then
+        cmdArgs="$cmdArgs /multimon"
+        break
+      fi
+    done
 
     # color depth
     cmdArgs="$cmdArgs /bpp:${colorDepth}"
