@@ -1,4 +1,5 @@
 .AppleDouble
+/BUILD.*
 /PASSWD
 /bin/
 /boot/
@@ -14,6 +15,7 @@
 /share/
 /sys/
 /tmp/
+/ts/5.1/tmp-tree/
 /ts/5.1/boot-images/pxe/
 /ts/5.1/boot-images/syslinux/
 /ts/5.1/boot-images/templates/menu/ifcpu.c32
@@ -89,6 +91,8 @@
 /ts/5.1/packages/broadcom-sta/etc/
 /ts/5.1/packages/broadcom-sta/lib/
 /ts/5.1/packages/ca-bundle/etc/ssl/
+/ts/5.1/packages/ca-bundle/build/installed
+/ts/5.1/packages/ca-bundle/etc/
 /ts/5.1/packages/ccidreader/etc/
 /ts/5.1/packages/ccidreader/lib/
 /ts/5.1/packages/cdrtools/bin/
