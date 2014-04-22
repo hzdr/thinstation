@@ -75,7 +75,11 @@ machine intel_nuc
 
 #!!Filesystem Support
 # Every mounted device needs a filesystem, so choose which ones you need.
+module microcode FORCE
+module cpufreq_stats FORCE
 module usb-storage
+module lp
+module usblp
 #module autofs4          	# Automount and autofs support
 module isofs            	# ISO9960 file system support for CDRoms
 module udf			# CDRom UDF file system support
@@ -213,6 +217,9 @@ package thinlinc_nightly		# Cendio ThinLinc client support (nightly builds)
 #package java			# Java runtime
 #package firefox_lowmem		# Firefox 3 for low resource machines
 pkg firefox		# Firefox current Web Browser
+package messagebox
+package nss
+package curl
 #package chrome			# Google Chrome Web Browser
 #package kiosk			# Rkiosk Plugin for Firefox
 #package flash_lowmem		# Flash 9 browser plugin for firefox and low resource machines
@@ -278,12 +285,14 @@ pkg cups          # cups printing system
 
 
 #!!Miscellaneous
-pkg gtk-2.0			# Full gtk-2.0 plus clearlooks theme
+package gtk-2.0			# Full gtk-2.0 plus clearlooks theme
 package icons-cursor		# Anti Aliased Mouse Cursor Theme
 #package icons-hicolor           # Hi-Color icons for some applications and themes. Does not really contain any icons.
 #package icons-gnome             # gnome Hi-Color icons theme. Needed by most other icon themes.
 #package icons-tango             # tango Hi-Color icons theme
 #package icons-neu               # neu Hi-Color icons theme
+package pango
+package fontconfig
 package fonts-misc
 #package fonts-jis-misc		# Japanese Industrial
 #package fonts-util
@@ -369,7 +378,7 @@ param defaultconfig  thinstation.conf.buildtime  	# The file with default setup.
                                                  	#  during boot.
 param basename       thinstation     			# Used for all config/tftp/scp file names
 param basepath       thinstation/conf               		# Used to determine path to tftp/scp files
-param baseurl        http://www.doncuppjr.net		# Used to determine url to wget files
+param baseurl        http://149.220.10.30		# Used to determine url to wget files
 param keyfile        ./id_rsa       			# Path for private key file used for ssh/scp
 #param knownhosts     ./known_hosts  			# Path for ssh known_hosts file for ssh/scp
 #param localpkgs      false				# to determine is PKG files are to be loaded locally
