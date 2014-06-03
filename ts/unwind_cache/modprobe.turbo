@@ -1,4 +1,10 @@
-#5b6f899c3d11c462094244098913ab3b  .dna
+#8251c1635b48385a6db914a44f0646dc  .dna
 
-mkdir -p /ts/5.1/packages/modprobe/sbin
-cp /sbin/modprobe /ts/5.1/packages/modprobe/sbin/.
+mkdir -p /ts/5.2/packages/modprobe/sbin
+cp /sbin/kmod /ts/5.2/packages/modprobe/sbin/.
+ln -sf kmod /ts/5.2/packages/modprobe/sbin/depmod
+ln -sf kmod /ts/5.2/packages/modprobe/sbin/insmod
+ln -sf kmod /ts/5.2/packages/modprobe/sbin/lsmod
+ln -sf kmod /ts/5.2/packages/modprobe/sbin/modinfo
+ln -sf kmod /ts/5.2/packages/modprobe/sbin/modprobe
+ln -sf kmod /ts/5.2/packages/modprobe/sbin/rmmod

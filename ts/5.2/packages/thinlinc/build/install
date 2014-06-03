@@ -1,0 +1,25 @@
+#!/bin/bash
+
+gzname=`basename $1`
+tarname=`basename $1 .tar.gz`
+filename=`basename $1 .tar.gz`
+INSTALLDIR=./packages/thinlinc
+
+tar -C wget_tmp -zxf ./wget_tmp/$gzname
+let returnval=$?
+
+chmod -R u+w ./wget_tmp
+cp -Prf ./wget_tmp/packages/thinlinc/* $INSTALLDIR/.
+
+mv $INSTALLDIR/usr/icons $INSTALLDIR/lib/pixmaps
+rmdir $INSTALLDIR/usr
+
+mkdir -p $INSTALLDIR/lib/icons/hicolor/scalable/apps
+cp $INSTALLDIR/lib/thinlinc/lib/tlclient/tlclient.svg \
+	$INSTALLDIR/lib/icons/hicolor/scalable/apps/thinlinc.svg
+icon-gen thinlinc
+
+sed -i -e 's/needs="x11";/needs="x11"; menu="Connectivity";/g' $INSTALLDIR/lib/menu/thinlinc
+
+
+exit $returnval

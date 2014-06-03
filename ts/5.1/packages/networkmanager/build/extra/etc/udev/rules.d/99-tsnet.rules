@@ -1,3 +1,0 @@
-SUBSYSTEM!="net", GOTO="net_end"
-RUN+="/etc/udev/scripts/net.sh"
-LABEL="net_end"
