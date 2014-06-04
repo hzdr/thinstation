@@ -64,6 +64,9 @@ cp ts/${TS_VERSION}/conf/hzdr/thinstation.conf.buildtime ts/${TS_VERSION}/
 # build.conf
 sudo ./setup-chroot -b -o --kernel SMP conf/hzdr/build.conf.private
 
+# revert changes to buildtime file
+git checkout ts/${TS_VERSION}/thinstation.conf.buildtime
+
 # copy the images to the respective TFTP directory
 if [ -e "${TFTP_ROOT}" ]; then
   if [ ! -e "${TFTP_ROOT}/thinstation" ]; then
