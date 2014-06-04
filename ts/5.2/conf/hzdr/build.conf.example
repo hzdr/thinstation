@@ -106,6 +106,7 @@ module ext4			# Ext4 file system support
 # --- Packages to include in boot image
 # --- Packages below may be "package" or "pkg"
 #!!Miscellaneous
+#package aufs      # This is needed in order for squashfs compression mode to work.
 #package ts-classic              # The classic ts logic for network/netfiles/hostname/mounting/telnetd/telnet/playcd
 package autonet
 package automount
@@ -211,7 +212,7 @@ package freerdp		# X RDP Client - fork of rdesktop
 #package tn5250          	# 5250 terminal emulator
 #package dillo			# Dillo light web browser
 package thinlinc		# Cendio ThinLinc client support
-package thinlinc_nightly		# Cendio ThinLinc client support (nightly builds)
+#package thinlinc_nightly		# Cendio ThinLinc client support (nightly builds)
 #package nx              	# No Machine NX client
 #package 2x			# 2X client
 #package java			# Java runtime
@@ -388,6 +389,8 @@ param haltonerror    false				# Will halt on error, default is true
 param hardlinkfs     true
 param sametimestmp   true                               # When enabled, the timestamps for all files and folders will be set to 00:00 of todays date in your timezone
 param initrdcmd	     "lzma -9"				# Compression mode and level of initrd file. none, gzip -9, lzma -9 ,bzip2 -9
+#param initrdcmd	     "squashfs"				# Compression mode and level of initrd file. none, gzip -9, lzma -9 ,bzip2 -9
+#param squashopt     "-comp xz -Xbcj x86 -Xdict-size 100%"
 param bootverbosity   0          			# Increased vebosity when booting TS
                                 			#   0 no verbose messages
                                 			#   1 boot
