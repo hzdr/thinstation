@@ -8,3 +8,4 @@ base
 #gnome-media
 pulseaudio
 gtkdialog
+gtk-2.0

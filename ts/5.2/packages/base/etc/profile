@@ -20,15 +20,15 @@ if [ "`tty`" == "$CONSOLE" ]; then
 		if check_last_session; then
 			cd /var/run
 			clear
+			splash_exit
 			exec /bin/xinit /etc/xinitrc -- /etc/xserverrc > /var/run/applications/session.$$ 2>&1
 		else
                         splash_exit
                         show_cursor
                         exec $NO_XORG_CMD
 		fi
-	else
-		splash_exit
-		trap - INT QUIT TSTP
 	fi
 fi
+splash_exit
+trap - INT QUIT TSTP
 show_cursor
