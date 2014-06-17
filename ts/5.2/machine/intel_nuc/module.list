@@ -39,3 +39,12 @@ module hid-cherry
 module hid-magicmouse
 module hid-microsoft
 module hid-chicony
+module hid-kensington
+module hid-multitouch
+module hid-cypress
+module hid-a4tech
+module hid-chicony
+module hid-ntrig
+module hid-hyperv
+module hid-appleir
+module hid-logitech-dj

@@ -4546,6 +4546,8 @@
 /ts/5.2/packages/file/lib/
 /ts/5.2/packages/gtkdialog/bin/
 /ts/5.2/packages/gtkdialog/build/installed
+/ts/5.2/packages/gtkdialog/build/extra/
+/ts/5.2/packages/gtkdialog/lib/
 /ts/5.2/packages/krb5/etc/
 /ts/5.2/packages/p11-kit/bin/
 /ts/5.2/packages/p11-kit/lib/

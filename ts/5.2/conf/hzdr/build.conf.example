@@ -238,7 +238,7 @@ pkg flash			# Flash Current
 
 #!!Window Managers. Choose no more than 1 window manager.
 # Not needed if you don t want to manage windows.
-package openbox		# A spartin clean/fast window manager.
+#package openbox		# A spartin clean/fast window manager.
 #package xdesktop-kiosk		# A locked down desktop kiosk using the openbox wm (See packages/xdesktop-kiosk/build/conf for 
 				# more help.
 #package icewm			# "ICEWM" window manager.  Makes TS a light workstation.

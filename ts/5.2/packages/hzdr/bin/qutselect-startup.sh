@@ -34,16 +34,16 @@ wait_for_wm()
                  -remove _NET_DESKTOP_NAMES \
                  -remove _NET_CURRENT_DESKTOP 2> /dev/null
 
-# start openbox wm
-/bin/openbox --config-file /etc/xdg/openbox/rc-single-app.xml &
+# start wm
+/bin/xfwm4 --daemon
+
+# wait for wm to start
+if ! wait_for_wm; then
+    echo "$0: Timeout waiting for wm to start"
+fi
 
 # update the default pa sink
 /bin/pa-update-default-sink.sh
-
-# wait for openbox to start
-if ! wait_for_wm; then
-    echo "$0: Timeout waiting for openbox to start"
-fi
 
 # start qutselect unlimited
 while true; do
@@ -52,6 +52,3 @@ while true; do
     break 
   fi
 done
-
-# stop openbox again
-/bin/openbox --exit
