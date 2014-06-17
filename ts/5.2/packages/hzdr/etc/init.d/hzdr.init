@@ -5,6 +5,29 @@
 case "$1" in 
 init)
 
+  # make sure we download the latest slist and motd file
+  if [ -n "$SERVER_IP" ]; then
+    TMPFILE=`mktemp`
+    SRC_SLISTPATH="$BASEPATH/$SESSION_0_HZDR_QUTSELECT_SLIST"
+    DST_SLISTPATH="/bin/qutselect.slist"
+    if `transport $SRC_SLISTPATH $TMPFILE $SERVER_IP` ; then
+      rm -f $DST_SLISTPATH
+      catv $TMPFILE | sed -e 's/\^M//g' >$DST_SLISTPATH 2>/dev/null
+      echo >> $DST_SLISTPATH
+    fi
+    rm -f $TMPFILE
+
+    TMPFILE=`mktemp`
+    SRC_MOTDPATH="$BASEPATH/$SESSION_0_HZDR_QUTSELECT_MOTD"
+    DST_MOTDPATH="/bin/qutselect.motd"
+    if `transport $SRC_MOTDPATH $TMPFILE $SERVER_IP` ; then
+      rm -f $DST_MOTDPATH
+      catv $TMPFILE | sed -e 's/\^M//g' >$DST_MOTDPATH 2>/dev/null
+      echo >> $DST_MOTDPATH
+    fi
+    rm -f $TMPFILE
+  fi
+
   # check if cups is installed and if yes then check if it is running already or not
   if [ -e "/sbin/cupsd" ]; then
     /bin/pgrep /sbin/cupsd
