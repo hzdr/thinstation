@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export PACKAGE=polkit-gnome
+export PACKAGE=wpa_supplicant
 export PORTS=$PACKAGE
 repackage -e
 
