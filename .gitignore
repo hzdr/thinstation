@@ -111,6 +111,7 @@
 /ts/5.2/packages/consolekit/lib/libck-connector.so.0.0.0
 /ts/5.2/packages/consolekit/lib/polkit-1/
 /ts/5.2/packages/consolekit/sbin/
+/ts/5.2/packages/consolekit/build/extra/bin/
 /ts/5.2/packages/cpufreq/bin/
 /ts/5.2/packages/cpufreq/lib/
 /ts/5.2/packages/cpuspeed/bin/

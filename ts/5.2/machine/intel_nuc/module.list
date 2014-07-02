@@ -22,9 +22,7 @@ module intel-gtt
 module soundcore
 module i2c-core
 module ptp
-module cfbimgblt
 module mfd-core
-module cfbfillrect
 module pps_core
 module video
 module acpi-cpufreq
@@ -37,7 +35,6 @@ module snd-rawmidi
 module snd-seq-device
 module microcode
 module usb-storage
-module hid-apple
 module hid-magicmouse
 module hid-chicony
 module hid-kensington
