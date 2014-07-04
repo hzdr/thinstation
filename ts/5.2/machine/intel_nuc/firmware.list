@@ -1,1 +1,2 @@
 firmware 0* intel-ucode
+firmware rtl8168g* rtl_nic
