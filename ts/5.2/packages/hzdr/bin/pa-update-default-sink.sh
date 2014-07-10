@@ -50,6 +50,12 @@ getSourceName()
 ############################################
 # main starts here
 
+# first we make sure we have all possible sinks (HDMI+analog stereo) before setting/rerouting
+# the audio streams to a different sink.
+for inum in `pactl list short cards | cut -f1`; do
+  pactl set-card-profile ${inum} output:analog-stereo+input:analog-stereo
+done
+
 # get all information pactl list can provide us about our sinks
 painfo=$(pactl list sinks)
 
