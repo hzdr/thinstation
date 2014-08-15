@@ -1,4 +1,6 @@
 #!/bin/bash
+. /etc/ashrc
+
 tempdir=`mktemp -d 2>/dev/null`
 disk=$1
 buggybios=$2
@@ -49,6 +51,19 @@ read_pt()
 	sleep 1
 }
 
+git_fallback()
+{
+        Xdialog --title "Git ERROR!" --yesno "\
+Clone failed via git even though initial \
+testing suggested it should succeed. \n\
+This could be a weird proxy error.\n\
+\n\
+Would you like to try via the https instead? \n\
+\n\
+* Dowloading objects may not be displayed!
+" 15 50
+}
+
 echo "Starting Partioner"
 touch /tmp/nomount
 un_mount
@@ -92,7 +107,10 @@ cd /boot
 cp /install/* .
 ./syslinux -s ${disk}1
 ./syslinux ${disk}1
+
 proxy-setup
+. /tmp/.proxy
+
 if [ -e /mnt/cdrom0/thindev-default.tar.xz ]; then
 	tar -xvf /mnt/cdrom0/thindev-default.tar.xz
 else
@@ -101,11 +119,15 @@ else
 	tar -xvf thindev-default.tar.xz
 	rm thindev-default.tar.xz
 fi
+
 cp /boot/initrd /boot/initrd-backup
 cp /boot/vmlinuz /boot/vmlinuz-backup
 cp /boot/lib.update /boot/lib.squash-backup
 cd /thinstation
 rm -rf *
+
 echo "Gitting thinstation repo"
-git clone --depth 1 git://github.com/Thinstation/thinstation.git -b 5.2-Stable /thinstation
+
+git clone --depth 1 https://github.com/Thinstation/thinstation.git -b 5.2-Stable /thinstation
+
 ./setup-chroot -i
