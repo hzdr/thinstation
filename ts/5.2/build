@@ -20,6 +20,7 @@ PATH=/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin:/usr/local/sbin:/ts/bin
 
 # set some defaults for builds that would produce unexpected results for legacy build scripts otherwise.
 ts_mesa_3d=enabled
+ts_localpkgs=true
 
 # Show Command line Parameters
 
@@ -94,9 +95,10 @@ addpkgs()
   if ls $1/*.pkg > /dev/null 2>&1 ; then
     rm $1/*.pkg
   fi
-  if [ "`make_caps $ts_localpkgs`" = "TRUE" ] ; then
+  if is_enabled $ts_localpkgs; then
     if ls $PKGDIR/*.pkg > /dev/null 2>&1 ; then
-    	cp $PKGDIR/*.pkg $1
+	mkdir -p $1
+    	ln $PKGDIR/*.pkg $1
     fi
   fi
 }
@@ -110,7 +112,7 @@ mounted()
 lib_in_path()
 {
 	for lpath in `cat lpaths.tmp` $filepath; do
-		if [ -e ./tmp-tree$lpath/$1 ]; then
+		if [ -e ./tmp-tree$lpath/$1 ] || [ -e $pkgname$lpath/$1 ]; then
 			return 0
 		fi
 	done
@@ -1098,6 +1100,15 @@ if ! is_enabled $ts_bootlogo; then
 	rm $PACDIR/splash.package
 fi
 
+# Now that all the package deps are satisfied, do we really need wmsetbg
+if [ -e $PACDIR/desktop.param ]; then
+	. $PACDIR/desktop.param
+fi
+if [ -z "$ts_desktop" ] && [ -e $PACDIR/wmsetbg.package ]; then
+	echo -e "Desktop Image Disabled. Removing wmsetbg package."
+        rm $PACDIR/wmsetbg.package
+fi
+
 install_non_distributable
 
 # Add all packages to filetree
@@ -1875,7 +1886,7 @@ if [ -z "$NOIMAGES" ] ; then
     cp -p $INITDIR/initrd $IMAGEDIR
     cp $INITDIR/image.md5 $IMAGEDIR
     image_fastboot
-    addpkgs $IMAGEDIR
+    addpkgs $IMAGEDIR/$ts_basepath/$PKG_PREFIX/
     ;;
   iso)
     IMAGEDIR=boot-images/iso
