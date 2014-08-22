@@ -328,17 +328,6 @@ FREERDP_KNOWN_HOST_0="Big_Bad_Server_Donald 7a:a4:af:8a:98:da:50:52:ba:33:8d:e6:
 FREERDP_SERVER_1="2 Big_Bad_Server_Road_Runner"
 FREERDP_SERVER_1_OPTIONS="-sec-nla /cert-ignore"
 
-
-#ICEWM_THEME=blueCrux   # Default IceWM theme
-#SESSION_#_TYPE=icewm
-#HIDE_CONTROLS		Hide all menus and the task bar
-#MENU_SHOWRES=off       Hide resolution menu.
-#MENU_SHOWAPPS=off	Hide apps menu.
-#MENU_SHOWABOUT=off	Hide about menu.
-#MENU_SHOWLOGOUT=off	Hide logout menu.
-#MENU_SHOWCLOCK=off     Hide the clock on the taskbar
-#MENU_EXTRA=only	Enable eclusive menu loading from another location
-#MENU_EXTRA_DIR="PATH"	Directory to load extra menus from
 # Script for shutting down Thinstation after a certain idle period. Developed
 # and tested with Thinstation 2.2.x. Updated for Thinstation 2.5.
 # Copyright (C) 2007 Daniel Meyer (eagle@cyberdelia.de)
