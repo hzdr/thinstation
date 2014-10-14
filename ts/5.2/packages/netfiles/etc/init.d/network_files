@@ -97,7 +97,7 @@ get_config_files()
 
 if [ -e $TS_HOSTS ] ; then
  echo_log "Getting group configurations..." -n $debug
- thingrouplist=`cat $TS_HOSTS |grep -i $CLIENT_MAC |cut -f3- -d" " |cut -f1 -d#`
+ thingrouplist=`egrep -i "${CLIENT_MAC}|${CLIENT_NAME}" ${TS_HOSTS} | cut -f3- -d" " | cut -f1 -d#`
 
  if [ -z "$thingrouplist" ] ; then
 	echo_log "Not found!" $debug
