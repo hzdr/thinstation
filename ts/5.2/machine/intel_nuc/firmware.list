@@ -1,2 +1,5 @@
 firmware 0* intel-ucode
-firmware rtl8168g* rtl_nic
+firmware rtl8168* rtl_nic
+firmware PALM* radeon
+firmware SUMO_* radeon
+firmware microcode_amd* amd-ucode
