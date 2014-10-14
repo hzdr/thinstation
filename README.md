@@ -2,13 +2,15 @@
 
 This repository hosts a fork of the Linux-based [Thinstation](http://github.com/Thinstation/thinstation) thin client project. It comes with some modifications to:
 
-* get Thinstation running more smoothly and optimized on the [intel NUC](http://www.intel.eu/content/www/eu/en/nuc/overview.html) platform. Tested/Supported models are:
-  * [D54250WYK](http://www.intel.eu/content/www/eu/en/nuc/nuc-kit-d54250wyk.html)
-  * [D34010WYK](http://www.intel.eu/content/www/eu/en/nuc/nuc-kit-d34010wyk.html)
-  * [DE3815TYKHE](http://www.intel.com/content/www/us/en/nuc/nuc-kit-de3815tykhe.html)
-  * [DC3217BY](http://www.intel.eu/content/www/eu/en/motherboards/desktop-motherboards/desktop-kit-dc3217by.html)
-  * [DC3217IYE](http://www.intel.eu/content/www/eu/en/motherboards/desktop-motherboards/desktop-kit-dc3217iye.html)
-  * [DCCP847DYE](http://www.intel.com/content/www/us/en/nuc/nuc-kit-dccp847dye.html)
+* get Thinstation running more smoothly and optimized for the various thin clients used at our institution. Tested and supported models are:
+  * [intel NUC D54250WYK](http://www.intel.eu/content/www/eu/en/nuc/nuc-kit-d54250wyk.html)
+  * [intel NUC D34010WYK](http://www.intel.eu/content/www/eu/en/nuc/nuc-kit-d34010wyk.html)
+  * [intel NUC DE3815TYKHE](http://www.intel.com/content/www/us/en/nuc/nuc-kit-de3815tykhe.html)
+  * [intel NUC DC3217BY](http://www.intel.eu/content/www/eu/en/motherboards/desktop-motherboards/desktop-kit-dc3217by.html)
+  * [intel NUC DC3217IYE](http://www.intel.eu/content/www/eu/en/motherboards/desktop-motherboards/desktop-kit-dc3217iye.html)
+  * [intel NUC DCCP847DYE](http://www.intel.com/content/www/us/en/nuc/nuc-kit-dccp847dye.html)
+  * [Fujitsu Futro S700](http://www.fujitsu.com/de/products/computing/pc/thin-clients/FUTRO-S700/)
+  * [Fujitsu Futro S550-2](http://globalsp.ts.fujitsu.com/dmsp/Publications/public/ds-FUTRO-S550-2.pdf)
 * provide a lightweight kiosk system which after bootup provides a simple connection GUI with options to connect via [ThinLinc](http://www.cendio.se/), RDP (via [freerdp](http://www.freerdp.com)) and VNC to Linux and Windows Terminalservers
 * provide an adapted user interface to the needs of our organization ([Helmholtz-Zentrum Dresden-Rossendorf](http://www.hzdr.de/))
 
