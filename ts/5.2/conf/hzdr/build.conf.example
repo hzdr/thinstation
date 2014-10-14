@@ -218,6 +218,7 @@ package thinlinc		# Cendio ThinLinc client support
 #package java			# Java runtime
 #package firefox_lowmem		# Firefox 3 for low resource machines
 pkg firefox		# Firefox current Web Browser
+pkg ca-bundle
 package messagebox
 package nss
 package curl
