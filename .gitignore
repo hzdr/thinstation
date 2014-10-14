@@ -15,6 +15,7 @@
 /share/
 /sys/
 /tmp/
+/ts/5.2/liblist.final
 /ts/5.2/tmp-tree/
 /ts/5.2/boot-images/pxe/
 /ts/5.2/boot-images/syslinux/
