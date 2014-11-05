@@ -4210,6 +4210,7 @@
 /ts/5.2/packages/ppp/lib/
 /ts/5.2/packages/ppp/sbin/
 /ts/5.2/packages/pulseaudio/etc/
+/ts/5.2/packages/pulseaudio/usr/
 /ts/5.2/packages/pycairo/lib/
 /ts/5.2/packages/pycurl/lib/
 /ts/5.2/packages/pygobject/lib/
