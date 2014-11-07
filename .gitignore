@@ -4592,6 +4592,7 @@
 /ts/5.2/packages/putty/lib/terminfo/
 /ts/5.2/packages/xorg7-glamor/etc/
 /ts/5.2/packages/xorg7-glamor/lib/
+/ts/ports/firmware/firmware-atmel/firmware-atmel#1.3-1.pkg.tar.gz
 /ts/ports/firmware/firmware-alsa/alsa-firmware-1.0.27.tar.bz2
 /ts/ports/firmware/firmware-alsa/firmware-alsa#1.0.27-1.pkg.tar.gz
 /ts/ports/firmware/firmware-atmel/atmel-firmware-1.3.tar.gz
