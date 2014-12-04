@@ -6,11 +6,10 @@
 # At the same time it will allow to preserve private information which shouldn't
 # be put on the GitHub server where the 
 #
-# Copyright (c) 2013 Jens Maus <mail@jens-maus.de>
+# Copyright (c) 2013-2014 Jens Maus <mail@jens-maus.de>
 #
 
 TFTP_ROOT="/tftpboot"
-TS_VERSION="5.2"
 
 # get the version number for our build
 if [ -e "VERSION" ]; then
@@ -36,19 +35,19 @@ else
 fi
 
 # check that we have ssh keys installed
-if [ ! -e "ts/${TS_VERSION}/id_rsa" ]; then
+if [ ! -e "ts/build/id_rsa" ]; then
   if [ -e "../id_rsa" ]; then
-    cp -a "../id_rsa" "ts/${TS_VERSION}/"
+    cp -a "../id_rsa" "ts/build/"
   else
-    echo "ERROR: ts/${TS_VERSION}/id_rsa SSH keyfile missing"
+    echo "ERROR: ts/build/id_rsa SSH keyfile missing"
     exit 2
   fi
 fi
-if [ ! -e "ts/${TS_VERSION}/id_rsa.pub" ]; then
+if [ ! -e "ts/build/id_rsa.pub" ]; then
   if [ -e "../id_rsa.pub" ]; then
-    cp -a "../id_rsa.pub" "ts/${TS_VERSION}/"
+    cp -a "../id_rsa.pub" "ts/build/"
   else
-    echo "ERROR: ts/${TS_VERSION}/id_rsa.pub SSH public keyfile missing"
+    echo "ERROR: ts/build/id_rsa.pub SSH public keyfile missing"
     exit 2
   fi
 fi
@@ -56,9 +55,9 @@ fi
 # let us copy the build.conf.example file to build.conf.private and
 # stuff in the root password into it (build.conf.private will not be
 # put on GitHub&co)
-sed "s/pleasechangeme/${PASSWD}/g" ts/${TS_VERSION}/conf/hzdr/build.conf.example >ts/${TS_VERSION}/conf/hzdr/build.conf.private
-chmod 660 ts/${TS_VERSION}/conf/hzdr/build.conf.private
-cp ts/${TS_VERSION}/conf/hzdr/thinstation.conf.buildtime ts/${TS_VERSION}/
+sed "s/pleasechangeme/${PASSWD}/g" ts/build/conf/hzdr/build.conf.example >ts/build/conf/hzdr/build.conf.private
+chmod 660 ts/build/conf/hzdr/build.conf.private
+cp ts/build/conf/hzdr/thinstation.conf.buildtime ts/build/
 
 # run the image build process and use the SMP kernel as well as the private
 # build.conf
@@ -66,15 +65,15 @@ sudo ./setup-chroot -b -o --kernel SMP conf/hzdr/build.conf.private
 #sudo ./setup-chroot -b -o --allmodules --kernel SMP conf/hzdr/build.conf.private
 
 # revert changes to buildtime file
-git checkout ts/${TS_VERSION}/thinstation.conf.buildtime
+git checkout ts/build/thinstation.conf.buildtime
 
 # copy the images to the respective TFTP directory
 if [ -e "${TFTP_ROOT}" ]; then
   if [ ! -e "${TFTP_ROOT}/thinstation" ]; then
     mkdir "${TFTP_ROOT}/thinstation"
   fi
-  cp ts/${TS_VERSION}/boot-images/pxe/boot/initrd ${TFTP_ROOT}/thinstation/initrd-${VERSION}
-  cp ts/${TS_VERSION}/boot-images/pxe/boot/lib.squash ${TFTP_ROOT}/thinstation/lib.squash-${VERSION}
-  cp ts/${TS_VERSION}/boot-images/pxe/boot/vmlinuz ${TFTP_ROOT}/thinstation/vmlinuz-${VERSION}
-  cp ts/${TS_VERSION}/boot-images/pkg-packages/*.pkg ${TFTP_ROOT}/thinstation/conf/pkg/
+  cp ts/build/boot-images/pxe/boot/initrd ${TFTP_ROOT}/thinstation/initrd-${VERSION}
+  cp ts/build/boot-images/pxe/boot/lib.squash ${TFTP_ROOT}/thinstation/lib.squash-${VERSION}
+  cp ts/build/boot-images/pxe/boot/vmlinuz ${TFTP_ROOT}/thinstation/vmlinuz-${VERSION}
+  cp ts/build/boot-images/pkg-packages/*.pkg ${TFTP_ROOT}/thinstation/conf/pkg/
 fi
