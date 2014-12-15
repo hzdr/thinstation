@@ -761,9 +761,8 @@ sample_configuration()
 
 locales()
 {
-	# Removes extended locale libs if not selected
 	echo -e "\nAdding locales to archive.\n"
-
+	# Removes extended locale libs if not selected
 	if [ -n "`find ./tmp-tree/build -maxdepth 1 -name \*.template`" ]; then
 		for localedef in `cat ./tmp-tree/build/*.template`; do
 			inputfile=`echo $localedef|cut -d , -f1`
@@ -1497,7 +1496,6 @@ mesa()
 		rm -rf ./tmp-tree/lib/dri
 		rm -rf ./tmp-tree/lib/gallium-pipe
 		rm -rf ./tmp-tree/lib/vdpau
-#		rm -f ./tmp-tree/lib/xorg/modules/drivers/modesetting_drv.so
 		rm -f ./tmp-tree/lib/xorg/modules/extensions/libglx.so
 	fi
 }
@@ -1879,9 +1877,9 @@ cd ../..
 image_fastboot()
 {
 	if [ "$ts_fastboot" == "true" ] || [ "$ts_fastboot" == "lotsofmem" ] ; then
-		cp -p $INITDIR/lib.squash $IMAGEDIR
-	elif [ -e $IMAGEDIR/lib.squash ]; then
-		rm $IMAGEDIR/lib.squash
+		cp -p $INITDIR/lib.squash $ESP
+	elif [ -e $ESP/lib.squash ]; then
+		rm $ESP/lib.squash
 	fi
 }
 
@@ -1903,13 +1901,13 @@ fi
 add_image()
 {
 	for kernel in `find $INITDIR -maxdepth 1 -type f -name vmlinuz\* -printf '%f '`; do
-		sys_link hard $INITDIR/$kernel $IMAGEDIR/boot/$kernel
+		sys_link hard $INITDIR/$kernel $ESP/boot/$kernel
 	done
 
-	sys_link hard $INITDIR/initrd $IMAGEDIR/boot/initrd
-	sys_link hard $INITDIR/image.md5 $IMAGEDIR/boot/image.md5
+	sys_link hard $INITDIR/initrd $ESP/boot/initrd
+	sys_link hard $INITDIR/image.md5 $ESP/boot/image.md5
 	if [ -e $INITDIR/lib.squash ]; then
-		sys_link hard $INITDIR/lib.squash $IMAGEDIR/boot/lib.squash
+		sys_link hard $INITDIR/lib.squash $ESP/boot/lib.squash
 	fi
 }
 
@@ -1917,11 +1915,8 @@ add_overlay()
 {
 	if [ -n "$ts_bootoverlay" ]; then
 		OVERLAYDIR="boot-images/$ts_bootoverlay/"
-		for dir in `find $OVERLAYDIR -type d |sed "s|$OVERLAYDIR||g"`; do
-			mkdir -p $IMAGEDIR/boot/$dir
-		done
 		for file in `find $OVERLAYDIR -type f |sed "s|$OVERLAYDIR||g"`; do
-			sys_link hard $OVERLAYDIR/$file $IMAGEDIR/boot/$file
+			sys_link hard $OVERLAYDIR/$file $ESP/boot/$file
 		done
 	fi
 }
@@ -1962,28 +1957,33 @@ syslinux_com_deps()
 
 syslinux_copy_files_bios()
 {
-	inet_dev=`ip route list |grep -e default |cut -d " " -f5`
-	local_ip=`ip addr show $inet_dev |grep -e "inet " |cut -d " " -f6 |cut -d "/" -f1`
+	if [ -z "$ts_bootserver" ]; then
+		inet_dev=`ip route list |grep -e default |cut -d " " -f5`
+		ts_bootserver=`ip addr show $inet_dev |grep -e "inet " |cut -d " " -f6 |cut -d "/" -f1`
+	fi
 	biosdir=/usr/share/syslinux/bios
 	configdir=boot-images/templates/syslinux/$ts_syslinuxtheme
-	ESP=$IMAGEDIR
 	BIOSDIR=${ESP}/boot$BDIR
 	CONFIGDIR=`dirname $CONFIGFILE`
-	mkdir -p "$BIOSDIR"
 
 	for file in `find $configdir -type f |sed -e "s|$configdir||g"`; do
 		subdirname=`dirname $file |sed -e "s|^/$||g"`
-		mkdir -p "${BIOSDIR}${subdirname}"
 		sys_copy ${configdir}${file} "$BIOSDIR/$file"
 	done
 
-	mkdir -p $BIOSDIR/$CONFIGDIR
+	mkdir -p `dirname $BIOSDIR/$CONFIGFILE`
 	cat $BIOSDIR/syslinux.cfg.tpl |sed -e "s/\$KERNEL_PARAMETERS/$KERNEL_PARAMETERS LM=$LM/g"> $BIOSDIR/$CONFIGFILE
         sed -i -e "s/\$LM/$LM/g" $BIOSDIR/$CONFIGFILE
 	if [ "$LOADER" == "lpxelinux.0" ]; then
 		for file in `find $BIOSDIR -type f`; do
 			if [ -n "`file -e tokens $file| grep -e ASCII |cut -d ":" -f1`" ];then
-				sed -i -e "s|/boot|http://$local_ip/boot|g" $file
+				sed -i -e "s|/boot|http://$ts_bootserver/boot|g" $file
+			fi
+		done
+	elif [ "$LOADER" == "pxelinux.0" ]; then
+		for file in `find $BIOSDIR -type f`; do
+			if [ -n "`file -e tokens $file| grep -e ASCII |cut -d ":" -f1`" ];then
+				sed -i -e "s|/boot|::/boot|g" $file
 			fi
 		done
 	fi
@@ -1997,7 +1997,9 @@ syslinux_copy_files_bios()
 		rm $ESP/$file
 	        sed -i -e "s/\$LM/$LM/g" $ESP/$endfile
 		if [ "$LOADER" == "lpxelinux.0" ]; then
-			sed -i -e "s|/boot|http://$local_ip/boot|g" $ESP/$endfile
+			sed -i -e "s|/boot|http://$ts_bootserver/boot|g" $ESP/$endfile
+		elif [ "$LOADER" == "pxelinux.0" ]; then
+			sed -i -e "s|/boot|::/boot|g" $ESP/$endfile
 		fi
         	echo $ESP/$endfile >> boot-images/initrd/added.files
 	done
@@ -2013,27 +2015,17 @@ syslinux_copy_files_bios()
 
 syslinux_copy_files_efi()
 {
-	inet_dev=`ip route list |grep -e default |cut -d " " -f5`
-	local_ip=`ip addr show $inet_dev |grep -e "inet " |cut -d " " -f6 |cut -d "/" -f1`
 	efi32dir=/usr/share/syslinux/efi32
 	efi64dir=/usr/share/syslinux/efi64
-	EFI32DIR=$ESP/EFI/syslinux/efi32
-	EFI64DIR=$ESP/EFI/syslinux/efi64
-	mkdir -p "$EFI32DIR"
-	mkdir -p "$EFI64DIR"
 
 	for file in `find $configdir -type f |sed -e "s|$configdir||g"`; do
 		subdirname=`dirname $file |sed -e "s|^/$||g"`
-		mkdir -p "${EFI32DIR}${subdirname}"
-		mkdir -p "${EFI64DIR}${subdirname}"
 		sys_copy ${configdir}${file} "$EFI32DIR/$file"
 		sys_copy ${configdir}${file} "$EFI64DIR/$file"
 	done
 	find $ESP -name syslinux.cfg.tpl -delete
 
 	if [ "$LOADER" == "lpxelinux.0" ]; then
-		mkdir -p $EFI32DIR/$CONFIGDIR
-		mkdir -p $EFI64DIR/$CONFIGDIR
 		sys_copy $BIOSDIR/$CONFIGFILE "$EFI32DIR/$CONFIGFILE"
 		sys_copy $BIOSDIR/$CONFIGFILE "$EFI64DIR/$CONFIGFILE"
 	else
@@ -2057,13 +2049,10 @@ refind_copy_files()
 {
 	refdir=/boot/efi/EFI/refind
 	configdir=boot-images/templates/refind/$ts_refindtheme
-	ESP=$IMAGEDIR
 	KDIR=${ESP}/boot
 	EFIDIR=$ESP/EFI/BOOT
-	mkdir -p $EFIDIR
 
 	for file in `find $refdir -type f |grep -Ev 'banners|docs|refind.conf-sample|refind_ia32.efi|refind_x64.efi|README.txt|mkfont.sh|gptsync' |sed -e "s|$refdir/||g"`; do
-		mkdir -p $EFIDIR/`dirname $file`
 		sys_copy $refdir/$file $EFIDIR/$file
 	done
 
@@ -2072,7 +2061,6 @@ refind_copy_files()
 
 	for file in `find $configdir -type f |sed -e "s|$configdir||g"`; do
 		subdirname=`dirname $file |sed -e "s|^/$||g"`
-		mkdir -p "${EFIDIR}${subdirname}"
 		sys_copy ${configdir}${file} "$EFIDIR/$file"
 		sed -i -e "s/\$KERNEL_PARAMETERS/$KERNEL_PARAMETERS LM=$LM/g" "$EFIDIR/$file"
 	done
@@ -2080,6 +2068,7 @@ refind_copy_files()
 
 sys_link()
 {
+	mkdir -p `dirname $3`
 	case "$1" in
 		soft) ln -sf "$2" "$3" ;;
 		hard) ln "$2" "$3" ;;
@@ -2089,6 +2078,7 @@ sys_link()
 
 sys_copy()
 {
+	mkdir -p `dirname $2`
 	cp -a "$1" "$2"
 	echo "$2" |sed -E "s|/+|/|g" |sed '/\.tpl/d' >> boot-images/initrd/added.files
 }
@@ -2110,45 +2100,57 @@ if [ -z "$NOIMAGES" ]; then
 		echo -e "\nMaking boot image for $image Type....\n"
 		case $image in
 			syslinux)
-				IMAGEDIR=boot-images/syslinux
+				ESP=boot-images/syslinux
+				EFI32DIR=$ESP/EFI/syslinux/efi32
+				EFI64DIR=$ESP/EFI/syslinux/efi64
 				BDIR=/syslinux
 				CONFIGFILE=syslinux.cfg
 				LOADER=syslinux
 				LM=2
 
-				addpkgs $IMAGEDIR
+				addpkgs $ESP
 				syslinux_copy_files_bios
 				add_image
 				add_overlay
 			;;
 			pxe)
-				IMAGEDIR=boot-images/pxe
-				BDIR=/pxelinux
+				ESP=boot-images/pxe
+				EFI32DIR=$ESP/boot/efi32
+				EFI64DIR=$ESP/boot/efi64
 				CONFIGFILE=pxelinux.cfg/default
+
+				BDIR=/lpxelinux
 				LOADER=lpxelinux.0
+
 				LM=3
 
-				addpkgs $IMAGEDIR
+				addpkgs $ESP
 				syslinux_copy_files_bios
 				syslinux_copy_files_efi
+
+				BDIR=/pxelinux
+				LOADER=pxelinux.0
+				syslinux_copy_files_bios
+
 				add_image
 				add_overlay
-				mkdir -p $IMAGEDIR/cgi-bin
-				sys_copy `prt-get fsearch index.cgi |grep -v Found |cut -d " " -f3` $IMAGEDIR/cgi-bin/index.cgi
+				sys_copy `prt-get fsearch index.cgi |grep -v Found |cut -d " " -f3` $ESP/cgi-bin/index.cgi
 			;;
 			iso)
-				IMAGEDIR=boot-images/iso/source
+				ESP=boot-images/iso/source
+				EFI32DIR=$ESP/EFI/syslinux/efi32
+				EFI64DIR=$ESP/EFI/syslinux/efi64
 				BDIR=/syslinux
 				CONFIGFILE=isolinux.cfg
 				LOADER=isolinux.bin
 				LM=4
 
-				addpkgs $IMAGEDIR
+				addpkgs $ESP
 				syslinux_copy_files_bios
 				if [ -e boot-images/syslinux/boot/syslinux ]; then
 					for file in `ls --color=never boot-images/syslinux/boot/syslinux`; do
-						if [ ! -e $IMAGEDIR/boot/syslinux/$file ]; then
-							sys_copy boot-images/syslinux/boot/syslinux/$file $IMAGEDIR/boot/syslinux/$file
+						if [ ! -e $ESP/boot/syslinux/$file ]; then
+							sys_copy boot-images/syslinux/boot/syslinux/$file $ESP/boot/syslinux/$file
 						fi
 					done
 				fi
@@ -2156,17 +2158,15 @@ if [ -z "$NOIMAGES" ]; then
 				refdir=/build/boot-images/refind/EFI
 				if [ -e $refdir ]; then
 					for file in `find $refdir -type f |sed -e "s|$refdir/||g"`; do
-						mkdir -p $IMAGEDIR/EFI/`dirname $file`
-						sys_copy $refdir/$file $IMAGEDIR/EFI/$file
+						sys_copy $refdir/$file $ESP/EFI/$file
 					done
 				fi
 				add_image
 				add_overlay
 
-				IMAGEDIR_FINAL=`dirname $IMAGEDIR`
+				IMAGEDIR_FINAL=`dirname $ESP`
 				if [ -e $INITDIR/boot.efi ]; then
-					mkdir -p $IMAGEDIR/EFI/BOOT
-					sys_copy $INITDIR/boot.efi $IMAGEDIR/EFI/BOOT/boot.efi
+					sys_copy $INITDIR/boot.efi $ESP/EFI/BOOT/boot.efi
 					mkisofs		-o $IMAGEDIR_FINAL/thinstation.iso \
 							-b boot/syslinux/isolinux.bin \
 							-c boot.cat \
@@ -2201,19 +2201,19 @@ if [ -z "$NOIMAGES" ]; then
 				if [ -e boot-images/common ]; then
 					ls boot-images/common | \
 					while read i; do
-						rm -rf "$IMAGEDIR/`basename "$i"`"
+						rm -rf "$ESP/`basename "$i"`"
 					done
 				fi
 			;;
 			refind)
-				IMAGEDIR=boot-images/refind
+				ESP=boot-images/refind
                                 CONFIGFILE=refind.conf
                                 LM=2
 
-                                addpkgs $IMAGEDIR
+                                addpkgs $ESP
                                 refind_copy_files
 
-				lsize=`du -s $IMAGEDIR |cut -f1`
+				lsize=`du -s $ESP |cut -f1`
 				let lsize=$lsize+32
 
 				dd if=/dev/zero of=$INITDIR/boot.efi bs=1K count=$lsize
@@ -2222,7 +2222,7 @@ if [ -z "$NOIMAGES" ]; then
 				mkfs.vfat -I $lodev
 				mkdir -p temp-efi
 				mount $lodev temp-efi
-				cp -a $IMAGEDIR/* temp-efi
+				cp -a $ESP/* temp-efi
 				umount temp-efi
 				losetup -d $lodev
 				rmdir temp-efi
@@ -2230,8 +2230,7 @@ if [ -z "$NOIMAGES" ]; then
 
 				syslinuxdir="boot-images/syslinux"
 				for file in `find $syslinuxdir -type f |sed -e "s|$syslinuxdir/||g"`; do
-					mkdir -p `dirname $IMAGEDIR/$file`
-					sys_copy $syslinuxdir/$file $IMAGEDIR/$file
+					sys_copy $syslinuxdir/$file $ESP/$file
 				done
 		esac
 	done
