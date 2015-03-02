@@ -4640,6 +4640,12 @@
 /ts/ports/binary-core/firmware-p54/2.19.0.0.a.14.arm
 /ts/ports/binary-core/firmware-zd1211/zd1211-firmware-1.4.tar.bz2
 /ts/ports/binary-core/refind/refind-bin-0.8.3.zip
+/ts/build/packages/samba-base/sbin/
+/ts/build/packages/samba-server/sbin/
+/ts/build/packages/udisks/build/extra/bin/
+/ts/ports/binary-core/amd-microcode/amd-ucode-latest.tar.bz2
+/ts/ports/binary-core/intel-microcode/microcode-20140122.tgz
+/usr
 /usr/ROX/
 /usr/bin/
 /usr/etc/
