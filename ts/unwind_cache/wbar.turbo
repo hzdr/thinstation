@@ -1,15 +1,2 @@
-#bec5f748c84b7ffa663c66dd4fbae617  .dna
+#22ac81961e6019b218866c48fb1c3444  .dna
 
-mkdir -p /ts/build/packages/wbar/bin
-mkdir -p /ts/build/packages/wbar/etc/wbar
-mkdir -p /ts/build/packages/wbar/lib/icons
-cp /ts/components/wbar/bin/wbar /ts/build/packages/wbar/bin/.
-cp /ts/components/wbar/share/wbar/iconpack/comic.ttf /ts/build/packages/wbar/etc/wbar/.
-cp /ts/components/wbar/share/wbar/iconpack/wbar.osx/firefox.png /ts/build/packages/wbar/lib/icons/.
-cp /ts/components/wbar/share/wbar/iconpack/wbar.osx/nautilus.png /ts/build/packages/wbar/lib/icons/.
-cp /ts/components/wbar/share/wbar/iconpack/wbar.osx/ooffice.png /ts/build/packages/wbar/lib/icons/.
-cp /ts/components/wbar/share/wbar/iconpack/wbar.osx/osxbarback.png /ts/build/packages/wbar/lib/icons/.
-cp /ts/components/wbar/share/wbar/iconpack/wbar.osx/skype.png /ts/build/packages/wbar/lib/icons/.
-cp /ts/components/wbar/share/wbar/iconpack/wbar.osx/thunderbird.png /ts/build/packages/wbar/lib/icons/.
-cp /ts/components/wbar/share/wbar/iconpack/wbar.osx/vmware.png /ts/build/packages/wbar/lib/icons/.
-cp /ts/components/wbar/share/wbar/iconpack/wbar.osx/xmms.png /ts/build/packages/wbar/lib/icons/.
