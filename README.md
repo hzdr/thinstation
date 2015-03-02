@@ -26,11 +26,11 @@ There are only a few points to get this Thinstation version compiled for being p
    cd thinstation-hzdr
    ```
 
-2. put proper `id_rsa` and `id_rsa.pub` file in ts/5.2 directory:
+2. put proper `id_rsa` and `id_rsa.pub` file in ts/build directory:
 
    ```
-   cp id_rsa ts/5.2
-   cp id_rsa.pub ts/5.2
+   cp id_rsa ts/build
+   cp id_rsa.pub ts/build
    ```
 
 3. run the build and automatically install the pxe images (make sure `/tftpboot` exists):
@@ -42,18 +42,18 @@ There are only a few points to get this Thinstation version compiled for being p
 ## License
 As the original Thinstation project is licensed under the GPL license, this fork and all its source components are also distributed under the GPL (GNU General Public License) Open Source License.
 
-## Summary of modifications (July 2014)
+## Summary of modifications (March 2015)
 The following should provide a short list of major modifications in comparison to the original Thinstation project:
 
-* created a new 'hzdr' package in `ts/5.2/packages/hzdr' with the following components:
-  * binaries of 'qutselect' package providing a Qt4-based user interface to start remote RDP, ThinLinc and VNC connections.
+* created a new 'hzdr' package in `ts/build/packages/hzdr' with the following components:
+  * binaries of 'qutselect' package (https://github.com/hzdr/qutselect) providing a Qt4-based user interface to start remote RDP, ThinLinc and VNC connections.
   * binaries of 'xfwm4' including an adapted theme to use as a lightweight window manager around qutselect
   * binaries of 'keyd' keyboard daemon to be able to define own keyboard shortcuts (see `/etc/keyd.conf`) to perform tasks within the context of the thin client OS (e.g. ejecting mounted drives, modifying volume, etc.)
   * binaries of 'xte' keyboard emulation to allow to lock a remote session with a simple keyboard shortcut in the context of the thin client OS
-  * modifications to generate an optimized ThinLinc configuration file to perform remote connections with only minor user input.
+  * modifications to generate an optimized ThinLinc configuration file to perform remote connections with only minor user input (no user/password asked).
   * special udev and acpi scripts to automatically move audio output on demand to a different device (e.g. as soon as headphones are plugged in)
-  * own pulseaudio configuration file to allow to switch audio output sinks even in a running ThinLinc session.
-* hightly optimized `build.conf` to generate a small PXE image (~ 48 MB only) with only the necessary packages included and `fastboot=lostofmem` enabled.
+  * own pulseaudio configuration file to allow to switch audio output sinks even during a running ThinLinc session.
+* hightly optimized `build.conf` (see ts/build/conf/hzdr)to generate a small PXE image (~ 48 MB only) with only the necessary packages included and `fastboot=lostofmem` enabled.
 * own `mkhzdr` install script to perform the necessary steps (even interactively) to generate the PXE images and directly install them in /tftpboot/thinstation
 
 ## Credits
