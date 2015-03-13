@@ -4644,7 +4644,8 @@
 /ts/build/packages/samba-server/sbin/
 /ts/build/packages/udisks/build/extra/bin/
 /ts/ports/binary-core/amd-microcode/amd-ucode-latest.tar.bz2
-/ts/ports/binary-core/intel-microcode/microcode-20140122.tgz
+/ts/ports/binary-core/intel-microcode/microcode-20140430.tgz
+/ts/ports/binary-core/refind/refind-bin-0.8.7.zip
 /usr
 /usr/ROX/
 /usr/bin/
