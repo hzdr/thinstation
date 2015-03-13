@@ -345,7 +345,7 @@ param bootlogo       false				# Enable or Disable the use of the Boot splash.
 param defaultconfig  thinstation.conf.buildtime  	# The file with default setup.  No other config file is found
                                                  	#  during boot.
 param basename       thinstation     			# Used for all config/tftp/scp file names
-param basepath       ts5.3               		# Used to determine path to tftp/scp files
+param basepath       ts5.4               		# Used to determine path to tftp/scp files
 param baseurl        http://www.doncuppjr.net		# Used to determine url to wget files
 #param keyfile        ./id_rsa       			# Path for private key file used for ssh/scp
 #param knownhosts     ./known_hosts  			# Path for ssh known_hosts file for ssh/scp
@@ -376,6 +376,7 @@ param downloads         /downloads
 param bootimages        "syslinux pxe iso refind"
 param syslinuxtheme     "default"
 param refindtheme	"default"
+param gummitheme	"default"
 #param httpproxy	http://192.168.1.2:8080
 
 #param bootfssize     50%                               # Modify the size of the tmpfs filesystem
