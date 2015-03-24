@@ -4049,6 +4049,7 @@
 /ts/build/packages/installer/install/mbr.bin
 /ts/build/packages/installer/install/syslinux
 /ts/build/packages/installer/install/vesamenu.c32
+/ts/build/packages/installer/install/extlinux
 /ts/build/packages/iphone/bin/
 /ts/build/packages/iphone/lib/libimobiledevice.so
 /ts/build/packages/iphone/lib/libimobiledevice.so.1

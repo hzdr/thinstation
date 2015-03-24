@@ -1,10 +1,10 @@
 base
-#messagebox
-#pcscd
-#ccidreader
+pcscd
+ccidreader
 #alsa
 #gst-ffmpeg
 #gst-plugins-base
-#gnome-media
+#gstreamer
+#gtkdialog
+#gnome-pulse
 pulseaudio
-gtkdialog
