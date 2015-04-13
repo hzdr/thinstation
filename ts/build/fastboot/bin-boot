@@ -32,3 +32,8 @@ wpa_passphrase
 wpa_supplicant
 swapon
 unsquashfs
+depmod
+kmod
+lsmod
+modprobe
+

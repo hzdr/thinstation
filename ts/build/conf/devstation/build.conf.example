@@ -69,6 +69,7 @@ machine VMWare				# A good set of modules for a VmWare Virtual Machine
 #!!Wireless Stuff
 package wpa_supplicant
 package wireless
+package broadcom-sta
 #package wifi-connect
 #!!!Misc Modules
 
@@ -139,7 +140,6 @@ package xorg7-nouveau		#New opensource nvidia driver
 #package xorg7_nvidia		#Proprietary nvidia driver
 #package xorg7_nvidia_64         # Additional 64bit module
 package xorg7-openchrome	#Via Video Chipsets driver
-#package xorg7-geode		#Geode Video driver
 package xorg7-intel		#Intel video driver for most modern chipsets except the GMA3500/3600
 package xorg7-sis
 
@@ -195,6 +195,7 @@ package filezilla		# FileZilla FTP Client for X
 package git			# GIT Version Control System
 #package gparted		# Gnome Partition Manager
 package open-vm-tools
+package vboxguest
 package medit			# Notepad
 package geany			# Lightweight IDE
 package mplayer			# DVD and video player
@@ -377,7 +378,7 @@ param bootverbosity   3          			# Increased vebosity when booting TS
 #!!Advanced
 # Leave this alone unless you can t download (wget required on your Linux box):
 param downloads         /downloads
-param bootimages        "syslinux iso pxe"
+param bootimages        "syslinux gummiboot iso pxe"
 param syslinuxtheme     "default"
 param refindtheme	"default"
 #param httpproxy	http://192.168.1.2:8080

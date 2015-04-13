@@ -716,7 +716,7 @@ if [ -n "$ts_bootresolution" ] ;then
 	mkdir -p ./tmp-tree/etc/splash/$ts_boottheme
 	cp -Prfd $TOOLSDIR/splash/$ts_boottheme/$res ./tmp-tree/etc/splash/$ts_boottheme
 	if is_enabled $ts_allres; then
-		for res in 800x600 1024x600 1024x768 1152x864 1280x720 1280x768 1280x800 1280x960 1280x1024 1366x768 1400x1050 1440x900 1600x900 1600x1200 1680x1050 1920x1080 1920x1200; do
+		for res in 640x480 800x600 1024x600 1024x768 1152x864 1280x720 1280x768 1280x800 1280x960 1280x1024 1366x768 1400x1050 1440x900 1600x900 1600x1200 1680x1050 1920x1080 1920x1200 2880x1800; do
 			if [ ! -e $TOOLSDIR/splash/$ts_boottheme/$res/$res.cfg ] ; then
 				splash_resize
 			fi
@@ -1949,13 +1949,7 @@ add_overlay()
 syslinux_scan_config()
 {
 	# Scan config file for potentially needed com32 files
-	for com in \
-		pmload vesamenu sdi cpuidtest dmitest whichsys vpdtest \
-		elf cpuid debug linux vesainfo pxechn meminfo ifmem \
-		pcitest ifplop ethersel liblua ifmemdsk kbdmap libcom32 \
-		libmenu prdhcp gfxboot hexdump config libutil gpxecmd \
-		kontron_wdt disk zzjson libgpl chain host rosh ifcpu \
-		ifcpu64 hdt menu lua mboot cmd; do
+	for com in `ls /usr/share/syslinux/bios/ -1 |grep -e c32 |cut -d. -f1`; do
 		grep $1 -oe $com.c32 >> /tmp/syslinux-com32
 	done
 }
