@@ -3,3 +3,5 @@ firmware rtl8168* rtl_nic
 firmware PALM* radeon
 firmware SUMO_* radeon
 firmware microcode_amd* amd-ucode
+firmware ibt-hw-37.8.10-fw-1.10.3.11.e.bseq intel
+firmware iwlwifi-7265D-12.ucode
