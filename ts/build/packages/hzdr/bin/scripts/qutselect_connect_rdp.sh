@@ -221,7 +221,7 @@ if [ -z "${cmdArgs}" ] && [ -x ${XFREERDP} ]; then
     done
 
     # color depth
-    cmdArgs="$cmdArgs /bpp:${colorDepth}"
+    #cmdArgs="$cmdArgs /bpp:${colorDepth}"
 
     # keyboard
     if [ "x${keyLayout}" = "xde" ]; then
