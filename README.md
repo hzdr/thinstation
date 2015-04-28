@@ -5,7 +5,7 @@ This repository hosts a fork of the Linux-based [Thinstation](http://github.com/
 * get Thinstation running more smoothly and optimized for the various thin clients used at our institution. Tested and supported models are:
   * [intel NUC 5i7RYH](http://www.intel.com/content/www/eu/en/nuc/nuc-kit-nuc5i7ryk.html)
   * [intel NUC 5i5RYK/5i5RYH](http://www.intel.com/content/www/eu/en/nuc/nuc-kit-nuc5i5ryk.html)
-  * [intel NUC 5i3RYK/5i5RYH](http://www.intel.com/content/www/eu/en/nuc/nuc-kit-nuc5i3ryk.html)
+  * [intel NUC 5i3RYK/5i3RYH](http://www.intel.com/content/www/eu/en/nuc/nuc-kit-nuc5i3ryk.html)
   * [intel NUC D54250WYK](http://www.intel.eu/content/www/eu/en/nuc/nuc-kit-d54250wyk.html)
   * [intel NUC D34010WYK](http://www.intel.eu/content/www/eu/en/nuc/nuc-kit-d34010wyk.html)
   * [intel NUC DE3815TYKHE](http://www.intel.com/content/www/us/en/nuc/nuc-kit-de3815tykhe.html)
@@ -45,11 +45,11 @@ There are only a few points to get this Thinstation version compiled for being p
 ## License
 As the original Thinstation project is licensed under the GPL license, this fork and all its source components are also distributed under the GPL (GNU General Public License) Open Source License.
 
-## Summary of modifications (March 2015)
+## Summary of modifications (April 2015)
 The following should provide a short list of major modifications in comparison to the original Thinstation project:
 
 * created a new 'hzdr' package in `ts/build/packages/hzdr' with the following components:
-  * binaries of 'qutselect' package (https://github.com/hzdr/qutselect) providing a Qt4-based user interface to start remote RDP, ThinLinc and VNC connections.
+  * binaries of 'qutselect' package (https://github.com/hzdr/qutselect) providing a Qt-based user interface to start remote RDP, ThinLinc and VNC connections.
   * binaries of 'xfwm4' including an adapted theme to use as a lightweight window manager around qutselect
   * binaries of 'keyd' keyboard daemon to be able to define own keyboard shortcuts (see `/etc/keyd.conf`) to perform tasks within the context of the thin client OS (e.g. ejecting mounted drives, modifying volume, etc.)
   * binaries of 'xte' keyboard emulation to allow to lock a remote session with a simple keyboard shortcut in the context of the thin client OS
