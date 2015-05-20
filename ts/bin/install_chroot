@@ -20,6 +20,8 @@ stage1()
 	fi
 	if [ ! -e root ]; then
 		mkdir -m 750 root
+		mkdir -p root/.parallel/
+		touch root/.parallel/ignored_vars
 	fi
 
 	for core_port in filesystem acl attr libcap coreutils pkgutils glibc bash readline ncurses findutils libpcre grep;
@@ -103,7 +105,6 @@ stage4()
 			printf "\n"
                 fi
         done
-	rm -f autodl
         printf "\rBinary Core Port Installation %-40s\n" "Complete"
 	post_install
 }
@@ -138,13 +139,11 @@ post_install()
 	fi
 }
 
-ROOT=$PWD
-if [ -e $ROOT/autodl ]; then
-	autodl=true
-else
+if [ -z "$autodl" ]; then
 	autodl=false
 fi
 
+ROOT=$PWD
 if [ -e $ROOT/dostage4 ]; then
 		stage4
 	elif [ -e $ROOT/dostage3 ]; then
