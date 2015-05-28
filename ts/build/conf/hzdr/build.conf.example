@@ -354,6 +354,7 @@ param stripelf       yes				# Strip extraneous information from elf binaries (Ma
 #param extra_vid      LVDS-1:d				# Add an extra video= parameter to kernel cmd line (good for disabling outputs on video cards)
 param bootlogo       true				# Enable or Disable the use of the Boot splash.
 param boottheme	     default           			# Backgound picture during boot
+param bootserver     149.220.10.30
 #param splash	     verbose				# kernel splash setting (0=off, silent or verbose (default=silent)
 param splash	     silent
 param fbmtrr         0                                  # MTRR value for uvesafb (default = 0, 4 is the best) grep your log to make sure you have not set it to high
