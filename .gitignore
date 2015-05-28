@@ -4342,6 +4342,7 @@
 /ts/build/packages/samba-base-new/lib/samba/
 /ts/build/packages/samba-client/bin/
 /ts/build/packages/samba-server/bin/
+/ts/build/packages/samba-print/bin/
 /ts/build/packages/scp/bin/
 /ts/build/packages/screen/bin/
 /ts/build/packages/screen/lib/
