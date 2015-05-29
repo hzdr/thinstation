@@ -124,7 +124,7 @@ if [ "$2" == "lotsofmem" ]; then
 	echo -e "\tMaking lib.squash"
 	mksquashfs ../fastboot-tmp/. ../$INITDIR/lib.squash -always-use-fragments -no-recovery -no-xattrs -noappend $FB_COMP_EXTRA
 	cp `which unsquashfs` bin/.
-#	cp /usr/lib/liblzma.so.5 lib
+	cp /usr/lib/liblzma.so.5 lib
 fi
 cd ..
 chmod 755 $INITDIR/lib.squash
