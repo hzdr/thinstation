@@ -54,8 +54,8 @@ extract_archive()
 		mkdir -p $pkgpath
 	fi
 	. $ppath/Pkgfile
-        archive="`find -L $ppath -type f -name ${name}#${version}-${release}.pkg.tar.\* -printf '%f'`"
-        if [ ! -f $ppath/$archive ]; then
+	archive="`find -L $ppath -type f -name ${name}#${version}-${release}.pkg.tar.\* -printf '%f'`"
+	if [ ! -f $ppath/$archive ]; then
 		printf "Port $package has not yet been built.\n"
 		if [ -n "$AUTODL" ] && $AUTODL; then
 			install_port=true
@@ -77,7 +77,7 @@ extract_archive()
 			prt-get install --install-scripts -fr -if -im $package
 			archive="`find -L $ppath -type f -name ${name}#${version}-${release}.pkg.tar.\* -printf '%f'`"
 		fi
-        fi
+	fi
 	bsdtar -pxf $ppath/$archive -C $pkgpath 2>/dev/null
 }
 
@@ -114,11 +114,11 @@ redirect_shared()
 {
 	for share_dir in share usr/share usr/local/share ; do
 		if [ -d $pkgpath/$share_dir ] && [ -n "`ls -A $pkgpath/$share_dir`" ]; then
-			if [ -d $pkgpath/$share_dir/dbus-1 ] && [ -n "`ls -A $pkgpath/$share_dir/dbus-1`" ]; then
-				mkdir -p $pkgpath/etc/dbus-1
-				cp -a $pkgpath/$share_dir/dbus-1/* $pkgpath/etc/dbus-1
-				rm -rf $pkgpath/$share_dir/dbus-1
-			fi
+#			if [ -d $pkgpath/$share_dir/dbus-1 ] && [ -n "`ls -A $pkgpath/$share_dir/dbus-1`" ]; then
+#				mkdir -p $pkgpath/etc/dbus-1
+#				cp -a $pkgpath/$share_dir/dbus-1/* $pkgpath/etc/dbus-1
+#				rm -rf $pkgpath/$share_dir/dbus-1
+#			fi
 			for shared_object in `ls --color=never $pkgpath/$share_dir` ; do
 				mkdir -p $pkgpath/lib
 				cp -a $pkgpath/$share_dir/$shared_object $pkgpath/lib/.
