@@ -4359,6 +4359,7 @@
 /ts/build/packages/splash/lib/
 /ts/build/packages/ssh/bin/
 /ts/build/packages/sshd/bin/
+/ts/build/packages/sshfs-fuse/bin/
 /ts/build/packages/strace/bin/
 /ts/build/packages/switchuser/bin/
 /ts/build/packages/switchuser/lib/
