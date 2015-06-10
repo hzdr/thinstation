@@ -5,29 +5,6 @@
 case "$1" in 
 init)
 
-  # make sure we download the latest slist and motd file
-  if [ -n "$SERVER_IP" ]; then
-    TMPFILE=`mktemp`
-    SRC_SLISTPATH="$BASEPATH/$SESSION_0_HZDR_QUTSELECT_SLIST"
-    DST_SLISTPATH="/bin/qutselect.slist"
-    if `transport $SRC_SLISTPATH $TMPFILE $SERVER_IP` ; then
-      rm -f $DST_SLISTPATH
-      catv $TMPFILE | sed -e 's/\^M//g' >$DST_SLISTPATH 2>/dev/null
-      echo >> $DST_SLISTPATH
-    fi
-    rm -f $TMPFILE
-
-    TMPFILE=`mktemp`
-    SRC_MOTDPATH="$BASEPATH/$SESSION_0_HZDR_QUTSELECT_MOTD"
-    DST_MOTDPATH="/bin/qutselect.motd"
-    if `transport $SRC_MOTDPATH $TMPFILE $SERVER_IP` ; then
-      rm -f $DST_MOTDPATH
-      catv $TMPFILE | sed -e 's/\^M//g' >$DST_MOTDPATH 2>/dev/null
-      echo >> $DST_MOTDPATH
-    fi
-    rm -f $TMPFILE
-  fi
-
   # check if cups is installed and if yes then check if it is running already or not
   if [ -e "/sbin/cupsd" ]; then
     /bin/pgrep /sbin/cupsd
@@ -36,46 +13,6 @@ init)
     fi
   fi
 
-  # Now we trying to rebind the power button of the sun keyboard to pause signal
-  KEYBOARD=`/lib/udev/findkeyboards | awk '{ print $3 }'`
-  /lib/udev/keymap ${KEYBOARD} 0x70066 pause
-
-  # the following remaps f14 to scroll lock and f15 to pause for a mac-style keyboard
-  /lib/udev/keymap ${KEYBOARD} 0x70069 ScrollLock
-  /lib/udev/keymap ${KEYBOARD} 0x7006A pause
-
-  # make sure we have a thinlinc config dir in the user home
-  if [ ! -d $HOME/.thinlinc ] ; then
-    mkdir -p $HOME/.thinlinc
-  fi
-
-  # lets parse for SESSION_0_* env variables which we can forward
-  # to the thinlinc configuration file
-	TLCLIENTCONF=$HOME/.thinlinc/tlclient.conf
-  let x=0
-  while [ -n "`eval echo '$SESSION_'$x'_TYPE'`" ] ; do  
-    TLTYPE=`eval echo '$SESSION_'$x'_TYPE'`     
-    if [ "`make_caps $TLTYPE`" = "HZDR" ] ; then
-
-	    (set | grep "SESSION_"$x"_HZDR_TL_CONFIG_" ) |
-	    while read session; do
-	      tlvalue=`echo $session | cut -f2 -d"="`
-	      tlvalue=`eval echo $tlvalue`
-	      line=`echo $session | cut -f1 -d"="`
-	      tlparam=`echo $line | sed -e s/SESSION_${x}_HZDR_TL_CONFIG_//`
-	      tlparam=`make_caps $tlparam` 
-
-	      echo "${tlparam}=${tlvalue}" >> $TLCLIENTCONF
-	    done
-    fi
-    let x=x+1
-  done
-
-  # make sure the whole home folder is owned by tsuser
-  if [ "$TSUSER" != "root" ]; then
-    chown -R $TSUSER:$TSUSER $HOME
-  fi
- 
   # start the keyd daemon so that we are listening for user
   # key presses
   (setsid /bin/keyd -l /var/log/keyd.log 2>&1 >/dev/null) &

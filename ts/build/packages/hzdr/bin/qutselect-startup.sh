@@ -1,5 +1,7 @@
 #!/bin/sh
 
+. $TS_GLOBAL
+
 has_ewmh_wm()
 {
     local name
@@ -29,6 +31,72 @@ wait_for_wm()
     return 1
 }
 
+get_qutselect_files()
+{
+  # make sure we download the latest slist and motd file
+  if [ -n "$SERVER_IP" ]; then
+    TMPFILE=`mktemp`
+    SRC_SLISTPATH="$BASEPATH/$SESSION_0_HZDR_QUTSELECT_SLIST"
+    DST_SLISTPATH="/bin/qutselect.slist"
+    if `transport $SRC_SLISTPATH $TMPFILE $SERVER_IP` ; then
+      rm -f $DST_SLISTPATH
+      catv $TMPFILE | sed -e 's/\^M//g' >$DST_SLISTPATH 2>/dev/null
+      echo >> $DST_SLISTPATH
+    fi
+    rm -f $TMPFILE
+
+    TMPFILE=`mktemp`
+    SRC_MOTDPATH="$BASEPATH/$SESSION_0_HZDR_QUTSELECT_MOTD"
+    DST_MOTDPATH="/bin/qutselect.motd"
+    if `transport $SRC_MOTDPATH $TMPFILE $SERVER_IP` ; then
+      rm -f $DST_MOTDPATH
+      catv $TMPFILE | sed -e 's/\^M//g' >$DST_MOTDPATH 2>/dev/null
+      echo >> $DST_MOTDPATH
+    fi
+    rm -f $TMPFILE
+  fi
+
+  return 0
+}
+
+create_thinlinc_conf()
+{
+  # make sure we have a thinlinc config dir in the user home
+  if [ ! -d $HOME/.thinlinc ] ; then
+    mkdir -p $HOME/.thinlinc
+  fi
+
+  # lets parse for SESSION_0_* env variables which we can forward
+  # to the thinlinc configuration file
+  TLCLIENTCONF=$HOME/.thinlinc/tlclient.conf
+  let x=0
+  while [ -n "`eval echo '$SESSION_'$x'_TYPE'`" ] ; do
+    TLTYPE=`eval echo '$SESSION_'$x'_TYPE'`
+    if [ "`make_caps $TLTYPE`" = "HZDR" ] ; then
+
+      (set | grep "SESSION_"$x"_HZDR_TL_CONFIG_" ) |
+      while read session; do
+        tlvalue=`echo $session | cut -f2 -d"="`
+        tlvalue=`eval echo $tlvalue`
+        line=`echo $session | cut -f1 -d"="`
+        tlparam=`echo $line | sed -e s/SESSION_${x}_HZDR_TL_CONFIG_//`
+        tlparam=`make_caps $tlparam`
+
+        echo "${tlparam}=${tlvalue}" >> $TLCLIENTCONF
+      done
+    fi
+    let x=x+1
+  done
+
+  return 0
+}
+
+# get the slist and motd files
+get_qutselect_files
+
+# create thinlinc conf file
+create_thinlinc_conf
+
 # Clean up after earlier WMs
 /bin/xprop -root -remove _NET_NUMBER_OF_DESKTOPS \
                  -remove _NET_DESKTOP_NAMES \
@@ -50,7 +118,7 @@ fi
 
 # start qutselect unlimited
 while true; do
-  /bin/qutselect -dtlogin -nouser -keep
+  ${SESSION_0_HZDR_QUTSELECT_CMD}
   if [ $? -ne 0 ]; then
     break 
   fi
