@@ -213,8 +213,6 @@ init|start)
 		`make_lower $section`_
 		if [ -e /tmp/x_$section ]; then rm /tmp/x_$section; fi
 	done
-	chown root /bin/Xorg
-	chmod u+s /bin/Xorg
 	;;
 help)
 	echo "Usage: $0 init"
