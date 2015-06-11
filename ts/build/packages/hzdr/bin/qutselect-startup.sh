@@ -42,7 +42,7 @@ get_qutselect_files()
     fi
 
     TMPFILE=`mktemp`
-    SRC_SLISTPATH="$BASEPATH/$SESSION_0_HZDR_QUTSELECT_SLIST"
+    SRC_SLISTPATH="$BASEPATH/$SESSION_0_QUTSELECT_SLIST"
     DST_SLISTPATH="${HOME}/.qutselect/qutselect.slist"
     if `transport $SRC_SLISTPATH $TMPFILE $SERVER_IP` ; then
       rm -f $DST_SLISTPATH
@@ -52,7 +52,7 @@ get_qutselect_files()
     rm -f $TMPFILE
 
     TMPFILE=`mktemp`
-    SRC_MOTDPATH="$BASEPATH/$SESSION_0_HZDR_QUTSELECT_MOTD"
+    SRC_MOTDPATH="$BASEPATH/$SESSION_0_QUTSELECT_MOTD"
     DST_MOTDPATH="${HOME}/.qutselect/qutselect.motd"
     if `transport $SRC_MOTDPATH $TMPFILE $SERVER_IP` ; then
       rm -f $DST_MOTDPATH
@@ -72,6 +72,11 @@ create_thinlinc_conf()
     mkdir -p $HOME/.thinlinc
   fi
 
+  # WORKAROUND: copy known_hosts file if not present
+  if [ ! -e ${HOME}/.thinlinc/known_hosts ]; then
+    cp -a /.ssh/known_hosts ${HOME}/.thinlinc/
+  fi
+
   # lets parse for SESSION_0_* env variables which we can forward
   # to the thinlinc configuration file
   TLCLIENTCONF=$HOME/.thinlinc/tlclient.conf
@@ -80,12 +85,12 @@ create_thinlinc_conf()
     TLTYPE=`eval echo '$SESSION_'$x'_TYPE'`
     if [ "`make_caps $TLTYPE`" = "HZDR" ] ; then
 
-      (set | grep "SESSION_"$x"_HZDR_TL_CONFIG_" ) |
+      (set | grep "SESSION_"$x"_THINLINC_CONFIG_" ) |
       while read session; do
         tlvalue=`echo $session | cut -f2 -d"="`
         tlvalue=`eval echo $tlvalue`
         line=`echo $session | cut -f1 -d"="`
-        tlparam=`echo $line | sed -e s/SESSION_${x}_HZDR_TL_CONFIG_//`
+        tlparam=`echo $line | sed -e s/SESSION_${x}_THINLINC_CONFIG_//`
         tlparam=`make_caps $tlparam`
 
         echo "${tlparam}=${tlvalue}" >> $TLCLIENTCONF
@@ -124,7 +129,7 @@ fi
 
 # start qutselect unlimited
 while true; do
-  ${SESSION_0_HZDR_QUTSELECT_CMD}
+  ${SESSION_0_QUTSELECT_CMD}
   if [ $? -ne 0 ]; then
     break 
   fi
