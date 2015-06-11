@@ -35,9 +35,15 @@ get_qutselect_files()
 {
   # make sure we download the latest slist and motd file
   if [ -n "$SERVER_IP" ]; then
+    
+    # make sure we have a thinlinc config dir in the user home
+    if [ ! -d $HOME/.qutselect ] ; then
+      mkdir -p $HOME/.qutselect
+    fi
+
     TMPFILE=`mktemp`
     SRC_SLISTPATH="$BASEPATH/$SESSION_0_HZDR_QUTSELECT_SLIST"
-    DST_SLISTPATH="/bin/qutselect.slist"
+    DST_SLISTPATH="${HOME}/.qutselect/qutselect.slist"
     if `transport $SRC_SLISTPATH $TMPFILE $SERVER_IP` ; then
       rm -f $DST_SLISTPATH
       catv $TMPFILE | sed -e 's/\^M//g' >$DST_SLISTPATH 2>/dev/null
@@ -47,7 +53,7 @@ get_qutselect_files()
 
     TMPFILE=`mktemp`
     SRC_MOTDPATH="$BASEPATH/$SESSION_0_HZDR_QUTSELECT_MOTD"
-    DST_MOTDPATH="/bin/qutselect.motd"
+    DST_MOTDPATH="${HOME}/.qutselect/qutselect.motd"
     if `transport $SRC_MOTDPATH $TMPFILE $SERVER_IP` ; then
       rm -f $DST_MOTDPATH
       catv $TMPFILE | sed -e 's/\^M//g' >$DST_MOTDPATH 2>/dev/null

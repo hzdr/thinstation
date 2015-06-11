@@ -3,7 +3,7 @@
 # Maintainer: Jens Maus (mail@jens-maus.de)
 
 name=qutselect
-version=2.0.0
+version=2.1
 release=1
 source=()
 
@@ -15,5 +15,5 @@ build() {
   cmake -DCMAKE_PREFIX_PATH=/usr/share/qt5/lib/cmake ..
   make
   make DESTDIR=$PKG install
-  ln -s /usr/local/bin/qutselect-2.0 /usr/local/bin/qutselect
+  ln -s /usr/local/bin/qutselect-${version} /usr/local/bin/qutselect
 }
