@@ -1,0 +1,8 @@
+# keyboard remapping for Sun Keyboards
+keyboard:usb:v0430p00a2*
+ KEYBOARD_KEY_70066=pause
+
+# keyboard remapping for Apple Keyboards
+keyboard:usb:v05ACp0250*
+ KEYBOARD_KEY_70069=scrolllock
+ KEYBOARD_KEY_7006A=pause
