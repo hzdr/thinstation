@@ -26,12 +26,25 @@ fi
 if [ -e "PASSWD" ]; then
   PASSWD=`cat PASSWD`
 else
-  # request the root password
-  echo -n "Please enter a root password: "
-  read -s PASSWD
-  echo
-  echo ${PASSWD} >PASSWD
-  chmod 660 PASSWD
+  if [ -e "../PASSWD" ]; then
+    PASSWD=`cat ../PASSWD`
+  else
+    # request the root password
+    echo -n "Please enter a root password for thinstation: "
+    read -s PASSWD
+    echo
+    echo ${PASSWD} >PASSWD
+    chmod 660 PASSWD
+  fi
+fi
+
+# check for a PASSWD_LDAP file and if not present request from user
+if [ ! -e "ts/build/packages/hzdr/bin/.pwd" ]; then
+  if [ -e "../PASSWD_LDAP" ]; then
+    PASSWD_LDAP=`cat ../PASSWD_LDAP`
+    echo ${PASSWD_LDAP} >ts/build/packages/hzdr/bin/.pwd
+    chmod 400 ts/build/packages/hzdr/bin/.pwd
+  fi
 fi
 
 # check that we have ssh keys installed
