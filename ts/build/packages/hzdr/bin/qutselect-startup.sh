@@ -72,9 +72,9 @@ create_thinlinc_conf()
     mkdir -p $HOME/.thinlinc
   fi
 
-  # WORKAROUND: copy known_hosts file if not present
+  # WORKAROUND: link known_hosts file if not present
   if [ ! -e ${HOME}/.thinlinc/known_hosts ]; then
-    cp -a /.ssh/known_hosts ${HOME}/.thinlinc/
+    ln -s ${HOME}/.ssh/known_hosts ${HOME}/.thinlinc/
   fi
 
   # lets parse for SESSION_0_* env variables which we can forward
