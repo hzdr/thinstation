@@ -4,18 +4,28 @@
 
 case "$1" in 
 init)
+  if ! pkg_initialized $PACKAGE; then
+    pkg_set_init_flag $PACKAGE
 
-  # check if cups is installed and if yes then check if it is running already or not
-  if [ -e "/sbin/cupsd" ]; then
-    /bin/pgrep /sbin/cupsd
-    if [ $? -gt 0 ]; then
-      /etc/init.d/cups init
+    # check if cups is installed and if yes then check if it is running already or not
+    if [ -e "/sbin/cupsd" ]; then
+      /bin/pgrep /sbin/cupsd
+      if [ $? -gt 0 ]; then
+        /etc/init.d/cups init
+      fi
     fi
+
+    # start the keyd daemon so that we are listening for user
+    # key presses
+    (setsid /bin/keyd -l /var/log/keyd.log 2>&1 >/dev/null) &
   fi
-
-  # start the keyd daemon so that we are listening for user
-  # key presses
-  (setsid /bin/keyd -l /var/log/keyd.log 2>&1 >/dev/null) &
-
-;;
+  ;;
+help)
+  echo "Usage: $0 init"
+  ;;
+*)
+  exit 1
+  ;;
 esac
+
+exit 0
