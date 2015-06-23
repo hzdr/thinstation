@@ -124,8 +124,11 @@ fi
 # update the default pa sink
 /bin/pa-update-default-sink.sh
 
-# set plugin path for Qt5
-#export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib
+# WORKAROUND for thinstation problem
+# make sure the splash screen is gone
+if [ -w /lib/splash/cache/.splash ]; then
+  echo exit > /lib/splash/cache/.splash
+fi
 
 # start qutselect unlimited
 while true; do
