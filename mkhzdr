@@ -41,8 +41,8 @@ fi
 # check for a PASSWD_LDAP file and if not present request from user
 if [ ! -e "ts/build/packages/hzdr/bin/.pwd" ]; then
   if [ -e "../PASSWD_LDAP" ]; then
-    PASSWD_LDAP=`cat ../PASSWD_LDAP`
-    echo ${PASSWD_LDAP} >ts/build/packages/hzdr/bin/.pwd
+    cp ../PASSWD_LDAP ts/build/packages/hzdr/bin/.pwd
+    chown 1000 ts/build/packages/hzdr/bin/.pwd
     chmod 400 ts/build/packages/hzdr/bin/.pwd
   fi
 fi

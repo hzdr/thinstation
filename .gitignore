@@ -4200,6 +4200,11 @@
 /ts/build/packages/nss/lib/
 /ts/build/packages/ntp/bin/
 /ts/build/packages/openmotif/lib/
+/ts/build/packages/openssh/bin/
+/ts/build/packages/openssh/build/installed
+/ts/build/packages/openssh/etc/
+/ts/build/packages/openssh/lib/
+/ts/build/packages/openssh/sbin/
 /ts/build/packages/parted/bin/
 /ts/build/packages/parted/lib/
 /ts/build/packages/pcmcia/bin/
