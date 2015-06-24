@@ -124,12 +124,6 @@ fi
 # update the default pa sink
 /bin/pa-update-default-sink.sh
 
-# WORKAROUND for thinstation problem
-# make sure the splash screen is gone
-if [ -w /lib/splash/cache/.splash ]; then
-  echo exit > /lib/splash/cache/.splash
-fi
-
 # start qutselect unlimited
 while true; do
   ${SESSION_0_QUTSELECT_CMD}
