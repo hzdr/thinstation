@@ -203,7 +203,7 @@ splash_start () {
         # Prepare the communications FIFO
         rm -f "${spl_fifo}" 2>/dev/null
         mkfifo -m 620 "${spl_fifo}"
-        chown ${TSUSER}.users -m 620 "${spl_fifo}"
+        chown ${TSUSER}.users "${spl_fifo}"
 
         local options=""
         [ "${SPLASH_KDMODE}" = "GRAPHICS" ] && options="--kdgraphics"
