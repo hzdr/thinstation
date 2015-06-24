@@ -1,5 +1,5 @@
 # keyboard remapping for Sun Keyboards
-keyboard:usb:v0430p00a2*
+keyboard:usb:v0430p00A2*
  KEYBOARD_KEY_70066=pause
 
 # keyboard remapping for Apple Keyboards
