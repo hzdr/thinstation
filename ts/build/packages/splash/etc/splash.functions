@@ -203,7 +203,7 @@ splash_start () {
         # Prepare the communications FIFO
         rm -f "${spl_fifo}" 2>/dev/null
         mkfifo -m 620 "${spl_fifo}"
-        chown ${TSUSER}.users "${spl_fifo}"
+	chown root.users "${spl_fifo}"
 
         local options=""
         [ "${SPLASH_KDMODE}" = "GRAPHICS" ] && options="--kdgraphics"
@@ -232,6 +232,9 @@ splash_start () {
         splash_comm_send "set autoverbose ${SPLASH_AUTOVERBOSE}"
 
         splash_set_event_dev
+	chown -R root.users "${spl_cachedir}"
+	chmod g+w "${spl_cachedir}"
+	chmod 660 "${spl_pidfile}"
 
         return 0
 }
@@ -299,11 +302,11 @@ splash_cache_cleanup () {
 # Sends data to the splash FIFO after making sure there's someone
 # alive on the other end to receive it.
 splash_comm_send() {
-	if [ -w "${spl_fifo}" ]; then
+	if [ -e "${spl_pidfile}" ]; then
 		splash_profile "comm $*"
 		if [ "$*" == "exit" ]; then
-			echo "$*" > "${spl_fifo}"
-			rm -f "${spl_fifo}" 2>/dev/null
+       	        	echo "$*" > "${spl_fifo}"
+			rm -f "${spl_pidfile}"
 		else
 			echo "$*" > "${spl_fifo}" &
 		fi

@@ -11,6 +11,12 @@
 
 TFTP_ROOT="/tftpboot"
 
+# if we are not root abort!
+if [ ${UID} -ne 0 ]; then
+  echo "ERROR: script requires super-user rights"
+  exit 1
+fi
+
 # get the version number for our build
 if [ -e "VERSION" ]; then
   VERSION=`cat VERSION`
@@ -50,7 +56,7 @@ fi
 # check that we have ssh keys installed
 if [ ! -e "ts/build/id_rsa" ]; then
   if [ -e "../id_rsa" ]; then
-    sudo cp -a "../id_rsa" "ts/build/"
+    cp -a "../id_rsa" "ts/build/"
   else
     echo "ERROR: ts/build/id_rsa SSH keyfile missing"
     exit 2
@@ -58,7 +64,7 @@ if [ ! -e "ts/build/id_rsa" ]; then
 fi
 if [ ! -e "ts/build/id_rsa.pub" ]; then
   if [ -e "../id_rsa.pub" ]; then
-    sudo cp -a "../id_rsa.pub" "ts/build/"
+    cp -a "../id_rsa.pub" "ts/build/"
   else
     echo "ERROR: ts/build/id_rsa.pub SSH public keyfile missing"
     exit 2
@@ -68,17 +74,17 @@ fi
 # let us copy the build.conf.example file to build.conf.private and
 # stuff in the root password into it (build.conf.private will not be
 # put on GitHub&co)
-sudo sed "s/pleasechangeme/${PASSWD}/g" ts/build/conf/hzdr/build.conf.example >ts/build/conf/hzdr/build.conf.private
-sudo chmod 660 ts/build/conf/hzdr/build.conf.private
-sudo cp ts/build/conf/hzdr/thinstation.conf.buildtime ts/build/
+sed "s/pleasechangeme/${PASSWD}/g" ts/build/conf/hzdr/build.conf.example >ts/build/conf/hzdr/build.conf.private
+chmod 660 ts/build/conf/hzdr/build.conf.private
+cp ts/build/conf/hzdr/thinstation.conf.buildtime ts/build/
 
 # run the image build process and use the SMP kernel as well as the private
 # build.conf
-sudo ./setup-chroot -a -b -o --kernel 64 conf/hzdr/build.conf.private
-#sudo ./setup-chroot -b -o --allmodules --kernel 64 conf/hzdr/build.conf.private
+./setup-chroot -a -b -o --kernel 64 conf/hzdr/build.conf.private
+#./setup-chroot -b -o --allmodules --kernel 64 conf/hzdr/build.conf.private
 
 # revert changes to buildtime file
-sudo git checkout ts/build/thinstation.conf.buildtime
+git checkout ts/build/thinstation.conf.buildtime
 
 # copy the images to the respective TFTP directory
 if [ -e "${TFTP_ROOT}" ]; then
