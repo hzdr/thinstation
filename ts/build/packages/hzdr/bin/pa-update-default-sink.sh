@@ -8,7 +8,7 @@
 # Otherwise setting HDMI as default or even if there is no HDMI
 # we use the first card listed
 #
-# Copyright (C) 2014 Jens Maus <mail@jens-maus.de>
+# Copyright (C) 2014-2015 Jens Maus <mail@jens-maus.de>
 #
 
 # function to get the name of a specific audio output sink
@@ -47,13 +47,33 @@ getSourceName()
   done
 }
 
+# function that allows to identify an active card profile
+# and use it accordingly.
+setActiveCardProfile()
+{
+  cardnum="${1}"
+
+  # now iterate through all cards and output the first profile that
+  # is set as available
+  cardinfo=`pactl list cards | sed -n "/^Card #${cardnum}$/,/^$/p"`
+
+  # find the first
+  actport=`echo "${cardinfo}" | grep -e ".*:.*(.*,.*available)" | grep -v "not available" | awk '{ print $1 }'`
+
+  # identify the profile name
+  actprofile=`echo "${cardinfo}" | sed -n "/\w*${actport}.*)/,/Part of profile/p" | tail -n1 | awk -F': ' '{ print $2 }' | awk -F',' '{ print $1 }'`
+
+  # set the profile as the active one for that card
+  pactl set-card-profile ${cardnum} ${actprofile}
+}
+
 ############################################
 # main starts here
 
 # first we make sure we have all possible sinks (HDMI+analog stereo) before setting/rerouting
 # the audio streams to a different sink.
 for inum in `pactl list short cards | cut -f1`; do
-  pactl set-card-profile ${inum} output:analog-stereo+input:analog-stereo
+  setActiveCardProfile ${inum}
 done
 
 # get all information pactl list can provide us about our sinks
