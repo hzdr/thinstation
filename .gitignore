@@ -4655,6 +4655,15 @@
 /ts/ports/binary-core/amd-microcode/amd-ucode-latest.tar.bz2
 /ts/ports/binary-core/intel-microcode/microcode-20140430.tgz
 /ts/ports/binary-core/refind/refind-bin-0.8.7.zip
+/ts/build/packages/base/lib/libnss_dns-2.20.so
+/ts/build/packages/base/lib/libnss_files-2.20.so
+/ts/build/packages/fuse/bin/
+/ts/build/packages/fuse/build/installed
+/ts/build/packages/fuse/etc/
+/ts/build/packages/fuse/lib/
+/ts/build/packages/fuse/sbin/
+/ts/build/packages/x-common/lib/libnss_nis-2.20.so
+/ts/build/packages/x-common/lib/libnss_nisplus-2.20.so
 /usr
 /usr/ROX/
 /usr/bin/
