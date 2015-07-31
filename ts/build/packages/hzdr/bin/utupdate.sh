@@ -34,7 +34,7 @@ then
     echo "Session of type $STYPE exists on host $HOST" >> $LOG 2>&1
     if [ "$STYPE" = "RDP" ];
     then
-	RIP=`netstat -anp | grep "$RPID/rdesktop" | grep tcp | grep ESTABLISHED | awk '{ print $5; }' | awk -F: '{ print $1; }'`
+        RIP=`netstat -anp | grep "$RPID/xfreerdp" | grep tcp | grep ESTABLISHED | awk '{ print $5; }' | awk -F: '{ print $1; }'`
     else
         RIP=$3
     fi
@@ -67,8 +67,8 @@ then
 else
     if [ "$RTYPE" = "1" ];
     then
-	RIP=`netstat -anp | grep "$RPID/rdesktop" | grep tcp | grep ESTABLISHED | awk '{ print $5; }' | awk -F: '{ print $1; }'`
-	echo "Opened RDP session to $HOST" >> $LOG
+        RIP=`netstat -anp | grep "$RPID/xfreerdp" | grep tcp | grep ESTABLISHED | awk '{ print $5; }' | awk -F: '{ print $1; }'`
+        echo "Opened RDP session to $HOST" >> $LOG
     else
         RIP=$3
     fi
@@ -89,18 +89,17 @@ else
     hostname -i >> $LDIF
 
     case $RTYPE in
-	0)
-	    echo "radiusServiceType: NX" >> $LDIF
-	    ;;
-	1)
-	    echo "radiusServiceType: RDP" >> $LDIF
-	    ;;
-	2)
-	    echo "radiusServiceType: APP" >> $LDIF
-	    ;;
+        0)
+            echo "radiusServiceType: NX" >> $LDIF
+            ;;
+        1)
+            echo "radiusServiceType: RDP" >> $LDIF
+            ;;
+        2)
+            echo "radiusServiceType: APP" >> $LDIF
+            ;;
     esac
     ldapmodify -x -y $UTBIN/.pwd  -h $LDAP -D "cn=manager,o=fsr,dc=de" -a -f $LDIF >> $LOG 2>&1
     echo "Added session data for $SDN" >> $LOG
 fi
-    
-#rm $LDIF
+
