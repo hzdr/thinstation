@@ -129,7 +129,6 @@ case $STYPE in
         CPID=$!
         sleep 1 
         ps | grep -v grep | grep tlclient.bin | awk '{ print $1; }' > /tmp/ut.pid
-        rm /tmp/user.key
         ;;
     APP)
 #       $UTBIN/apprun.sh "$APP" "$UNAME" "$HOST" "$PID" & >> $LOG

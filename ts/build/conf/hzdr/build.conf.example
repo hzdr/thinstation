@@ -22,6 +22,9 @@ module ntfs             	# NTFS file system support
 module ext4			# Ext4 file system support
 module fuse			# FUSE module support
 
+# third-party kernel modules required
+module cdc-acm			# USB<>serial (CDC ACM) support for card readers
+
 # Packages
 package autonet			# Support for loading config files via network
 package automount		# Support for automounter
