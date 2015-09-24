@@ -1,4 +1,4 @@
-965ce5e98357c6a6fd8314600df264b2  aufs4.patch
-96c2c77b1c54ba01cfd8fc2d13fbf828  linux-4.1.3.tar.xz
+5de7f25bb7ad330015945e16943b6eb1  aufs4.patch
+f67c24d90bfa8286838187c6a0a54d8f  linux-4.1.8.tar.xz
 2de7064847d179e74c587d4add5421de  tmpfs_user_xattr.patch
-faa7a14f0de9d242ef4b8d7e5db25574  ts.config
+95bca2445ca527480a62765507117f42  ts.config

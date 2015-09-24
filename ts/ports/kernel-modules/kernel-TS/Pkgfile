@@ -15,7 +15,7 @@ source=(ftp://ftp.kernel.org/pub/linux/kernel/v4.x/linux-$sversion.tar.xz \
 	ts.config)
 
 build() {
-export MAKEFLAGS="-j5"
+export MAKEFLAGS="-j7"
 	cd linux-$sversion
 	cp $SRC/ts.config ./.config
 
