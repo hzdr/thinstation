@@ -18,7 +18,6 @@ module usblp			# USB printer support
 module isofs            	# ISO9960 file system support for CDRoms
 module udf			# CDRom UDF file system support
 module vfat             	# Fat and VFat file system support
-module ntfs             	# NTFS file system support
 module ext4			# Ext4 file system support
 module fuse			# FUSE module support
 
