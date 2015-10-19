@@ -1,4 +1,6 @@
 .AppleDouble
+.DS_Store
+autodl
 /BUILD.*
 /PASSWD
 /bin/
