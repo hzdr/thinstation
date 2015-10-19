@@ -1,6 +1,6 @@
-firmware SUMO_rlc.bin
-firmware PALM_pfp.bin
-firmware SUMO_uvd.bin
-firmware PALM_me.bin
-firmware microcode_amd.bin
 firmware rtl8168e-2.fw
+firmware PALM_pfp.bin
+firmware PALM_me.bin
+firmware SUMO_uvd.bin
+firmware SUMO_rlc.bin
+firmware microcode_amd.bin
