@@ -80,8 +80,8 @@ cp ts/build/conf/hzdr/thinstation.conf.buildtime ts/build/
 
 # run the image build process and use the SMP kernel as well as the private
 # build.conf
-./setup-chroot -a -b -o --kernel 64 conf/hzdr/build.conf.private
-#./setup-chroot -b -o --allmodules --kernel 64 conf/hzdr/build.conf.private
+./setup-chroot -a -b -o --license ACCEPT --autodl --kernel 64 conf/hzdr/build.conf.private
+#./setup-chroot -b -o --allmodules --license ACCEPT --autodl --kernel 64 conf/hzdr/build.conf.private
 
 # revert changes to buildtime file
 git checkout ts/build/thinstation.conf.buildtime
