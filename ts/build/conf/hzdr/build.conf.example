@@ -105,3 +105,4 @@ param downloads      /downloads		# directory path for downloads
 param bootimages     "pxe"		# boot image mode (pxe, iso, etc.)
 param syslinuxtheme  "default"		# splash theme
 param bootfssize     50%                # Modify the size of the tmpfs filesystem
+param blacklist      snd-pcsp.ko  # blacklist certain kernel modules
