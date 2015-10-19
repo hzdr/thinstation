@@ -15,6 +15,7 @@ drwxr-xr-x	root/root	lib/firmware/3com/
 -rw-r--r--	root/root	lib/firmware/LICENCE.cavium
 -rw-r--r--	root/root	lib/firmware/LICENCE.chelsio_firmware
 -rw-r--r--	root/root	lib/firmware/LICENCE.cw1200
+-rw-r--r--	root/root	lib/firmware/LICENCE.e100
 -rw-r--r--	root/root	lib/firmware/LICENCE.ene_firmware
 -rw-r--r--	root/root	lib/firmware/LICENCE.fw_sst_0f28
 -rw-r--r--	root/root	lib/firmware/LICENCE.go7007
@@ -22,12 +23,14 @@ drwxr-xr-x	root/root	lib/firmware/3com/
 -rw-r--r--	root/root	lib/firmware/LICENCE.ibt_firmware
 -rw-r--r--	root/root	lib/firmware/LICENCE.it913x
 -rw-r--r--	root/root	lib/firmware/LICENCE.iwlwifi_firmware
+-rw-r--r--	root/root	lib/firmware/LICENCE.kaweth
 -rw-r--r--	root/root	lib/firmware/LICENCE.mwl8335
 -rw-r--r--	root/root	lib/firmware/LICENCE.myri10ge_firmware
 -rw-r--r--	root/root	lib/firmware/LICENCE.nvidia
 -rw-r--r--	root/root	lib/firmware/LICENCE.phanfw
 -rw-r--r--	root/root	lib/firmware/LICENCE.qat_dh895xcc_firmware
 -rw-r--r--	root/root	lib/firmware/LICENCE.qat_mmp_firmware
+-rw-r--r--	root/root	lib/firmware/LICENCE.qla1280
 -rw-r--r--	root/root	lib/firmware/LICENCE.qla2xxx
 -rw-r--r--	root/root	lib/firmware/LICENCE.r8a779x_usb3
 -rw-r--r--	root/root	lib/firmware/LICENCE.ralink-firmware.txt
@@ -36,6 +39,7 @@ drwxr-xr-x	root/root	lib/firmware/3com/
 -rw-r--r--	root/root	lib/firmware/LICENCE.siano
 -rw-r--r--	root/root	lib/firmware/LICENCE.tda7706-firmware.txt
 -rw-r--r--	root/root	lib/firmware/LICENCE.ti-connectivity
+-rw-r--r--	root/root	lib/firmware/LICENCE.ti-keystone
 -rw-r--r--	root/root	lib/firmware/LICENCE.ueagle-atm4-firmware
 -rw-r--r--	root/root	lib/firmware/LICENCE.via_vt6656
 -rw-r--r--	root/root	lib/firmware/LICENCE.wl1251
@@ -59,7 +63,7 @@ drwxr-xr-x	root/root	lib/firmware/RTL8192E/
 -rw-r--r--	root/root	lib/firmware/RTL8192E/main.img
 -rw-r--r--	root/root	lib/firmware/TDA7706_OM_v2.5.1_boot.txt
 -rw-r--r--	root/root	lib/firmware/TDA7706_OM_v3.0.2_boot.txt
--rw-r--r--	root/root	lib/firmware/WHENCE
+-rwxr-xr-x	root/root	lib/firmware/WHENCE
 drwxr-xr-x	root/root	lib/firmware/acenic/
 -rw-r--r--	root/root	lib/firmware/acenic/tg1.bin
 -rw-r--r--	root/root	lib/firmware/acenic/tg2.bin
@@ -174,10 +178,27 @@ drwxr-xr-x	root/root	lib/firmware/ar3k/30101coex/
 -rw-r--r--	root/root	lib/firmware/as102_data1_st.hex
 -rw-r--r--	root/root	lib/firmware/as102_data2_st.hex
 drwxr-xr-x	root/root	lib/firmware/ath10k/
+drwxr-xr-x	root/root	lib/firmware/ath10k/QCA6174/
+drwxr-xr-x	root/root	lib/firmware/ath10k/QCA6174/hw2.1/
+-rw-r--r--	root/root	lib/firmware/ath10k/QCA6174/hw2.1/board.bin
+-rw-r--r--	root/root	lib/firmware/ath10k/QCA6174/hw2.1/firmware-5.bin
+-rw-r--r--	root/root	lib/firmware/ath10k/QCA6174/hw2.1/notice_ath10k_firmware-5.txt
+drwxr-xr-x	root/root	lib/firmware/ath10k/QCA6174/hw3.0/
+-rw-r--r--	root/root	lib/firmware/ath10k/QCA6174/hw3.0/board.bin
+-rw-r--r--	root/root	lib/firmware/ath10k/QCA6174/hw3.0/firmware-4.bin
+-rw-r--r--	root/root	lib/firmware/ath10k/QCA6174/hw3.0/notice_ath10k_firmware-4.txt
 drwxr-xr-x	root/root	lib/firmware/ath10k/QCA988X/
 drwxr-xr-x	root/root	lib/firmware/ath10k/QCA988X/hw2.0/
+-rw-r--r--	root/root	lib/firmware/ath10k/QCA988X/hw2.0/board.bin
 -rw-r--r--	root/root	lib/firmware/ath10k/QCA988X/hw2.0/firmware-4.bin
+-rw-r--r--	root/root	lib/firmware/ath10k/QCA988X/hw2.0/firmware-5.bin
 -rw-r--r--	root/root	lib/firmware/ath10k/QCA988X/hw2.0/notice_ath10k_firmware-4.txt
+-rw-r--r--	root/root	lib/firmware/ath10k/QCA988X/hw2.0/notice_ath10k_firmware-5.txt
+drwxr-xr-x	root/root	lib/firmware/ath10k/QCA99X0/
+drwxr-xr-x	root/root	lib/firmware/ath10k/QCA99X0/hw2.0/
+-rw-r--r--	root/root	lib/firmware/ath10k/QCA99X0/hw2.0/board.bin
+-rw-r--r--	root/root	lib/firmware/ath10k/QCA99X0/hw2.0/firmware-5.bin
+-rw-r--r--	root/root	lib/firmware/ath10k/QCA99X0/hw2.0/notice_ath10k_firmware-5.txt
 -rw-r--r--	root/root	lib/firmware/ath3k-1.fw
 drwxr-xr-x	root/root	lib/firmware/ath6k/
 drwxr-xr-x	root/root	lib/firmware/ath6k/AR6002/
@@ -600,13 +621,13 @@ drwxr-xr-x	root/root	lib/firmware/go7007/
 -rw-r--r--	root/root	lib/firmware/i2400m-fw-usb-1.5.sbcf
 -rw-r--r--	root/root	lib/firmware/i6050-fw-usb-1.5.sbcf
 drwxr-xr-x	root/root	lib/firmware/i915/
-lrwxrwxrwx	root/root	lib/firmware/i915/bxt_dmc_ver1.bin -> bxt_dmc_ver1_05.bin
+lrwxrwxrwx	root/root	lib/firmware/i915/bxt_dmc_ver1.bin -> bxt_dmc_ver1_06.bin
 -rw-r--r--	root/root	lib/firmware/i915/bxt_dmc_ver1_04.bin
 -rw-r--r--	root/root	lib/firmware/i915/bxt_dmc_ver1_05.bin
-lrwxrwxrwx	root/root	lib/firmware/i915/skl_dmc_ver1.bin -> skl_dmc_ver1_21.bin
--rw-r--r--	root/root	lib/firmware/i915/skl_dmc_ver1_19.bin
--rw-r--r--	root/root	lib/firmware/i915/skl_dmc_ver1_20.bin
+-rw-r--r--	root/root	lib/firmware/i915/bxt_dmc_ver1_06.bin
+lrwxrwxrwx	root/root	lib/firmware/i915/skl_dmc_ver1.bin -> skl_dmc_ver1_22.bin
 -rw-r--r--	root/root	lib/firmware/i915/skl_dmc_ver1_21.bin
+-rw-r--r--	root/root	lib/firmware/i915/skl_dmc_ver1_22.bin
 lrwxrwxrwx	root/root	lib/firmware/i915/skl_guc_ver1.bin -> skl_guc_ver1_1059.bin
 -rw-r--r--	root/root	lib/firmware/i915/skl_guc_ver1_1059.bin
 lrwxrwxrwx	root/root	lib/firmware/i915/skl_guc_ver4.bin -> skl_guc_ver4_3.bin
@@ -625,6 +646,7 @@ drwxr-xr-x	root/root	lib/firmware/intel/
 -rw-r--r--	root/root	lib/firmware/intel/ibt-hw-37.7.bseq
 -rw-r--r--	root/root	lib/firmware/intel/ibt-hw-37.8.10-fw-1.10.2.27.d.bseq
 -rw-r--r--	root/root	lib/firmware/intel/ibt-hw-37.8.10-fw-1.10.3.11.e.bseq
+-rw-r--r--	root/root	lib/firmware/intel/ibt-hw-37.8.10-fw-22.50.19.14.f.bseq
 -rw-r--r--	root/root	lib/firmware/intel/ibt-hw-37.8.bseq
 -rw-r--r--	root/root	lib/firmware/intelliport2.bin
 drwxr-xr-x	root/root	lib/firmware/isci/
@@ -777,6 +799,9 @@ drwxr-xr-x	root/root	lib/firmware/mwl8k/
 -rw-r--r--	root/root	lib/firmware/mwl8k/fmimage_8764_ap-1.fw
 -rw-r--r--	root/root	lib/firmware/mwl8k/helper_8366.fw
 -rw-r--r--	root/root	lib/firmware/mwl8k/helper_8687.fw
+drwxr-xr-x	root/root	lib/firmware/mwlwifi/
+-rwxr-xr-x	root/root	lib/firmware/mwlwifi/88W8864.bin
+-rwxr-xr-x	root/root	lib/firmware/mwlwifi/88W8897.bin
 -rw-r--r--	root/root	lib/firmware/myri10ge_eth_big_z8e.dat
 -rw-r--r--	root/root	lib/firmware/myri10ge_eth_z8e.dat
 -rw-r--r--	root/root	lib/firmware/myri10ge_ethp_big_z8e.dat
@@ -835,6 +860,7 @@ drwxr-xr-x	root/root	lib/firmware/qlogic/
 drwxr-xr-x	root/root	lib/firmware/r128/
 -rw-r--r--	root/root	lib/firmware/r128/r128_cce.bin
 -rw-r--r--	root/root	lib/firmware/r8a779x_usb3_v1.dlmem
+-rw-r--r--	root/root	lib/firmware/r8a779x_usb3_v2.dlmem
 drwxr-xr-x	root/root	lib/firmware/radeon/
 -rw-r--r--	root/root	lib/firmware/radeon/ARUBA_me.bin
 -rw-r--r--	root/root	lib/firmware/radeon/ARUBA_pfp.bin
@@ -1190,6 +1216,8 @@ lrwxrwxrwx	root/root	lib/firmware/ti-connectivity/wl12xx-nvs.bin -> wl127x-nvs.b
 -rw-r--r--	root/root	lib/firmware/ti-connectivity/wl18xx-fw-3.bin
 -rw-r--r--	root/root	lib/firmware/ti-connectivity/wl18xx-fw-4.bin
 -rw-r--r--	root/root	lib/firmware/ti-connectivity/wl18xx-fw.bin
+drwxr-xr-x	root/root	lib/firmware/ti-keystone/
+-rw-r--r--	root/root	lib/firmware/ti-keystone/ks2_qmss_pdsp_acc48_k2_le_1_0_0_9.bin
 -rw-r--r--	root/root	lib/firmware/ti_3410.fw
 -rw-r--r--	root/root	lib/firmware/ti_5052.fw
 drwxr-xr-x	root/root	lib/firmware/tigon/
