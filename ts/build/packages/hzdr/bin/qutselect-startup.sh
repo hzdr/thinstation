@@ -78,7 +78,7 @@ create_thinlinc_conf()
   fi
 
   # check if chooser should be forces
-  if [ -n "${FORCE_CHOOSER}" ]; then
+  if [ -n "${SESSION_0_QUTSELECT_CHOOSER}" ]; then
     export SESSION_0_THINLINC_CONFIG_AUTHENTICATION_METHOD=publickey
     export SESSION_0_THINLINC_CONFIG_AUTOLOGIN=1
     export SESSION_0_THINLINC_CONFIG_PRIVATE_KEY=/tmp/user.key
@@ -132,7 +132,7 @@ fi
 /bin/pa-update-default-sink.sh
 
 # if the chooser should be preferred
-if [ -n "${FORCE_CHOOSER}" ]; then
+if [ -n "${SESSION_0_QUTSELECT_CHOOSER}" ]; then
   export SESSION_0_QUTSELECT_CMD="/bin/chooser >>${HOME}/chooser.log 2>&1"
 fi
 
