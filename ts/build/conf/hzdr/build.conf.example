@@ -23,6 +23,10 @@ module fuse			# FUSE module support
 
 # third-party kernel modules required
 module cdc-acm			# USB<>serial (CDC ACM) support for card readers
+module snd-usb-audio    # USB audio support
+module snd-usbmidi-lib  # USB audio support
+module snd-rawmidi      # USB audio support
+module snd-seq-device   # USB audio support
 
 # Packages
 package autonet			# Support for loading config files via network

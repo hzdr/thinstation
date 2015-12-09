@@ -11,6 +11,8 @@
 # Copyright (C) 2014-2015 Jens Maus <mail@jens-maus.de>
 #
 
+. ${TS_GLOBAL}
+
 # function to get the name of a specific audio output sink
 getSinkName()
 {
@@ -19,8 +21,8 @@ getSinkName()
   # now iterate through all sinks and grab its information
   numsinks=$(pactl list short sinks | awk '{ print $1 }')
   for i in ${numsinks}; do
-    sinkinfo=`echo "${painfo}" | sed -n "/^Sink #${i}$/,/Formats:/p"`
-    searchres=`echo "${sinkinfo}" | grep -e ${pattern}`
+    sinkinfo=$(echo "${painfo}" | sed -n "/^Sink #${i}$/,/Formats:/p")
+    searchres=$(echo "${sinkinfo}" | grep -e ${pattern})
     if [ -n "${searchres}" ]; then
       # output the sink name
       echo "${painfo}" | sed -n "/^Sink #${i}$/,/Formats:/p" | grep "Name: " | awk '{ print $2 }'
@@ -37,8 +39,8 @@ getSourceName()
   # now iterate through all sources and grab its information
   numsrcs=$(pactl list short sources | awk '{ print $1 }')
   for i in ${numsrcs}; do
-    srcinfo=`echo "${painfo}" | sed -n "/^Source #${i}$/,/Formats:/p"`
-    searchres=`echo "${srcinfo}" | grep -e ${pattern}`
+    srcinfo=$(echo "${painfo}" | sed -n "/^Source #${i}$/,/Formats:/p")
+    searchres=$(echo "${srcinfo}" | grep -e ${pattern})
     if [ -n "${searchres}" ]; then
       # output the src name
       echo "${painfo}" | sed -n "/^Source #${i}$/,/Formats:/p" | grep "Name: " | awk '{ print $2 }'
@@ -55,13 +57,19 @@ setActiveCardProfile()
 
   # now iterate through all cards and output the first profile that
   # is set as available
-  cardinfo=`pactl list cards | sed -n "/^Card #${cardnum}$/,/^$/p"`
+  cardinfo=$(pactl list cards | sed -n "/^Card #${cardnum}$/,/^$/p")
 
   # find the first
-  actport=`echo "${cardinfo}" | grep -e ".*:.*(.*,.*available)" | grep -v "not available" | awk '{ print $1 }'`
+  actport=$(echo "${cardinfo}" | grep -e ".*:.*(.*,.*available)" | grep -v "not available" | awk '{ print $1 }')
 
-  # identify the profile name
-  actprofile=`echo "${cardinfo}" | sed -n "/\w*${actport}.*)/,/Part of profile/p" | tail -n1 | awk -F': ' '{ print $2 }' | awk -F',' '{ print $1 }'`
+  # check if actport is empty
+  if [ -n "${actport}" ]; then
+    # not empty, identify the profile name
+    actprofile=$(echo "${cardinfo}" | sed -n "/\w*${actport}.*)/,/Part of profile/p" | tail -n1 | awk -F': ' '{ print $2 }' | awk -F',' '{ print $1 }')
+  else
+    # empty, so lets get the first profile
+    actprofile=$(echo "${cardinfo}" | sed -n "/\tPorts:/,/^$/p" | grep "Part of profile" | head -n1 | awk -F': ' '{ print $2 }' | awk -F',' '{ print $1 }')
+  fi
 
   # set the profile as the active one for that card
   pactl set-card-profile ${cardnum} ${actprofile}
@@ -72,7 +80,7 @@ setActiveCardProfile()
 
 # first we make sure we have all possible sinks (HDMI+analog stereo) before setting/rerouting
 # the audio streams to a different sink.
-for inum in `pactl list short cards | cut -f1`; do
+for inum in $(pactl list short cards | cut -f1); do
   setActiveCardProfile ${inum}
 done
 
@@ -81,21 +89,17 @@ painfo=$(pactl list sinks)
 
 sinkname=""
 # check for the headphones first
-if [ -n "`echo \"${painfo}\" | grep -e Headphones.*priority | grep -v 'not available'`" ]; then
+if [ -n "$(echo \"${painfo}\" | grep -e Headphones.*priority | grep -v 'not available')" ]; then
   # headphones are plugged in and available, lets find out the sink name
-  sinkname=`getSinkName "Headphones.*priority"`
-
-  # make sure the headphones are set to 100% volume
-  pactl set-sink-volume ${sinkname} 100%
-
+  sinkname=$(getSinkName "Headphones.*priority")
 else
   # check for USB sound devices (Speakers)
-  if [ -n "`echo \"${painfo}\" | grep -e Speakers.*priority | grep -v 'not available'`" ]; then
-    sinkname=`getSinkName "Speakers.*priority"`
+  if [ -n "$(echo \"${painfo}\" | grep -e Speakers.*priority | grep -v 'not available')" ]; then
+    sinkname=$(getSinkName "Speakers.*priority")
   else
     # check for HDMI devices
-    if [ -n "`echo \"${painfo}\" | grep -e HDMI.*priority`" ]; then
-      sinkname=`getSinkName "HDMI.*priority"`
+    if [ -n "$(echo \"${painfo}\" | grep -e HDMI.*priority)" ]; then
+      sinkname=$(getSinkName "HDMI.*priority")
     fi
   fi
 fi
@@ -104,12 +108,15 @@ fi
 if [ -n "${sinkname}" ]; then
 
   # move all sink inputs to the new sink
-  for inum in `pactl list short sink-inputs | cut -f1`; do
+  for inum in $(pactl list short sink-inputs | cut -f1); do
     pactl move-sink-input ${inum} "${sinkname}"
   done
 
   # make sure that the new sink is unmuted
   pactl set-sink-mute ${sinkname} 0
+
+  # make sure the audio output is set to the AUDIO_LEVEL volume level
+  pactl set-sink-volume ${sinkname} ${AUDIO_LEVEL}%
 
   # set the new sink as the new default
   pactl set-default-sink ${sinkname}
@@ -124,13 +131,13 @@ painfo=$(pactl list sources)
 
 srcname=""
 # check for a microphone first
-if [ -n "`echo \"${painfo}\" | grep -e Microphone.*priority | grep -v 'not available'`" ]; then
-  # headphones are plugged in and available, lets find out the sink name
-  srcname=`getSourceName "Microphone.*priority"`
+if [ -n "$(echo \"${painfo}\" | grep -e Microphone.*priority | grep -v 'not available')" ]; then
+  # microphone is plugged in and available, lets find out the sink name
+  srcname=$(getSourceName "Microphone.*priority")
 
-  # make sure the headphones are set to 100% volume and unmuted
+  # make sure the microphone is set to the MIC_LEVEL volume and unmuted
   pactl set-source-mute ${srcname} 0
-  pactl set-source-volume ${srcname} 100%
+  pactl set-source-volume ${srcname} ${MIC_LEVEL}%
 fi
 
 exit 0
