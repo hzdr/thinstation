@@ -89,16 +89,16 @@ painfo=$(pactl list sinks)
 
 sinkname=""
 # check for the headphones first
-if [ -n "$(echo \"${painfo}\" | grep -e Headphones.*priority | grep -v 'not available')" ]; then
+if [ -n "`echo \"${painfo}\" | grep -e Headphones.*priority | grep -v 'not available'`" ]; then
   # headphones are plugged in and available, lets find out the sink name
   sinkname=$(getSinkName "Headphones.*priority")
 else
   # check for USB sound devices (Speakers)
-  if [ -n "$(echo \"${painfo}\" | grep -e Speakers.*priority | grep -v 'not available')" ]; then
+  if [ -n "`echo \"${painfo}\" | grep -e Speakers.*priority | grep -v 'not available'`" ]; then
     sinkname=$(getSinkName "Speakers.*priority")
   else
     # check for HDMI devices
-    if [ -n "$(echo \"${painfo}\" | grep -e HDMI.*priority)" ]; then
+    if [ -n "`echo \"${painfo}\" | grep -e HDMI.*priority`" ]; then
       sinkname=$(getSinkName "HDMI.*priority")
     fi
   fi
@@ -131,7 +131,7 @@ painfo=$(pactl list sources)
 
 srcname=""
 # check for a microphone first
-if [ -n "$(echo \"${painfo}\" | grep -e Microphone.*priority | grep -v 'not available')" ]; then
+if [ -n "`echo \"${painfo}\" | grep -e Microphone.*priority | grep -v 'not available'`" ]; then
   # microphone is plugged in and available, lets find out the sink name
   srcname=$(getSourceName "Microphone.*priority")
 
