@@ -39,7 +39,7 @@ There are only a few points to get this Thinstation version compiled for being p
 3. run the build and automatically install the pxe images (make sure `/tftpboot` exists):
 
    ```
-   ./mkhzdr
+   sudo ./mkhzdr
    ``` 
 
 ## License
