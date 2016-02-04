@@ -3,7 +3,7 @@
 This repository hosts a fork of the Linux-based [Thinstation](http://github.com/Thinstation/thinstation) thin client project. It comes with some modifications to:
 
 * get Thinstation running more smoothly and optimized for the various thin clients used at our institution. Tested and supported models are:
-  * [intel NUC 5i7RYH](http://www.intel.com/content/www/eu/en/nuc/nuc-kit-nuc5i7ryk.html)
+  * [intel NUC 5i7RYH](http://www.intel.de/content/www/eu/en/nuc/nuc-kit-nuc5i7ryh.html)
   * [intel NUC 5i5RYK/5i5RYH](http://www.intel.com/content/www/eu/en/nuc/nuc-kit-nuc5i5ryk.html)
   * [intel NUC 5i3RYK/5i3RYH](http://www.intel.com/content/www/eu/en/nuc/nuc-kit-nuc5i3ryk.html)
   * [intel NUC D54250WYK](http://www.intel.eu/content/www/eu/en/nuc/nuc-kit-d54250wyk.html)
