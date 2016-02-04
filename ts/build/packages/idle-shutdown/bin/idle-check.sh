@@ -42,7 +42,7 @@
 #
 #
 # Copyright (C) 2007 Daniel Meyer (eagle@cyberdelia.de)
-# Copyright (C) 2013-2015 Jens Maus (mail@jens-maus.de)
+# Copyright (C) 2013-2016 Jens Maus (mail@jens-maus.de)
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as
@@ -78,7 +78,7 @@ if [ ${SHUTDOWN_IDLE_MAX_UPTIME} -gt 0 ] && [ $(awk '{ print int($1) }' /proc/up
   echo "max uptime reached"
 
   # max uptime shutdowns should only happen on specific weekdays
-  if [ -n "${SHUTDOWN_IDLE_MAX_UPTIME_WDAY}" ] && [ -z "$(date +%a | grep -E ${SHUTDOWN_IDLE_MAX_UPTIME_WDAY})" ]; then
+  if [ -n "${SHUTDOWN_IDLE_MAX_UPTIME_WDAY}" ] && [ -z "$(LANG=C date +%a | grep -E ${SHUTDOWN_IDLE_MAX_UPTIME_WDAY})" ]; then
     SHUTDOWN_NOW=0
 
     echo "skipping maxuptime shutdown as current weekday is not permitted"
@@ -89,7 +89,7 @@ fi
 if [ ${SHUTDOWN_NOW} -eq 1 ]; then
 
   # Check shutdown hour
-  if [ -n "${SHUTDOWN_IDLE_HOUR}" ] && [ ${SHUTDOWN_IDLE_HOUR} -ne $(/bin/date +%H) ]; then
+  if [ -n "${SHUTDOWN_IDLE_HOUR}" ] && [ ${SHUTDOWN_IDLE_HOUR} -ne $(LANG=C /bin/date +%H) ]; then
     SHUTDOWN_NOW=0
 
     echo "skipping shutdown as current time is not permitted"
