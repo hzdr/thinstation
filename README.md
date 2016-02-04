@@ -62,5 +62,5 @@ The following should provide a short list of major modifications in comparison t
 ## Credits
 The HZDR fork of Thinstation is brought to you by:
 
-* Jens Maus
+* Jens Maus &lt;j.maus@hzdr.de&gt;
 * Alexandr Lougovski
