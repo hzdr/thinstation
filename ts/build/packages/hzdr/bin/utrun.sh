@@ -106,7 +106,7 @@ case $STYPE in
         else
            UNP = ""
         fi
-        xfreerdp /f /multimon /kbd:German /d:FZR $UNP /t:${UNAME}:${HOST} /cert-ignore /drive:USB /mnt/$(hostname)/ /sound:latency:400 /microphone:sys:pulse +fonts +window-drag -menu-anims -themes +wallpaper -toggle-fullscreen /v:${HOST} & >> $LOG 2>&1
+        xfreerdp /f /multimon /kbd:German /d:FZR $UNP /t:${UNAME}@${HOST} /cert-ignore /drive:USB,/mnt/$(hostname)/ /sound:latency:400 /microphone:sys:pulse +fonts +window-drag -menu-anims -themes +wallpaper -toggle-fullscreen /v:${HOST} & >> $LOG 2>&1
         CPID=$!
         echo $CPID > /tmp/ut.pid
         ;;
