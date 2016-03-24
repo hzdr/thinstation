@@ -11,6 +11,9 @@
 
 TFTP_ROOT="/tftpboot"
 
+# make sure we have an appropriate umask set
+umask 022
+
 # if we are not root abort!
 if [ ${UID} -ne 0 ]; then
   echo "ERROR: script requires super-user rights"
