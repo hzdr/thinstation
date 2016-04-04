@@ -3,15 +3,12 @@
 This repository hosts a fork of the Linux-based [Thinstation](http://github.com/Thinstation/thinstation) thin client project. It comes with some modifications to:
 
 * get Thinstation running more smoothly and optimized for the various thin clients used at our institution. Tested and supported models are:
-  * [intel NUC 5i7RYH](http://www.intel.de/content/www/eu/en/nuc/nuc-kit-nuc5i7ryh.html)
-  * [intel NUC 5i5RYK/5i5RYH](http://www.intel.com/content/www/eu/en/nuc/nuc-kit-nuc5i5ryk.html)
-  * [intel NUC 5i3RYK/5i3RYH](http://www.intel.com/content/www/eu/en/nuc/nuc-kit-nuc5i3ryk.html)
-  * [intel NUC D54250WYK](http://www.intel.eu/content/www/eu/en/nuc/nuc-kit-d54250wyk.html)
-  * [intel NUC D34010WYK](http://www.intel.eu/content/www/eu/en/nuc/nuc-kit-d34010wyk.html)
-  * [intel NUC DE3815TYKHE](http://www.intel.com/content/www/us/en/nuc/nuc-kit-de3815tykhe.html)
-  * [intel NUC DC3217BY](http://www.intel.eu/content/www/eu/en/motherboards/desktop-motherboards/desktop-kit-dc3217by.html)
-  * [intel NUC DC3217IYE](http://www.intel.eu/content/www/eu/en/motherboards/desktop-motherboards/desktop-kit-dc3217iye.html)
-  * [intel NUC DCCP847DYE](http://www.intel.com/content/www/us/en/nuc/nuc-kit-dccp847dye.html)
+  * 6th Gen Intel NUC (Skylake): [NUC6i3SYB/NUC6i5SYB](https://downloadmirror.intel.com/25507/eng/NUC6i5SYB_NUC6i3SYB_TechProdSpec02.pdf)
+  * 5th Gen Intel NUC (Broadwell): [NUC5i3RYB/NUC5i5RYB](https://downloadmirror.intel.com/24565/eng/NUC5i5RYB_NUC5i3RYB_TechProdSpec02.pdf)
+  * 4th Gen Intel NUC (Haswell): [D34010WYB/D54250WYB](http://www.intel.de/content/www/de/de/nuc/nuc-kit-d34010wykh-board-d34010wyb.html)
+  * 3th Gen Intel NUC (Atom): [DE3815TYBE](http://www.intel.de/content/www/de/de/nuc/nuc-kit-de3815tykhe-board-de3815tybe.html)
+  * 2th Gen Intel NUC (Ivy Bridge): [D33217GK](http://www.intel.com/content/www/us/en/support/boards-and-kits/intel-nuc-boards/intel-nuc-board-d33217gk.html)
+  * 1st Gen Intel NUC (Sandy Bridge): [DCP847SKE](http://www.intel.de/content/www/de/de/nuc/nuc-kit-dccp847dye-board-dcp847ske.html)
   * [Fujitsu Futro S700](http://www.fujitsu.com/de/products/computing/pc/thin-clients/FUTRO-S700/)
   * [Fujitsu Futro S550-2](http://globalsp.ts.fujitsu.com/dmsp/Publications/public/ds-FUTRO-S550-2.pdf)
 * provide a lightweight kiosk system which after bootup provides a simple connection GUI with options to connect via [ThinLinc](http://www.cendio.se/), RDP (via [freerdp](http://www.freerdp.com)) and VNC to Linux and Windows Terminalservers
