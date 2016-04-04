@@ -3,11 +3,13 @@
 ################################################
 
 # Supported Hardware
-machine Intel-NUC5i3RYK	   	# 3. Gen i3
-machine Intel-NUCD34010WYK 	# 2. Gen i3
-machine Intel-NUCDC3217IYE 	# 1. Gen i3
-machine Intel-NUCDCCP847DYE	# 1. Gen Celeron
-machine Fujitsu-Futro	   	  # FUTRO S700 & co
+machine Intel-NUC6i3SYB		# 6. Gen i3 (Skylake)
+machine Intel-NUC5i3RYB	   	# 5. Gen i3 (Broadwell)
+machine Intel-NUCD34010WYB 	# 4. Gen i3 (Haswell)
+machine Intel-NUCDE3815TYBE	# 3. Gen Atom E3815
+machine Intel-NUCD33217GK 	# 2. Gen i3 (Ivy Bridge)
+machine Intel-NUCDCP847SKE	# 1. Gen Celeron (Sandy Bridge)
+machine Fujitsu-Futro	   	# FUTRO S700/S500
 
 # Filesystem Support
 module microcode FORCE		# force microcode CPU update
@@ -22,7 +24,7 @@ module ext4			# Ext4 file system support
 module fuse			# FUSE module support
 
 # third-party kernel modules required
-module cdc-acm			# USB<>serial (CDC ACM) support for card readers
+module cdc-acm		# USB<>serial (CDC ACM) support for card readers
 module snd-usb-audio    # USB audio support
 module snd-usbmidi-lib  # USB audio support
 module snd-rawmidi      # USB audio support
@@ -108,7 +110,7 @@ param downloads      /downloads		# directory path for downloads
 param bootimages     "pxe"		# boot image mode (pxe, iso, etc.)
 param syslinuxtheme  "default"		# splash theme
 param bootfssize     50%                # Modify the size of the tmpfs filesystem
-param blacklist      snd-pcsp.ko  # blacklist certain kernel modules
+param blacklist      snd-pcsp.ko 	# blacklist certain kernel modules
 
 # Options for building with all modules and all firmwares
 #package extensions-x		# Adds various utility s for the X Environment !!!! INCLUDES hwlister.sh !!!!
