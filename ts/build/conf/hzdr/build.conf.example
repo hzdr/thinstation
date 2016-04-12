@@ -11,24 +11,35 @@ machine Intel-NUCD33217GK 	# 2. Gen i3 (Ivy Bridge)
 machine Intel-NUCDCP847SKE	# 1. Gen Celeron (Sandy Bridge)
 machine Fujitsu-Futro	   	# FUTRO S700/S500
 
-# Filesystem Support
+# CPU microcode/freqscaling support
 module microcode FORCE		# force microcode CPU update
 module cpufreq_stats FORCE	# force frequency scaling support
-module usb-storage		# USB storage support
-module lp			# printer support in general
-module usblp			# USB printer support
+
+# Filesystem Support
 module isofs            	# ISO9960 file system support for CDRoms
 module udf			# CDRom UDF file system support
 module vfat             	# Fat and VFat file system support
 module ext4			# Ext4 file system support
 module fuse			# FUSE module support
 
-# third-party kernel modules required
-module cdc-acm		# USB<>serial (CDC ACM) support for card readers
-module snd-usb-audio    # USB audio support
-module snd-usbmidi-lib  # USB audio support
-module snd-rawmidi      # USB audio support
-module snd-seq-device   # USB audio support
+# USB storage support
+module scsi_mod			# SCSI core module
+module usb-storage		# USB storage support
+module sd_mod			# SCSI disk (sd) driver
+module uas			# USB storage module
+
+# USB printer support
+module lp			# printer support in general
+module usblp			# USB printer support
+
+# USB sound support
+module snd-usb-audio    	# USB audio support
+module snd-usbmidi-lib  	# USB audio support
+module snd-rawmidi      	# USB audio support
+module snd-seq-device   	# USB audio support
+
+# USB card reader support
+module cdc-acm			# USB<>serial (CDC ACM) support for card readers
 
 # Packages
 package autonet			# Support for loading config files via network

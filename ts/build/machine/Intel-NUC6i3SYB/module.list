@@ -18,10 +18,12 @@ module bluetooth
 module mmc_block
 module x86_pkg_temp_thermal
 module coretemp
+module iwlmvm
 module iwlwifi
 module kvm-intel
 module i915
 module kvm
+module mac80211
 module crct10dif-pclmul
 module crc32-pclmul
 module cfg80211
