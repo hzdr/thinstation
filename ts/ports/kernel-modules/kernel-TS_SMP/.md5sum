@@ -1,4 +1,2 @@
-48d57f5e45a96760a92fd63e62f76cbd  linux-4.1.19.tar.xz
-651d02fe79b96edfe97ca102f066dbac  radeon_fix.patch
-2de7064847d179e74c587d4add5421de  tmpfs_user_xattr.patch
-86ea652a9f8960203938f242f2803e7a  ts.config
+70c4571bfb7ce7ccb14ff43b50165d43  linux-4.6.2.tar.xz
+8492b1857774ad1dd38f69171f007eaa  ts.config
