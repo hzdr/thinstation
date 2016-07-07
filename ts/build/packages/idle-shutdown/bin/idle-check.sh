@@ -63,7 +63,8 @@ SHUTDOWN_IDLE_MAX_UPTIME_WDAY="Sat|Sun"
 SHUTDOWN_NOW=0
 
 # 1. Check if we reached MAX idle time
-if [ ${SHUTDOWN_IDLE_TIME} -gt 0 ] && [ $(($(DISPLAY=:0 /bin/xprintidle)/1000)) -gt ${SHUTDOWN_IDLE_TIME} ]; then
+if [ ${SHUTDOWN_IDLE_TIME} -gt 0 ] &&
+   [ $(($(DISPLAY=:0 /bin/xprintidle)/1000)) -gt ${SHUTDOWN_IDLE_TIME} ]; then
   # max idle time reached.
   SHUTDOWN_NOW=1
 
@@ -71,7 +72,9 @@ if [ ${SHUTDOWN_IDLE_TIME} -gt 0 ] && [ $(($(DISPLAY=:0 /bin/xprintidle)/1000)) 
 fi
 
 # 2. Check if we reached MAX uptime
-if [ ${SHUTDOWN_IDLE_MAX_UPTIME} -gt 0 ] && [ $(awk '{ print int($1) }' /proc/uptime) -gt ${SHUTDOWN_IDLE_MAX_UPTIME} ]; then
+if [ ${SHUTDOWN_NOW} -eq 0 ] &&
+   [ ${SHUTDOWN_IDLE_MAX_UPTIME} -gt 0 ] &&
+   [ $(awk '{ print int($1) }' /proc/uptime) -gt ${SHUTDOWN_IDLE_MAX_UPTIME} ]; then
   # max uptime has been reached
   SHUTDOWN_NOW=1
 
