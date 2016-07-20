@@ -11,8 +11,7 @@ machine Intel-NUCD33217GK 	# 2. Gen i3 (Ivy Bridge)
 machine Intel-NUCDCP847SKE	# 1. Gen Celeron (Sandy Bridge)
 machine Fujitsu-Futro	   	# FUTRO S700/S500
 
-# CPU microcode/freqscaling support
-module microcode FORCE		# force microcode CPU update
+# CPU freqscaling support
 module cpufreq_stats FORCE	# force frequency scaling support
 
 # Filesystem Support
