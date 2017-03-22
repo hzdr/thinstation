@@ -3,12 +3,13 @@
 This repository hosts a fork of the Linux-based [Thinstation](http://github.com/Thinstation/thinstation) thin client project. It comes with some modifications to:
 
 * get Thinstation running more smoothly and optimized for the various thin clients used at our institution. Tested and supported models are:
-  * 6th Gen Intel NUC (Skylake): [NUC6i3SYB/NUC6i5SYB](https://downloadmirror.intel.com/25507/eng/NUC6i5SYB_NUC6i3SYB_TechProdSpec02.pdf)
-  * 5th Gen Intel NUC (Broadwell): [NUC5i3RYB/NUC5i5RYB](https://downloadmirror.intel.com/24565/eng/NUC5i5RYB_NUC5i3RYB_TechProdSpec02.pdf)
-  * 4th Gen Intel NUC (Haswell): [D34010WYB/D54250WYB](http://www.intel.de/content/www/de/de/nuc/nuc-kit-d34010wykh-board-d34010wyb.html)
-  * 3th Gen Intel NUC (Atom): [DE3815TYBE](http://www.intel.de/content/www/de/de/nuc/nuc-kit-de3815tykhe-board-de3815tybe.html)
+  * 7th Gen Intel NUC (Kaby-Lake): [NUC7i3BNK/NUC7i3BNH](http://www.intel.de/content/www/us/en/nuc/nuc-kit-nuc7i3bnk.html)
+  * 6th Gen Intel NUC (Skylake): [NUC6i3SYB/NUC6i5SYB](http://www.intel.de/content/www/us/en/nuc/nuc-kit-nuc6i5syk.html)
+  * 5th Gen Intel NUC (Broadwell): [NUC5i3RYB/NUC5i5RYB](http://www.intel.de/content/www/us/en/nuc/nuc-kit-nuc5i3ryk.html)
+  * 4th Gen Intel NUC (Haswell): [D34010WYB/D54250WYB](http://www.intel.de/content/www/us/en/nuc/nuc-kit-d34010wykh-board-d34010wyb.html)
+  * 3th Gen Intel NUC (Atom): [DE3815TYBE](http://www.intel.de/content/www/us/en/nuc/nuc-kit-de3815tykhe-board-de3815tybe.html)
   * 2th Gen Intel NUC (Ivy Bridge): [D33217GK](http://www.intel.com/content/www/us/en/support/boards-and-kits/intel-nuc-boards/intel-nuc-board-d33217gk.html)
-  * 1st Gen Intel NUC (Sandy Bridge): [DCP847SKE](http://www.intel.de/content/www/de/de/nuc/nuc-kit-dccp847dye-board-dcp847ske.html)
+  * 1st Gen Intel NUC (Sandy Bridge): [DCP847SKE](http://www.intel.de/content/www/us/en/nuc/nuc-kit-dccp847dye-board-dcp847ske.html)
   * [Fujitsu Futro S700](http://www.fujitsu.com/de/products/computing/pc/thin-clients/FUTRO-S700/)
   * [Fujitsu Futro S550-2](http://globalsp.ts.fujitsu.com/dmsp/Publications/public/ds-FUTRO-S550-2.pdf)
 * provide a lightweight kiosk system which after bootup provides a simple connection GUI with options to connect via [ThinLinc](http://www.cendio.se/), RDP (via [freerdp](http://www.freerdp.com)) and VNC to Linux and Windows Terminalservers
