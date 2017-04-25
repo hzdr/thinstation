@@ -4609,8 +4609,7 @@ autodl
 /ts/build/packages/xorg7-glamor/etc/
 /ts/build/packages/xorg7-glamor/lib/
 /ts/ports/firmware/firmware-atmel/firmware-atmel#1.3-1.pkg.tar.gz
-/ts/ports/firmware/firmware-alsa/alsa-firmware-1.0.27.tar.bz2
-/ts/ports/firmware/firmware-alsa/firmware-alsa#1.0.27-1.pkg.tar.gz
+/ts/ports/firmware/firmware-alsa/alsa-firmware-*.tar.bz2
 /ts/ports/firmware/firmware-atmel/atmel-firmware-1.3.tar.gz
 /ts/ports/firmware/firmware-b43/broadcom-wl-6.30.163.46.tar.bz2
 /ts/ports/firmware/firmware-b43/firmware-b43#6.30.163.46-1.pkg.tar.gz
@@ -4624,8 +4623,7 @@ autodl
 /ts/ports/firmware/firmware-p54/2.13.25.0.lm87.arm
 /ts/ports/firmware/firmware-p54/2.19.0.0.a.14.arm
 /ts/ports/firmware/firmware-p54/firmware-p54#1.0-1.pkg.tar.gz
-/ts/ports/firmware/firmware-zd1211/firmware-zd1211#1.4-1.pkg.tar.gz
-/ts/ports/firmware/firmware-zd1211/zd1211-firmware-1.4.tar.bz2
+/ts/ports/firmware/firmware-zd1211/zd1211-firmware-*.tar.bz2
 /ts/ports/firmware/firmware/firmware#git-1.pkg.tar.gz
 /ts/build/boot-images/initrd/boot.efi
 /ts/build/boot-images/refind/
@@ -4642,7 +4640,7 @@ autodl
 /ts/build/packages/overlayfs/sbin/
 /ts/build/packages/pulseaudio/libexec/
 /ts/build/packages/notification-daemon/build/extra/
-/ts/ports/binary-core/firmware-alsa/alsa-firmware-1.0.27.tar.bz2
+/ts/ports/binary-core/firmware-alsa/alsa-firmware-*.tar.bz2
 /ts/ports/binary-core/firmware-atmel/atmel-firmware-1.3.tar.gz
 /ts/ports/binary-core/firmware-b43/broadcom-wl-6.30.163.46.tar.bz2
 /ts/ports/binary-core/firmware-b43/wl_apsta-3.130.20.0.o
@@ -4655,7 +4653,7 @@ autodl
 /ts/ports/binary-core/firmware-p54/2.13.25.0.arm
 /ts/ports/binary-core/firmware-p54/2.13.25.0.lm87.arm
 /ts/ports/binary-core/firmware-p54/2.19.0.0.a.14.arm
-/ts/ports/binary-core/firmware-zd1211/zd1211-firmware-1.4.tar.bz2
+/ts/ports/binary-core/firmware-zd1211/zd1211-firmware-*.tar.bz2
 /ts/ports/binary-core/refind/refind-bin-0.8.3.zip
 /ts/build/packages/samba-base/sbin/
 /ts/build/packages/samba-server/sbin/
