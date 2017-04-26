@@ -408,6 +408,14 @@ strip_files()
 	fi
 }
 
+fix_permissions()
+{
+  #find tmp-tree -xdev -not -user 1000 -exec chown -h root {} \;
+  #find tmp-tree -xdev -not -group 1000 -not -group 25 -exec chgrp -h root {} \;
+  find tmp-tree -xdev \( -type f -or -type d \) -and -perm -u+x -exec chmod a+rx {} \;
+  find tmp-tree -xdev \( -type f -or -type d \) -and -not -perm -u+x -exec chmod a+r {} \;
+}
+
 make_initrd()
 {
 
@@ -1861,6 +1869,7 @@ if [ -z "$BUILDTIME" ]; then
 	main
 	splash_setup
 	strip_files
+	fix_permissions
 	make_initrd
 else
 	if [ -e "$BUILDTIME" ]; then
