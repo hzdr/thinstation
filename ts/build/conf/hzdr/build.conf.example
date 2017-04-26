@@ -3,6 +3,7 @@
 ################################################
 
 # Supported Hardware
+machine Intel-NUC7i3BNB		# 7. Gen i3 (Kaby Lake)
 machine Intel-NUC6i3SYB		# 6. Gen i3 (Skylake)
 machine Intel-NUC5i3RYB	   	# 5. Gen i3 (Broadwell)
 machine Intel-NUCD34010WYB 	# 4. Gen i3 (Haswell)
