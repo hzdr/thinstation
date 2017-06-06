@@ -1,11 +1,11 @@
---- a/libfreerdp/common/addin.c.orig	2017-04-26 13:03:41.633865046 +0000
-+++ a/libfreerdp/common/addin.c	2017-04-26 13:04:43.397495455 +0000
-@@ -304,7 +304,7 @@
+--- a/libfreerdp/common/addin.c
++++ b/libfreerdp/common/addin.c
+@@ -204,7 +204,7 @@
  
- 	/* channel add-in */
+ 		/* channel add-in */
  
 -	if (dwFlags & FREERDP_ADDIN_CHANNEL_STATIC)
-+	if (dwFlags & FREERDP_ADDIN_CHANNEL_STATIC || (strcmp(pszName, "tprdp") == 0))
- 	{
- 		if (dwFlags & FREERDP_ADDIN_CHANNEL_ENTRYEX)
- 			entry = freerdp_load_dynamic_addin(pszFileName, NULL, "VirtualChannelEntryEx");
++	if ((dwFlags & FREERDP_ADDIN_CHANNEL_STATIC) || (strcmp(pszName, "tprdp") == 0))
+ 		entry = freerdp_load_dynamic_addin(pszFileName, NULL, "VirtualChannelEntry");
+ 	else if (dwFlags & FREERDP_ADDIN_CHANNEL_DYNAMIC)
+ 		entry = freerdp_load_dynamic_addin(pszFileName, NULL, "DVCPluginEntry");
