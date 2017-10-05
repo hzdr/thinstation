@@ -1,0 +1,4 @@
+#hzdr 00
+chown 1000:1000 /etc/tlc-password.cfg
+chown 1000:1000 /etc/tlc-pubkey.cfg
+
