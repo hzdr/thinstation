@@ -60,7 +60,7 @@ setActiveCardProfile()
   cardinfo=$(pactl list cards | sed -n "/^Card #${cardnum}$/,/^$/p")
 
   # find the first
-  actport=$(echo "${cardinfo}" | grep -e ".*:.*(.*,.*available)" | grep -v "not available" | awk '{ print $1 }')
+  actport=$(echo "${cardinfo}" | grep -e ".*:.*(.*,.*available)" | grep -v "not available" | head -n 1 | awk '{ print $1 }')
 
   # check if actport is empty
   if [ -n "${actport}" ]; then
