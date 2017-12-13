@@ -72,7 +72,10 @@ setActiveCardProfile()
   fi
 
   # set the profile as the active one for that card
-  pactl set-card-profile ${cardnum} ${actprofile}
+  pactl set-card-profile ${cardnum} ${actprofile}+input:analog-stereo >/dev/null 2>&1
+  if [ $? -eq 1 ]; then
+    pactl set-card-profile ${cardnum} ${actprofile}
+  fi
 }
 
 ############################################
