@@ -4,8 +4,8 @@
 # Depends on: xorg-libx11
 
 name=freerdp
-version=1.1-dev
-release=stable-1.1
+version=latest
+release=master
 
 build() {
 	git clone git://github.com/FreeRDP/FreeRDP.git -b ${release}
@@ -23,7 +23,7 @@ build() {
 		-DWITH_PULSE=ON \
 		-DWITH_ALSA=ON \
 		-DWITH_CUPS=ON \
-		-DWITH_FFMPEG=OFF \
+		-DWITH_FFMPEG=ON \
 		-DCHANNEL_URBDRC_CLIENT=ON \
 		-DWITH_GSTREAMER=ON \
 		-DWITH_DIRECTFB=OFF \
