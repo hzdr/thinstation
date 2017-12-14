@@ -4187,6 +4187,7 @@ autodl
 /ts/build/packages/multiping/bin/
 /ts/build/packages/networkmanager/build/extra/etc/libnl/
 /ts/build/packages/networkmanager/build/extra/lib/gdk-pixbuf-2.0/
+/ts/build/packages/networkmanager/build/extra/bin/
 /ts/build/packages/nfs/etc/idmapd.conf
 /ts/build/packages/nfs/etc/netconfig
 /ts/build/packages/nfs/etc/rpc
@@ -4687,3 +4688,7 @@ autodl
 /man/
 /var/
 /www/
+/.project
+/ts/ports/binary-core/firmware-zd1211/zd1211-firmware-1.5.tar.bz2
+/ts/ports/binary-core/intel-microcode/microcode-20170511.tgz
+/ts/ports/binary-core/refind/refind-bin-0.11.0.zip
