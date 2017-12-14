@@ -1,3 +1,5 @@
 firmware ibt-11-5.sfi intel
-firmware iwlwifi-8000C-13.ucode
-firmware skl_dmc_ver1.bin
+firmware ibt-11-5.ddc intel
+firmware iwlwifi-8000C-22.ucode
+firmware skl_dmc_ver1_26.bin i915
+firmware skl_dmc_ver1.bin i915
