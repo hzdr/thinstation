@@ -11,6 +11,7 @@ module fb_sys_fops
 module ghash-clmulni-intel
 module i2c-algo-bit
 module i2c-i801
+module i2c-smbus
 module i915
 module intel-gtt
 module irqbypass
@@ -24,6 +25,7 @@ module mei-me
 module pps_core
 module ptp
 module scsi_mod
+module sd_mod
 module snd
 module snd-hda-codec
 module snd-hda-codec-hdmi
@@ -31,16 +33,14 @@ module snd-hda-core
 module snd-hda-intel
 module snd-hwdep
 module snd-pcm
-module snd-rawmidi
-module snd-seq-device
 module snd-timer
-module snd-usb-audio
-module snd-usbmidi-lib
 module soundcore
 module syscopyarea
 module sysfillrect
 module sysimgblt
 module tpm
 module tpm_tis
+module tpm_tis_core
+module uas
 module video
 module x86_pkg_temp_thermal

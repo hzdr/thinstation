@@ -12,9 +12,6 @@ machine Intel-NUCD33217GK 	# 2. Gen i3 (Ivy Bridge)
 machine Intel-NUCDCP847SKE	# 1. Gen Celeron (Sandy Bridge)
 machine Fujitsu-Futro	   	# FUTRO S700/S500
 
-# CPU freqscaling support
-module cpufreq_stats FORCE	# force frequency scaling support
-
 # Filesystem Support
 module isofs            	# ISO9960 file system support for CDRoms
 module udf			# CDRom UDF file system support
@@ -84,6 +81,7 @@ package fonts-TTF-BH		# This one works nicely most of the time and is small.
 package fonts-TTF-vera		# Vera Sans package
 package dbus			# DBus Library package
 package ntfs-3g			# NTFS 3G FUSE based filesystem driver
+package wireless                # WiFi tools
 
 # Application packages (loadable afterwards)
 pkg firefox			# Firefox current Web Browser
