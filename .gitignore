@@ -4212,6 +4212,10 @@ autodl
 /ts/build/packages/openssh/etc/
 /ts/build/packages/openssh/lib/
 /ts/build/packages/openssh/sbin/
+/ts/build/packages/openssl/bin/openssl
+/ts/build/packages/openssl/build/installed
+/ts/build/packages/openssl/etc/
+/ts/build/packages/openssl/lib/
 /ts/build/packages/parted/bin/
 /ts/build/packages/parted/lib/
 /ts/build/packages/pcmcia/bin/

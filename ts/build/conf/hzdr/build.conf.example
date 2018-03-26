@@ -82,13 +82,14 @@ package fonts-TTF-vera		# Vera Sans package
 package dbus			# DBus Library package
 package ntfs-3g			# NTFS 3G FUSE based filesystem driver
 package wireless                # WiFi tools
+package ca-bundle		# Root Certificate Bundle
 
 # Application packages (loadable afterwards)
 pkg firefox			# Firefox current Web Browser
-pkg ca-bundle			# Root Certificate Bundle
 pkg flash			# Flash Player Current Version
 pkg openssh			# OpenSSH (with scp&co)
 pkg cups          		# cups printing system
+pkg openssl                     # OpenSSL package (with 'openssl' binary)
 
 # Parameters
 param fastboot       lotsofmem		# Fastboot mode
