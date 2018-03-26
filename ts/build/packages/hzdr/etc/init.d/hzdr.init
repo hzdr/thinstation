@@ -15,6 +15,9 @@ init)
       fi
     fi
 
+    # make sure /mnt/HOSTNAME exists for USB mounting
+    mkdir -p /mnt/$(hostname)
+
     # start the keyd daemon so that we are listening for user
     # key presses
     (setsid /bin/keyd -l /var/log/keyd.log 2>&1 >/dev/null) &
