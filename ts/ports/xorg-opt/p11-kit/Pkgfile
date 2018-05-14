@@ -3,14 +3,15 @@
 # Maintainer: Donald A. Cupp Jr. (don cupp jr at ya hoo dot com)
 
 name=p11-kit
-version=0.22.1
+version=0.23.2
 release=1
-source=(http://p11-glue.freedesktop.org/releases/$name-$version.tar.gz)
+source=(https://github.com/p11-glue/p11-kit/archive/$version.tar.gz)
 
 build() {
 	cd $name-$version
 
-	./configure --prefix=/usr \
+#	./configure --prefix=/usr \
+	./autogen.sh --prefix=/usr \
 			--enable-shared \
 			--disable-rpath \
 			--disable-nls \
@@ -18,4 +19,6 @@ build() {
 
 	make
 	make DESTDIR=$PKG install
+	rm $PKG/usr/lib/p11-kit-proxy.so
+	ln -s libp11-kit.so.0 $PKG/usr/lib/p11-kit-proxy.so
 }

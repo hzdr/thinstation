@@ -1,7 +1,7 @@
 #ica 25
 chmod u+s /opt/Citrix/ICAClient/ctxusb
 
-#disable receiver connection bar
+# Disable receiver connection bar
 sed -i '/ConnectionBar=*/c\ConnectionBar=0' /opt/Citrix/ICAClient/config/All_Regions.ini
 
 # Links appsrv.ini et wfclient.ini in permanent storage needed in ica.init 

@@ -1,14 +1,20 @@
-# Description: A Python interface to libcurl.
-# URL:         http://pycurl.sourceforge.net/
-# Maintainer:  Syl, syl at clyl dot net
-# Depends on:  python, libcurl
+# Description: A language that lets writing C extensions for the Python language.
+# URL: http://www.cython.org/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Victor Martinez, pitillo at ono dot com
+# Depends on: setuptools
 
 name=pycurl
-version=7.19.0
+pname=pycurl
+version=pip
 release=1
-source=(http://pycurl.sourceforge.net/download/$name-$version.tar.gz)
+source=()
 
 build() {
-    cd $name-$version
-    python setup.py install --root=$PKG
+        pip download $name --no-binary :all:
+        mkdir -p $SRC/$name
+        tar -xvf $SRC/$pname-*.* -C $SRC/$name || unzip -d $SRC/$name $pname-*.zip
+        cd $SRC/$name/*
+
+        python ./setup.py install --root $PKG
 }

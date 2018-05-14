@@ -1,15 +1,20 @@
-# Description:	Python bindings for the CUPS printing system API
-# URL:		http://cyberelk.net/tim/software/pycups/
-# Maintainer:	Alan Mizrahi, alan at mizrahi dot com dot ve
-# Depends on:	cups python
+# Description: A language that lets writing C extensions for the Python language.
+# URL: http://www.cython.org/
+# Maintainer: Danny Rawlins, monster dot romster at gmail dot com
+# Packager: Victor Martinez, pitillo at ono dot com
+# Depends on: setuptools
 
 name=pycups
-version=1.9.73
+pname=pycups
+version=pip
 release=1
-source=(http://cyberelk.net/tim/data/pycups/pycups-$version.tar.bz2)
+source=()
 
 build() {
-	cd $name-$version
-	python setup.py build
-	python setup.py install --root=$PKG
+        pip download $name --no-binary :all:
+        mkdir -p $SRC/$name
+        tar -xvf $SRC/$pname-*.* -C $SRC/$name || unzip -d $SRC/$name $pname-*.zip
+        cd $SRC/$name/*
+
+        python ./setup.py install --root $PKG
 }
