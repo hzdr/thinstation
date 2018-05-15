@@ -4698,3 +4698,14 @@ autodl
 /ts/ports/binary-core/firmware-zd1211/zd1211-firmware-1.5.tar.bz2
 /ts/ports/binary-core/intel-microcode/microcode-20170511.tgz
 /ts/ports/binary-core/refind/refind-bin-0.11.0.zip
+/ts/build/packages/base-nss/build/installed
+/ts/build/packages/base-nss/lib/
+/ts/build/packages/gdk-pixbuf/lib/
+/ts/build/packages/ica/build/extra/lib/libwebkitgtk-1.0.so.0.22.17
+/ts/build/packages/openssl/bin/
+/ts/build/packages/terminfo/lib/terminfo/x/xterm-256color
+/ts/build/packages/x-common/etc/X11/xorg.conf.d/70-synaptics.conf
+/ts/build/packages/x-nss/build/installed
+/ts/build/packages/x-nss/lib/
+/ts/build/packages/xorg7-qxl/build/extra/
+
