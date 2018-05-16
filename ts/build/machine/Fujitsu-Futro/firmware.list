@@ -3,3 +3,4 @@ firmware PALM_pfp.bin radeon
 firmware PALM_me.bin radeon
 firmware SUMO_uvd.bin radeon
 firmware SUMO_rlc.bin radeon
+firmware microcode_amd.bin amd-ucode

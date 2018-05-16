@@ -1,2 +1,3 @@
 firmware ibt-hw-37.8.10-fw-1.10.3.11.e.bseq intel
 firmware iwlwifi-7265D-22.ucode
+firmware 0* intel-ucode

@@ -2,3 +2,4 @@ firmware ibt-12-16.sfi intel
 firmware ibt-12-16.ddc intel
 firmware iwlwifi-8265-22.ucode
 firmware kbl_dmc_ver1_01.bin i915
+firmware 0* intel-ucode

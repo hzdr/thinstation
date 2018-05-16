@@ -4666,7 +4666,6 @@ autodl
 /ts/build/packages/samba-server/sbin/
 /ts/build/packages/udisks/build/extra/bin/
 /ts/ports/binary-core/amd-microcode/amd-ucode-latest.tar.bz2
-/ts/ports/binary-core/intel-microcode/microcode-20140430.tgz
 /ts/ports/binary-core/refind/refind-bin-0.8.7.zip
 /ts/build/packages/base/lib/libnss_dns-2.20.so
 /ts/build/packages/base/lib/libnss_files-2.20.so
@@ -4696,7 +4695,7 @@ autodl
 /www/
 /.project
 /ts/ports/binary-core/firmware-zd1211/zd1211-firmware-1.5.tar.bz2
-/ts/ports/binary-core/intel-microcode/microcode-20170511.tgz
+/ts/ports/binary-core/intel-microcode/intel-microcode#20180425-1.pkg.tar.xz
 /ts/ports/binary-core/refind/refind-bin-0.11.0.zip
 /ts/build/packages/base-nss/build/installed
 /ts/build/packages/base-nss/lib/

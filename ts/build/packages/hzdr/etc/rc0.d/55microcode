@@ -1,0 +1,5 @@
+#!/bin/sh
+
+if [[ -f /sys/devices/system/cpu/microcode/reload ]]; then
+  echo 1 >/sys/devices/system/cpu/microcode/reload
+fi
