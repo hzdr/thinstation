@@ -1,7 +1,10 @@
-base-nss
 terminfo
 modprobe
 systemd
 splash
 acpi
 rngd
+switchuser
+base-nss
+gtkdialog
+messagebox

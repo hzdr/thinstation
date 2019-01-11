@@ -2,8 +2,12 @@
 
 . $TS_GLOBAL
 . /etc/ashrc
+
 PID=$$
 DISPLAY_NUMBER=0
+USER_LOGOUT_CODE=0
+USER_DISCONNECT_CODE=0
+
 if [ -e /etc/dialog.functions ]; then . /etc/dialog.functions; fi
 if [ -e /etc/$PACKAGE.functions ] ; then . /etc/$PACKAGE.functions ; fi
 if [ ! -e /etc/cmd/$PACKAGE.wm ] ; then if [ -n "$WMNAME" ] ; then . /etc/$WMNAME.functions ;fi ;fi
@@ -77,19 +81,15 @@ order_command()
 	if [ -n "$PASSWORD" ]; then
 		PASSWORD="'$PASSWORD'"
 	fi
+	if [ -n "$REMUSER" ]; then
+		REMUSER="'$REMUSER'"
+	fi
 	if is_enabled $REVERSE_ORDER ; then
 		ORDERED_COMMAND="${SERVER_ARG}$SERVER $OPTIONS ${USER_ARG}$REMUSER ${PASSWORD_ARG}$PASSWORD $MISC_OPTIONS"
 	else
 		ORDERED_COMMAND="$OPTIONS ${USER_ARG}$REMUSER ${PASSWORD_ARG}$PASSWORD $MISC_OPTIONS ${SERVER_ARG}$SERVER"
 	fi
 	CMD="`eval echo '$'CMD_$MODE '$'ORDERED_COMMAND`"
-}
-
-ck_wrapper()
-{
-	if [ -x /bin/ck-launch-session ]; then
-		CMD="ck-launch-session $CMD"
-	fi
 }
 
 xterm_wrapper()
@@ -142,7 +142,9 @@ auto)
     order_command
     wm_workspaces "$CMD" "$4"
     xterm_wrapper
-    run_command
+    if find_network; then
+	    run_command
+    fi
     wait
         check_NX
         check_reboot
@@ -161,14 +163,15 @@ console)
     dconf_proxy_configure
     use_xrandr
     use_wallpaper
-    while [ -e /tmp/.X11-unix/X$DISPLAY_NUMBER ] && [ "$reconnect" != "1" ]; do
+    while [ -e /tmp/.X11-unix/X$DISPLAY_NUMBER ] && [ "$reconnect" != "1" ] ; do
 	package_input
 	MODE=CONSOLE
 	order_command
 	xterm_wrapper
-	ck_wrapper
 	eula_
-        run_command
+	if find_network; then
+	        run_command
+	fi
 	wait
 	check_NX
 	check_xrunning
@@ -192,7 +195,9 @@ window|fullscreen)
     fi
     order_command
     xterm_wrapper
-    run_command
+    if find_network; then
+	    run_command
+    fi
     x_check_status
     ;;
 help)

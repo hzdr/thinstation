@@ -2,12 +2,12 @@ drwxr-xr-x	root/root	usr/
 drwxr-xr-x	root/root	usr/lib/
 drwxr-xr-x	root/root	usr/lib/python2.7/
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/
-drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/urllib3-1.22-py2.7.egg-info/
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3-1.22-py2.7.egg-info/PKG-INFO
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3-1.22-py2.7.egg-info/SOURCES.txt
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3-1.22-py2.7.egg-info/dependency_links.txt
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3-1.22-py2.7.egg-info/requires.txt
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3-1.22-py2.7.egg-info/top_level.txt
+drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/urllib3-1.24.1-py2.7.egg-info/
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3-1.24.1-py2.7.egg-info/PKG-INFO
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3-1.24.1-py2.7.egg-info/SOURCES.txt
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3-1.24.1-py2.7.egg-info/dependency_links.txt
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3-1.24.1-py2.7.egg-info/requires.txt
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3-1.24.1-py2.7.egg-info/top_level.txt
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/urllib3/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/__init__.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/__init__.pyc
@@ -20,6 +20,8 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/urllib3/
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/urllib3/contrib/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/contrib/__init__.py (EMPTY)
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/contrib/__init__.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/contrib/_appengine_environ.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/contrib/_appengine_environ.pyc
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/urllib3/contrib/_securetransport/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/contrib/_securetransport/__init__.py (EMPTY)
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/contrib/_securetransport/__init__.pyc
@@ -51,8 +53,6 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/urllib3/packages/backports/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/packages/backports/__init__.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/packages/backports/makefile.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/packages/backports/makefile.pyc
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/packages/ordered_dict.py
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/packages/ordered_dict.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/packages/six.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/packages/six.pyc
 drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/urllib3/packages/ssl_match_hostname/
@@ -71,14 +71,14 @@ drwxr-xr-x	root/root	usr/lib/python2.7/site-packages/urllib3/util/
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/__init__.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/connection.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/connection.pyc
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/queue.py
+-rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/queue.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/request.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/request.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/response.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/response.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/retry.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/retry.pyc
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/selectors.py
--rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/selectors.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/ssl_.py
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/ssl_.pyc
 -rw-r--r--	root/root	usr/lib/python2.7/site-packages/urllib3/util/timeout.py
