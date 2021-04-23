@@ -1,3 +1,8 @@
+## ⚠️ Development on this fork is stopped! ⚠️
+## The follow-up project to create a lightweight ThinClient OS can be found here: https://github.com/jens-maus/thinRoot
+
+
+
 # Thinstation - HZDR fork
 
 This repository hosts a fork of the Linux-based [Thinstation](http://github.com/Thinstation/thinstation) thin client project. It comes with some modifications to:
